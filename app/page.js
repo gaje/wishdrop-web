@@ -252,18 +252,18 @@ export default function Home() {
               </ul>
             </div>
             <div>
-              <h5 className="font-semibold text-gray-900 mb-3">Company</h5>
+              <h5 className="font-semibold text-gray-900 mb-3">Legal</h5>
               <ul className="space-y-2 text-sm text-gray-600">
-                <li><Link href="#" className="hover:text-teal-600">About</Link></li>
-                <li><Link href="#" className="hover:text-teal-600">Privacy</Link></li>
-                <li><Link href="#" className="hover:text-teal-600">Terms</Link></li>
+                <li><Link href="/legal/privacy" className="hover:text-teal-600">Privacy Policy</Link></li>
+                <li><Link href="/legal/terms" className="hover:text-teal-600">Terms of Service</Link></li>
+                <li><Link href="/legal/affiliate-disclosure" className="hover:text-teal-600">Affiliate Disclosure</Link></li>
               </ul>
             </div>
             <div>
-              <h5 className="font-semibold text-gray-900 mb-3">Follow Us</h5>
+              <h5 className="font-semibold text-gray-900 mb-3">Connect</h5>
               <ul className="space-y-2 text-sm text-gray-600">
-                <li><a href="#" className="hover:text-teal-600">Twitter</a></li>
-                <li><a href="#" className="hover:text-teal-600">Instagram</a></li>
+                <li><a href="https://twitter.com/wishdropapp" target="_blank" rel="noopener noreferrer" className="hover:text-teal-600">Twitter</a></li>
+                <li><a href="https://instagram.com/wishdropapp" target="_blank" rel="noopener noreferrer" className="hover:text-teal-600">Instagram</a></li>
               </ul>
             </div>
           </div>
