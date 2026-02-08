@@ -95,6 +95,11 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/legal/affiliate-disclosure" className="text-gray-300 hover:text-teal-400 transition-colors text-sm">
+                  Affiliate Disclosure
+                </Link>
+              </li>
+              <li>
                 <a href="mailto:support@wishdrop.app" className="text-gray-300 hover:text-teal-400 transition-colors text-sm">
                   Contact Us
                 </a>
