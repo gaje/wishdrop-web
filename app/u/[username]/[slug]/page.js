@@ -4,6 +4,57 @@ import ListDetailClient from './ListDetailClient'
 
 const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://10.0.0.25:4000/api'
 
+export async function generateMetadata({ params }) {
+  const { username, slug } = await params
+
+  try {
+    const res = await fetch(
+      `${API_BASE}/lists/${encodeURIComponent(username)}/${encodeURIComponent(slug)}`,
+      { cache: 'no-store' }
+    )
+
+    if (!res.ok) {
+      return {
+        title: 'List Not Found | Wishdrop',
+        description: 'This wishlist may be private or no longer exists.',
+      }
+    }
+
+    const data = await res.json()
+    const list = data.list
+    const items = data.items || []
+    const firstItemImage = items.find((item) => item.imageUrl)?.imageUrl
+
+    const title = `${list.title} by @${username} | Wishdrop`
+    const description = list.description || `Check out ${list.title} - a wishlist by @${username}`
+
+    return {
+      title,
+      description,
+      openGraph: {
+        title: list.title,
+        description,
+        type: 'website',
+        images: firstItemImage
+          ? [{ url: firstItemImage, width: 1200, height: 630 }]
+          : [{ url: '/logo-circle.png', width: 512, height: 512 }],
+      },
+      twitter: {
+        card: firstItemImage ? 'summary_large_image' : 'summary',
+        title: list.title,
+        description,
+        images: firstItemImage ? [firstItemImage] : undefined,
+      },
+    }
+  } catch (error) {
+    console.error('Failed to generate metadata for list:', error)
+    return {
+      title: 'Wishlist | Wishdrop',
+      description: 'Create and share wishlists with friends and family.',
+    }
+  }
+}
+
 // SVG Icon component for occasions
 const OccasionIcon = ({ type, className = "w-5 h-5" }) => {
   switch (type) {
