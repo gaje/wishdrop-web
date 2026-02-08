@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import Header from '@/components/Header'
@@ -105,7 +105,7 @@ const INTEREST_CATEGORIES = [
   { id: 'kitchen-cooking', label: 'Kitchen & Cooking' },
 ]
 
-export default function CreateList() {
+function CreateListContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const { user, loading: authLoading } = useAuth()
@@ -866,5 +866,17 @@ export default function CreateList() {
         </div>
       )}
     </div>
+  )
+}
+
+export default function CreateList() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-slate-50 flex items-center justify-center">
+        <div className="w-10 h-10 rounded-full border-[3px] border-slate-200 border-t-teal-500 animate-spin" />
+      </div>
+    }>
+      <CreateListContent />
+    </Suspense>
   )
 }

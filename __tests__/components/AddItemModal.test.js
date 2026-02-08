@@ -20,6 +20,11 @@ describe('AddItemModal', () => {
     jest.clearAllMocks()
   })
 
+  // Helper to switch to manual entry mode
+  const switchToManualMode = () => {
+    fireEvent.click(screen.getByText('Manual Entry'))
+  }
+
   it('renders when open', () => {
     render(
       <AddItemModal
@@ -45,7 +50,7 @@ describe('AddItemModal', () => {
     expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
   })
 
-  it('renders URL input field', () => {
+  it('renders URL input field in URL mode', () => {
     render(
       <AddItemModal
         isOpen={true}
@@ -57,7 +62,7 @@ describe('AddItemModal', () => {
     expect(screen.getByPlaceholderText('https://example.com/product')).toBeInTheDocument()
   })
 
-  it('renders item name field', () => {
+  it('renders item name field in manual mode', () => {
     render(
       <AddItemModal
         isOpen={true}
@@ -66,10 +71,11 @@ describe('AddItemModal', () => {
         onItemAdded={mockOnItemAdded}
       />
     )
+    switchToManualMode()
     expect(screen.getByPlaceholderText('e.g., Blue Wireless Headphones')).toBeInTheDocument()
   })
 
-  it('renders price field', () => {
+  it('renders price field in manual mode', () => {
     render(
       <AddItemModal
         isOpen={true}
@@ -78,10 +84,11 @@ describe('AddItemModal', () => {
         onItemAdded={mockOnItemAdded}
       />
     )
+    switchToManualMode()
     expect(screen.getByPlaceholderText('29.99')).toBeInTheDocument()
   })
 
-  it('renders priority buttons', () => {
+  it('renders priority buttons in manual mode', () => {
     render(
       <AddItemModal
         isOpen={true}
@@ -90,12 +97,13 @@ describe('AddItemModal', () => {
         onItemAdded={mockOnItemAdded}
       />
     )
+    switchToManualMode()
     expect(screen.getByText('High')).toBeInTheDocument()
-    expect(screen.getByText('Medium')).toBeInTheDocument()
+    expect(screen.getByText('Normal')).toBeInTheDocument()
     expect(screen.getByText('Low')).toBeInTheDocument()
   })
 
-  it('renders notes textarea', () => {
+  it('renders notes textarea in manual mode', () => {
     render(
       <AddItemModal
         isOpen={true}
@@ -104,10 +112,11 @@ describe('AddItemModal', () => {
         onItemAdded={mockOnItemAdded}
       />
     )
+    switchToManualMode()
     expect(screen.getByPlaceholderText('Any additional details (size, color, etc.)')).toBeInTheDocument()
   })
 
-  it('has required indicator on title input', () => {
+  it('has required indicator on title input in manual mode', () => {
     render(
       <AddItemModal
         isOpen={true}
@@ -116,12 +125,13 @@ describe('AddItemModal', () => {
         onItemAdded={mockOnItemAdded}
       />
     )
+    switchToManualMode()
 
     // The Item Name field should have a required indicator
     expect(screen.getByText('*')).toBeInTheDocument()
   })
 
-  it('does not call api.items.create without title', async () => {
+  it('does not call api.items.create without title in manual mode', async () => {
     render(
       <AddItemModal
         isOpen={true}
@@ -130,12 +140,9 @@ describe('AddItemModal', () => {
         onItemAdded={mockOnItemAdded}
       />
     )
+    switchToManualMode()
 
-    // Just fill in a URL but not a title
-    const urlInput = screen.getByPlaceholderText('https://example.com/product')
-    fireEvent.change(urlInput, { target: { value: 'https://example.com/product' } })
-
-    // Try to submit - the API should NOT be called because title is empty
+    // Try to submit without a title
     const submitButton = screen.getByRole('button', { name: 'Add Item' })
     fireEvent.click(submitButton)
 
@@ -162,7 +169,7 @@ describe('AddItemModal', () => {
     expect(mockOnClose).toHaveBeenCalled()
   })
 
-  it('changes priority when button clicked', () => {
+  it('changes priority when button clicked in manual mode', () => {
     render(
       <AddItemModal
         isOpen={true}
@@ -171,6 +178,7 @@ describe('AddItemModal', () => {
         onItemAdded={mockOnItemAdded}
       />
     )
+    switchToManualMode()
 
     const highButton = screen.getByText('High')
     fireEvent.click(highButton)
@@ -238,7 +246,7 @@ describe('AddItemModal', () => {
     jest.useRealTimers()
   })
 
-  it('submits item successfully', async () => {
+  it('submits item successfully in manual mode', async () => {
     api.items.create.mockResolvedValue({ _id: 'new-item-123' })
 
     render(
@@ -249,6 +257,7 @@ describe('AddItemModal', () => {
         onItemAdded={mockOnItemAdded}
       />
     )
+    switchToManualMode()
 
     // Fill in the title
     const titleInput = screen.getByPlaceholderText('e.g., Blue Wireless Headphones')
@@ -266,7 +275,7 @@ describe('AddItemModal', () => {
         expect.objectContaining({
           listId: 'list-123',
           title: 'My New Item',
-          priority: 'medium',
+          priority: 'normal',
           price: { amount: 19.99, currency: 'USD' },
         })
       )
@@ -276,7 +285,7 @@ describe('AddItemModal', () => {
     expect(mockOnClose).toHaveBeenCalled()
   })
 
-  it('shows error on submission failure', async () => {
+  it('shows error on submission failure in manual mode', async () => {
     const error = new Error('Network error')
     error.getUserMessage = () => 'Failed to add item. Please try again.'
     api.items.create.mockRejectedValue(error)
@@ -289,6 +298,7 @@ describe('AddItemModal', () => {
         onItemAdded={mockOnItemAdded}
       />
     )
+    switchToManualMode()
 
     const titleInput = screen.getByPlaceholderText('e.g., Blue Wireless Headphones')
     fireEvent.change(titleInput, { target: { value: 'My New Item' } })
@@ -309,6 +319,7 @@ describe('AddItemModal', () => {
         onItemAdded={mockOnItemAdded}
       />
     )
+    switchToManualMode()
 
     const titleInput = screen.getByPlaceholderText('e.g., Blue Wireless Headphones')
     fireEvent.change(titleInput, { target: { value: 'My New Item' } })
@@ -332,6 +343,8 @@ describe('AddItemModal', () => {
       />
     )
 
+    // After reopening, modal resets to URL mode, so switch back to manual
+    switchToManualMode()
     expect(screen.getByPlaceholderText('e.g., Blue Wireless Headphones')).toHaveValue('')
   })
 
