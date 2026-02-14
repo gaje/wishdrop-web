@@ -2,7 +2,7 @@ import Header from '@/components/Header'
 import { notFound } from 'next/navigation'
 import ProfileClient from './ProfileClient'
 
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://10.0.0.25:4000/api'
+const API_BASE = (process.env.NEXT_PUBLIC_API_BASE || 'http://localhost:4000') + '/api'
 
 export async function generateMetadata({ params }) {
   const { username } = await params

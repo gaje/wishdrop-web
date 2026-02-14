@@ -10,7 +10,7 @@ const dsn = process.env.SENTRY_DSN
 if (dsn) {
   Sentry.init({
     dsn,
-    environment: process.env.NEXT_PUBLIC_VERCEL_ENV || 'development',
+    environment: process.env.NODE_ENV || 'development',
 
     // Sample 100% of errors for beta
     sampleRate: 1.0,

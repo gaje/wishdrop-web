@@ -2,7 +2,7 @@ import { Link } from 'next-view-transitions'
 import Header from '@/components/Header'
 import ListDetailClient from './ListDetailClient'
 
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://10.0.0.25:4000/api'
+const API_BASE = (process.env.NEXT_PUBLIC_API_BASE || 'http://localhost:4000') + '/api'
 
 export async function generateMetadata({ params }) {
   const { username, slug } = await params
@@ -126,7 +126,7 @@ const OCCASION_CONFIG = {
   'Anniversary': { bg: 'bg-pink-50', border: 'border-pink-200', text: 'text-pink-700', iconColor: 'text-pink-600' },
   'Graduation': { bg: 'bg-indigo-50', border: 'border-indigo-200', text: 'text-indigo-700', iconColor: 'text-indigo-600' },
   'Housewarming': { bg: 'bg-amber-50', border: 'border-amber-200', text: 'text-amber-700', iconColor: 'text-amber-600' },
-  'Just Because': { bg: 'bg-teal-50', border: 'border-teal-200', text: 'text-teal-700', iconColor: 'text-teal-600' },
+  'Just Because': { bg: 'bg-cyan-50', border: 'border-cyan-200', text: 'text-cyan-700', iconColor: 'text-cyan-600' },
   'Other': { bg: 'bg-slate-50', border: 'border-slate-200', text: 'text-slate-700', iconColor: 'text-slate-600' },
 }
 
@@ -170,7 +170,7 @@ export default async function ListDetailPage({ params }) {
             <p className="text-slate-500 mb-6">
               This list may be private or no longer exists
             </p>
-            <Link href="/" className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-teal-500 to-cyan-500 text-white rounded-xl font-semibold hover:shadow-lg hover:shadow-teal-200 transition-all">
+            <Link href="/" className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-cyan-500 to-cyan-500 text-white rounded-xl font-semibold hover:shadow-lg hover:shadow-cyan-200 transition-all">
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
               </svg>
@@ -195,7 +195,7 @@ export default async function ListDetailPage({ params }) {
           {/* Back Link */}
           <Link
             href="/dashboard"
-            className="inline-flex items-center gap-1.5 text-sm text-slate-500 hover:text-teal-600 font-medium mb-6 transition-colors"
+            className="inline-flex items-center gap-1.5 text-sm text-slate-500 hover:text-cyan-600 font-medium mb-6 transition-colors"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -208,7 +208,7 @@ export default async function ListDetailPage({ params }) {
             className="flex flex-col sm:flex-row sm:items-start gap-5"
             style={{ viewTransitionName: `list-${slug}`, contain: 'layout paint' }}
           >
-            <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-br from-teal-400 to-cyan-500 flex items-center justify-center flex-shrink-0 shadow-lg shadow-teal-200/50">
+            <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-br from-cyan-400 to-cyan-500 flex items-center justify-center flex-shrink-0 shadow-lg shadow-cyan-200/50">
               <OccasionIcon type={list?.occasion || 'Just Because'} className="w-8 h-8 sm:w-10 sm:h-10 text-white" />
             </div>
             <div className="flex-1 min-w-0">
@@ -224,7 +224,7 @@ export default async function ListDetailPage({ params }) {
                 )}
               </div>
               <p className="text-slate-500 mb-3">
-                by <Link href={`/u/${username}`} className="text-teal-600 hover:text-teal-700 font-medium">@{username}</Link>
+                by <Link href={`/u/${username}`} className="text-cyan-600 hover:text-cyan-700 font-medium">@{username}</Link>
               </p>
 
               {list?.description && (
