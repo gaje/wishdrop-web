@@ -39,20 +39,20 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-cyan-50 via-teal-50 to-blue-50">
+    <div className="min-h-screen bg-gradient-to-br from-cyan-50 via-cyan-50 to-blue-50">
       <Header />
       <EmailVerificationBanner />
 
       {/* Hero Section */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
         <div className="mb-6">
-          <span className="inline-block px-4 py-2 bg-teal-100 text-teal-700 rounded-full text-sm font-semibold mb-4">
+          <span className="inline-block px-4 py-2 bg-cyan-100 text-cyan-700 rounded-full text-sm font-semibold mb-4">
             The smarter way to gift
           </span>
         </div>
         <h2 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
           No more guessing.<br />
-          <span className="bg-gradient-to-r from-cyan-500 to-teal-500 bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-cyan-500 to-cyan-500 bg-clip-text text-transparent">
             Just perfect gifts.
           </span>
         </h2>
@@ -62,10 +62,10 @@ export default function Home() {
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-          <Link href="/signup" className="inline-block px-8 py-4 bg-gradient-to-r from-cyan-500 to-teal-500 text-white rounded-full font-bold text-lg hover:shadow-2xl transition-all hover:scale-105">
+          <Link href="/signup" className="inline-block px-8 py-4 bg-gradient-to-r from-cyan-500 to-cyan-500 text-white rounded-full font-bold text-lg hover:shadow-2xl transition-all hover:scale-105">
             Get Started Free
           </Link>
-          <Link href="#features" className="inline-block px-8 py-4 bg-white text-gray-700 rounded-full font-bold text-lg border-2 border-gray-200 hover:border-teal-500 transition-all">
+          <Link href="#features" className="inline-block px-8 py-4 bg-white text-gray-700 rounded-full font-bold text-lg border-2 border-gray-200 hover:border-cyan-500 transition-all">
             See How It Works
           </Link>
         </div>
@@ -87,6 +87,158 @@ export default function Home() {
         </div>
       </section>
 
+      {/* App Preview Section */}
+      <section id="preview" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <h3 className="text-3xl font-bold text-center text-gray-900 mb-3">
+          See It in Action
+        </h3>
+        <p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
+          Simple, beautiful, and built for sharing
+        </p>
+
+        {/* Phone Mockups */}
+        <div className="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-4 md:grid md:grid-cols-3 md:overflow-visible md:pb-0">
+          {/* Card 1: Create Lists */}
+          <div className="flex-shrink-0 w-80 snap-center md:w-auto">
+            <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
+              {/* Phone Frame */}
+              <div className="bg-gradient-to-br from-gray-100 to-gray-200 p-4">
+                <div className="aspect-[9/16] max-h-80 rounded-3xl overflow-hidden bg-gradient-to-br from-cyan-400 to-cyan-600 p-6 relative">
+                  {/* Status bar mockup */}
+                  <div className="flex items-center justify-between mb-6">
+                    <div className="text-white text-xs font-semibold">9:41</div>
+                    <div className="flex gap-1">
+                      <div className="w-4 h-4 rounded-full bg-white/30"></div>
+                      <div className="w-4 h-4 rounded-full bg-white/30"></div>
+                      <div className="w-4 h-4 rounded-full bg-white/30"></div>
+                    </div>
+                  </div>
+
+                  {/* List view mockup */}
+                  <div className="space-y-3">
+                    {/* Header */}
+                    <div className="bg-white/20 backdrop-blur-sm rounded-xl p-3">
+                      <div className="h-6 bg-white/40 rounded w-3/4 mb-2"></div>
+                      <div className="h-3 bg-white/30 rounded w-1/2"></div>
+                    </div>
+
+                    {/* Item cards */}
+                    {[1, 2, 3].map((i) => (
+                      <div key={i} className="bg-white rounded-xl p-3 flex gap-3">
+                        <div className="w-16 h-16 bg-gradient-to-br from-gray-200 to-gray-300 rounded-lg"></div>
+                        <div className="flex-1">
+                          <div className="h-3 bg-gray-200 rounded w-full mb-2"></div>
+                          <div className="h-3 bg-gray-200 rounded w-2/3 mb-2"></div>
+                          <div className="h-3 bg-cyan-200 rounded w-1/4"></div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Label */}
+              <div className="p-4 text-center">
+                <h4 className="font-semibold text-gray-900 mb-1">Create Lists</h4>
+                <p className="text-sm text-gray-600">Add products from any store</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Card 2: Share Instantly */}
+          <div className="flex-shrink-0 w-80 snap-center md:w-auto">
+            <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
+              {/* Phone Frame */}
+              <div className="bg-gradient-to-br from-gray-100 to-gray-200 p-4">
+                <div className="aspect-[9/16] max-h-80 rounded-3xl overflow-hidden bg-gradient-to-br from-cyan-400 to-cyan-600 p-6 relative">
+                  {/* Status bar mockup */}
+                  <div className="flex items-center justify-between mb-6">
+                    <div className="text-white text-xs font-semibold">9:41</div>
+                    <div className="flex gap-1">
+                      <div className="w-4 h-4 rounded-full bg-white/30"></div>
+                      <div className="w-4 h-4 rounded-full bg-white/30"></div>
+                      <div className="w-4 h-4 rounded-full bg-white/30"></div>
+                    </div>
+                  </div>
+
+                  {/* Share sheet mockup */}
+                  <div className="absolute inset-0 flex items-end p-6">
+                    <div className="bg-white rounded-t-3xl w-full p-6 space-y-4">
+                      {/* Link preview */}
+                      <div className="bg-gradient-to-r from-cyan-100 to-blue-100 rounded-xl p-4">
+                        <div className="h-4 bg-cyan-600 rounded w-3/4 mb-2"></div>
+                        <div className="h-3 bg-cyan-400 rounded w-1/2"></div>
+                      </div>
+
+                      {/* Share buttons */}
+                      <div className="flex gap-3 justify-around pt-2">
+                        {[1, 2, 3, 4].map((i) => (
+                          <div key={i} className="flex flex-col items-center gap-2">
+                            <div className="w-12 h-12 bg-gradient-to-br from-gray-200 to-gray-300 rounded-full"></div>
+                            <div className="h-2 bg-gray-200 rounded w-12"></div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Label */}
+              <div className="p-4 text-center">
+                <h4 className="font-semibold text-gray-900 mb-1">Share Instantly</h4>
+                <p className="text-sm text-gray-600">One link to share with everyone</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Card 3: Discover Products */}
+          <div className="flex-shrink-0 w-80 snap-center md:w-auto">
+            <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
+              {/* Phone Frame */}
+              <div className="bg-gradient-to-br from-gray-100 to-gray-200 p-4">
+                <div className="aspect-[9/16] max-h-80 rounded-3xl overflow-hidden bg-gradient-to-br from-cyan-400 to-cyan-600 p-6 relative">
+                  {/* Status bar mockup */}
+                  <div className="flex items-center justify-between mb-6">
+                    <div className="text-white text-xs font-semibold">9:41</div>
+                    <div className="flex gap-1">
+                      <div className="w-4 h-4 rounded-full bg-white/30"></div>
+                      <div className="w-4 h-4 rounded-full bg-white/30"></div>
+                      <div className="w-4 h-4 rounded-full bg-white/30"></div>
+                    </div>
+                  </div>
+
+                  {/* Product grid mockup */}
+                  <div className="space-y-3">
+                    {/* Search bar */}
+                    <div className="bg-white/20 backdrop-blur-sm rounded-xl p-3">
+                      <div className="h-4 bg-white/40 rounded w-1/2"></div>
+                    </div>
+
+                    {/* Product grid (2 rows × 2 cols) */}
+                    <div className="grid grid-cols-2 gap-2">
+                      {[1, 2, 3, 4].map((i) => (
+                        <div key={i} className="bg-white rounded-lg p-2">
+                          <div className="aspect-square bg-gradient-to-br from-gray-200 to-gray-300 rounded mb-2"></div>
+                          <div className="h-2 bg-gray-200 rounded w-full mb-1"></div>
+                          <div className="h-2 bg-cyan-200 rounded w-1/2"></div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Label */}
+              <div className="p-4 text-center">
+                <h4 className="font-semibold text-gray-900 mb-1">Discover Products</h4>
+                <p className="text-sm text-gray-600">Explore trending items and lists</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Features Section */}
       <section id="features" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <h3 className="text-3xl font-bold text-center text-gray-900 mb-12">
@@ -94,7 +246,7 @@ export default function Home() {
         </h3>
         <div className="grid md:grid-cols-3 gap-8">
           <div className="bg-white rounded-2xl p-8 shadow-lg">
-            <div className="w-12 h-12 bg-gradient-to-br from-cyan-500 to-teal-500 rounded-full flex items-center justify-center mb-4">
+            <div className="w-12 h-12 bg-gradient-to-br from-cyan-500 to-cyan-500 rounded-full flex items-center justify-center mb-4">
               <span className="text-2xl">🎯</span>
             </div>
             <h4 className="text-xl font-bold text-gray-900 mb-3">Get What You Actually Want</h4>
@@ -105,7 +257,7 @@ export default function Home() {
           </div>
 
           <div className="bg-white rounded-2xl p-8 shadow-lg">
-            <div className="w-12 h-12 bg-gradient-to-br from-cyan-500 to-teal-500 rounded-full flex items-center justify-center mb-4">
+            <div className="w-12 h-12 bg-gradient-to-br from-cyan-500 to-cyan-500 rounded-full flex items-center justify-center mb-4">
               <span className="text-2xl">👥</span>
             </div>
             <h4 className="text-xl font-bold text-gray-900 mb-3">Share the Burden</h4>
@@ -116,7 +268,7 @@ export default function Home() {
           </div>
 
           <div className="bg-white rounded-2xl p-8 shadow-lg">
-            <div className="w-12 h-12 bg-gradient-to-br from-cyan-500 to-teal-500 rounded-full flex items-center justify-center mb-4">
+            <div className="w-12 h-12 bg-gradient-to-br from-cyan-500 to-cyan-500 rounded-full flex items-center justify-center mb-4">
               <span className="text-2xl">🔗</span>
             </div>
             <h4 className="text-xl font-bold text-gray-900 mb-3">One Link to Rule Them All</h4>
@@ -141,7 +293,7 @@ export default function Home() {
             onClick={() => setActiveTab('trending')}
             className={`px-6 py-3 font-semibold transition-colors ${
               activeTab === 'trending'
-                ? 'text-teal-600 border-b-2 border-teal-500'
+                ? 'text-cyan-600 border-b-2 border-cyan-500'
                 : 'text-gray-500 hover:text-gray-900'
             }`}
           >
@@ -151,7 +303,7 @@ export default function Home() {
             onClick={() => setActiveTab('new')}
             className={`px-6 py-3 font-semibold transition-colors ${
               activeTab === 'new'
-                ? 'text-teal-600 border-b-2 border-teal-500'
+                ? 'text-cyan-600 border-b-2 border-cyan-500'
                 : 'text-gray-500 hover:text-gray-900'
             }`}
           >
@@ -161,7 +313,7 @@ export default function Home() {
             onClick={() => setActiveTab('featured')}
             className={`px-6 py-3 font-semibold transition-colors ${
               activeTab === 'featured'
-                ? 'text-teal-600 border-b-2 border-teal-500'
+                ? 'text-cyan-600 border-b-2 border-cyan-500'
                 : 'text-gray-500 hover:text-gray-900'
             }`}
           >
@@ -174,7 +326,7 @@ export default function Home() {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
         {loading ? (
           <div className="flex justify-center items-center py-20">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-teal-500"></div>
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-cyan-500"></div>
           </div>
         ) : lists.length === 0 ? (
           <div className="text-center py-20">
@@ -189,7 +341,7 @@ export default function Home() {
                 className="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition-all hover:scale-105"
               >
                 <div className="flex items-start gap-4">
-                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-cyan-500 to-teal-500 flex items-center justify-center flex-shrink-0">
+                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-cyan-500 to-cyan-500 flex items-center justify-center flex-shrink-0">
                     <span className="text-2xl">🎁</span>
                   </div>
                   <div className="flex-1 min-w-0">
@@ -218,7 +370,7 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="bg-gradient-to-r from-cyan-500 to-teal-500 py-16">
+      <section className="bg-gradient-to-r from-cyan-500 to-cyan-500 py-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h3 className="text-3xl font-bold text-white mb-4">
             Ready to stop getting socks?
@@ -226,7 +378,7 @@ export default function Home() {
           <p className="text-xl text-white/90 mb-8">
             Join thousands of people who are finally getting gifts they actually want.
           </p>
-          <Link href="/signup" className="inline-block px-8 py-4 bg-white text-teal-600 rounded-full font-bold text-lg hover:shadow-2xl transition-all hover:scale-105">
+          <Link href="/signup" className="inline-block px-8 py-4 bg-white text-cyan-600 rounded-full font-bold text-lg hover:shadow-2xl transition-all hover:scale-105">
             Create Your Free List
           </Link>
         </div>
@@ -237,7 +389,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="grid md:grid-cols-4 gap-8 mb-8">
             <div>
-              <h4 className="text-lg font-bold bg-gradient-to-r from-cyan-500 to-teal-500 bg-clip-text text-transparent mb-4">
+              <h4 className="text-lg font-bold bg-gradient-to-r from-cyan-500 to-cyan-500 bg-clip-text text-transparent mb-4">
                 Wishdrop
               </h4>
               <p className="text-gray-600 text-sm">
@@ -247,23 +399,23 @@ export default function Home() {
             <div>
               <h5 className="font-semibold text-gray-900 mb-3">Product</h5>
               <ul className="space-y-2 text-sm text-gray-600">
-                <li><Link href="/signup" className="hover:text-teal-600">Sign Up</Link></li>
-                <li><Link href="/login" className="hover:text-teal-600">Login</Link></li>
+                <li><Link href="/signup" className="hover:text-cyan-600">Sign Up</Link></li>
+                <li><Link href="/login" className="hover:text-cyan-600">Login</Link></li>
               </ul>
             </div>
             <div>
               <h5 className="font-semibold text-gray-900 mb-3">Legal</h5>
               <ul className="space-y-2 text-sm text-gray-600">
-                <li><Link href="/legal/privacy" className="hover:text-teal-600">Privacy Policy</Link></li>
-                <li><Link href="/legal/terms" className="hover:text-teal-600">Terms of Service</Link></li>
-                <li><Link href="/legal/affiliate-disclosure" className="hover:text-teal-600">Affiliate Disclosure</Link></li>
+                <li><Link href="/legal/privacy" className="hover:text-cyan-600">Privacy Policy</Link></li>
+                <li><Link href="/legal/terms" className="hover:text-cyan-600">Terms of Service</Link></li>
+                <li><Link href="/legal/affiliate-disclosure" className="hover:text-cyan-600">Affiliate Disclosure</Link></li>
               </ul>
             </div>
             <div>
               <h5 className="font-semibold text-gray-900 mb-3">Connect</h5>
               <ul className="space-y-2 text-sm text-gray-600">
-                <li><a href="https://twitter.com/wishdropapp" target="_blank" rel="noopener noreferrer" className="hover:text-teal-600">Twitter</a></li>
-                <li><a href="https://instagram.com/wishdropapp" target="_blank" rel="noopener noreferrer" className="hover:text-teal-600">Instagram</a></li>
+                <li><a href="https://twitter.com/wishdropapp" target="_blank" rel="noopener noreferrer" className="hover:text-cyan-600">Twitter</a></li>
+                <li><a href="https://instagram.com/wishdropapp" target="_blank" rel="noopener noreferrer" className="hover:text-cyan-600">Instagram</a></li>
               </ul>
             </div>
           </div>
