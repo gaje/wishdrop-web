@@ -1,3 +1,5 @@
+const { withSentryConfig } = require('@sentry/nextjs')
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
@@ -10,4 +12,13 @@ const nextConfig = {
   },
 }
 
-module.exports = nextConfig
+const sentryOptions = {
+  org: 'gajetastic',
+  project: 'wishdrop-web',
+  silent: true,
+  widenClientFileUpload: true,
+  hideSourceMaps: true,
+  automaticVercelMonitors: true,
+}
+
+module.exports = withSentryConfig(nextConfig, sentryOptions)
