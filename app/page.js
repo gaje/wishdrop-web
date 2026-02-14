@@ -2,46 +2,29 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { discover } from '../lib/api'
-import { useAuth } from '@/lib/AuthContext'
 import Header from '@/components/Header'
-import EmailVerificationBanner from './components/EmailVerificationBanner'
 
 export default function Home() {
-  const { loading: authLoading } = useAuth()
-  const [lists, setLists] = useState([])
-  const [loading, setLoading] = useState(true)
-  const [activeTab, setActiveTab] = useState('trending')
+  const [trendingProducts, setTrendingProducts] = useState([])
 
   useEffect(() => {
-    if (!authLoading) {
-      loadLists()
-    }
-  }, [activeTab, authLoading])
+    loadTrendingProducts()
+  }, [])
 
-  const loadLists = async () => {
+  const loadTrendingProducts = async () => {
     try {
-      setLoading(true)
-      let response
-      if (activeTab === 'trending') {
-        response = await discover.trending(20, 0)
-      } else if (activeTab === 'new') {
-        response = await discover.new(20, 0)
-      } else {
-        response = await discover.featured(20, 0)
-      }
-      setLists(response.lists || [])
+      const response = await discover.trendingItems(8)
+      setTrendingProducts(response.items || [])
     } catch (error) {
-      console.error('Failed to load lists:', error)
-    } finally {
-      setLoading(false)
+      console.error('Failed to load trending products:', error)
     }
   }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-cyan-50 via-cyan-50 to-blue-50">
       <Header />
-      <EmailVerificationBanner />
 
       {/* Hero Section */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
@@ -52,7 +35,7 @@ export default function Home() {
         </div>
         <h2 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
           No more guessing.<br />
-          <span className="bg-gradient-to-r from-cyan-500 to-cyan-500 bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-cyan-500 to-blue-600 bg-clip-text text-transparent">
             Just perfect gifts.
           </span>
         </h2>
@@ -62,7 +45,7 @@ export default function Home() {
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-          <Link href="/signup" className="inline-block px-8 py-4 bg-gradient-to-r from-cyan-500 to-cyan-500 text-white rounded-full font-bold text-lg hover:shadow-2xl transition-all hover:scale-105">
+          <Link href="/signup" className="inline-block px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white rounded-full font-bold text-lg hover:shadow-2xl transition-all hover:scale-105">
             Get Started Free
           </Link>
           <Link href="#features" className="inline-block px-8 py-4 bg-white text-gray-700 rounded-full font-bold text-lg border-2 border-gray-200 hover:border-cyan-500 transition-all">
@@ -252,7 +235,7 @@ export default function Home() {
         </h3>
         <div className="grid md:grid-cols-3 gap-8">
           <div className="bg-white rounded-2xl p-8 shadow-lg">
-            <div className="w-12 h-12 bg-gradient-to-br from-cyan-500 to-cyan-500 rounded-full flex items-center justify-center mb-4">
+            <div className="w-12 h-12 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-full flex items-center justify-center mb-4">
               <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 8a4 4 0 100 8 4 4 0 000-8zm0-4v2m0 12v2m8-8h-2M4 12H2" />
               </svg>
@@ -265,7 +248,7 @@ export default function Home() {
           </div>
 
           <div className="bg-white rounded-2xl p-8 shadow-lg">
-            <div className="w-12 h-12 bg-gradient-to-br from-cyan-500 to-cyan-500 rounded-full flex items-center justify-center mb-4">
+            <div className="w-12 h-12 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-full flex items-center justify-center mb-4">
               <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
               </svg>
@@ -278,7 +261,7 @@ export default function Home() {
           </div>
 
           <div className="bg-white rounded-2xl p-8 shadow-lg">
-            <div className="w-12 h-12 bg-gradient-to-br from-cyan-500 to-cyan-500 rounded-full flex items-center justify-center mb-4">
+            <div className="w-12 h-12 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-full flex items-center justify-center mb-4">
               <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
               </svg>
@@ -292,97 +275,146 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Discover Section Header */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8 pt-8">
-        <h3 className="text-3xl font-bold text-center text-gray-900 mb-2">
-          Get Inspired
+      {/* Scenario Cards Section */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <h3 className="text-3xl font-bold text-center text-gray-900 mb-3">
+          Made for every occasion
         </h3>
-        <p className="text-center text-gray-600 mb-8">
-          Check out what others are wishing for
+        <p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
+          Whether it's a birthday, wedding, or just because, WishDrop makes it easy to share what you want
         </p>
-        <div className="flex gap-4 border-b border-gray-200">
-          <button
-            onClick={() => setActiveTab('trending')}
-            className={`px-6 py-3 font-semibold transition-colors ${
-              activeTab === 'trending'
-                ? 'text-cyan-600 border-b-2 border-cyan-500'
-                : 'text-gray-500 hover:text-gray-900'
-            }`}
-          >
-            Trending
-          </button>
-          <button
-            onClick={() => setActiveTab('new')}
-            className={`px-6 py-3 font-semibold transition-colors ${
-              activeTab === 'new'
-                ? 'text-cyan-600 border-b-2 border-cyan-500'
-                : 'text-gray-500 hover:text-gray-900'
-            }`}
-          >
-            New
-          </button>
-          <button
-            onClick={() => setActiveTab('featured')}
-            className={`px-6 py-3 font-semibold transition-colors ${
-              activeTab === 'featured'
-                ? 'text-cyan-600 border-b-2 border-cyan-500'
-                : 'text-gray-500 hover:text-gray-900'
-            }`}
-          >
-            Featured
-          </button>
+
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+          {/* Birthday */}
+          <Link href="/signup" className="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition-all hover:-translate-y-1 flex flex-col items-center text-center">
+            <div className="w-12 h-12 mb-3 flex items-center justify-center">
+              <svg className="w-5 h-5 text-cyan-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 8.25v-1.5m0 1.5c-1.355 0-2.697.056-4.024.166C6.845 8.51 6 9.473 6 10.608v2.513m6-4.871c1.355 0 2.697.056 4.024.166C17.155 8.51 18 9.473 18 10.608v2.513M15 8.25v-1.5m-6 1.5v-1.5m12 9.75l-1.5.75a3.354 3.354 0 01-3 0 3.354 3.354 0 00-3 0 3.354 3.354 0 01-3 0 3.354 3.354 0 00-3 0 3.354 3.354 0 01-3 0L3 16.5m15-3.379a48.474 48.474 0 00-6-.371c-2.032 0-4.034.126-6 .371m12 0c.39.049.777.102 1.163.16 1.07.16 1.837 1.094 1.837 2.175v5.169c0 .621-.504 1.125-1.125 1.125H4.125A1.125 1.125 0 013 20.625v-5.17c0-1.08.768-2.014 1.837-2.174A47.78 47.78 0 016 13.12M12 8.25a2.25 2.25 0 01-2.25-2.25V4.5" />
+              </svg>
+            </div>
+            <h4 className="font-semibold text-gray-900 text-sm mb-1">Birthday</h4>
+            <p className="text-xs text-gray-600">Celebrate another year</p>
+          </Link>
+
+          {/* Holiday */}
+          <Link href="/signup" className="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition-all hover:-translate-y-1 flex flex-col items-center text-center">
+            <div className="w-12 h-12 mb-3 flex items-center justify-center">
+              <svg className="w-5 h-5 text-cyan-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M21 11.25v8.25a1.5 1.5 0 01-1.5 1.5H5.25a1.5 1.5 0 01-1.5-1.5v-8.25M12 4.875A2.625 2.625 0 109.375 7.5H12m0-2.625V7.5m0-2.625A2.625 2.625 0 1114.625 7.5H12m0 0V21m-8.625-9.75h18c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125h-18c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z" />
+              </svg>
+            </div>
+            <h4 className="font-semibold text-gray-900 text-sm mb-1">Holiday</h4>
+            <p className="text-xs text-gray-600">Festive season wishes</p>
+          </Link>
+
+          {/* Wedding */}
+          <Link href="/signup" className="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition-all hover:-translate-y-1 flex flex-col items-center text-center">
+            <div className="w-12 h-12 mb-3 flex items-center justify-center">
+              <svg className="w-5 h-5 text-cyan-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+              </svg>
+            </div>
+            <h4 className="font-semibold text-gray-900 text-sm mb-1">Wedding</h4>
+            <p className="text-xs text-gray-600">Start your life together</p>
+          </Link>
+
+          {/* Baby */}
+          <Link href="/signup" className="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition-all hover:-translate-y-1 flex flex-col items-center text-center">
+            <div className="w-12 h-12 mb-3 flex items-center justify-center">
+              <svg className="w-5 h-5 text-cyan-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" />
+              </svg>
+            </div>
+            <h4 className="font-semibold text-gray-900 text-sm mb-1">Baby</h4>
+            <p className="text-xs text-gray-600">Welcome the new arrival</p>
+          </Link>
+
+          {/* Housewarming */}
+          <Link href="/signup" className="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition-all hover:-translate-y-1 flex flex-col items-center text-center">
+            <div className="w-12 h-12 mb-3 flex items-center justify-center">
+              <svg className="w-5 h-5 text-cyan-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+              </svg>
+            </div>
+            <h4 className="font-semibold text-gray-900 text-sm mb-1">Housewarming</h4>
+            <p className="text-xs text-gray-600">Make a house a home</p>
+          </Link>
+
+          {/* Just Because */}
+          <Link href="/signup" className="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition-all hover:-translate-y-1 flex flex-col items-center text-center">
+            <div className="w-12 h-12 mb-3 flex items-center justify-center">
+              <svg className="w-5 h-5 text-cyan-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456z" />
+              </svg>
+            </div>
+            <h4 className="font-semibold text-gray-900 text-sm mb-1">Just Because</h4>
+            <p className="text-xs text-gray-600">No reason needed</p>
+          </Link>
         </div>
       </section>
 
-      {/* Lists Grid */}
+      {/* Trending Products Section */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
-        {loading ? (
-          <div className="flex justify-center items-center py-20">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-cyan-500"></div>
-          </div>
-        ) : lists.length === 0 ? (
-          <div className="text-center py-20">
-            <p className="text-xl text-gray-600">No lists found</p>
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {lists.map((list) => (
-              <Link
-                key={list._id}
-                href={`/u/${list.owner?.username}/${list.slug}`}
-                className="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition-all hover:scale-105"
-              >
-                <div className="flex items-start gap-4">
-                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-cyan-500 to-cyan-500 flex items-center justify-center flex-shrink-0">
-                    <span className="text-2xl">🎁</span>
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <h3 className="text-lg font-bold text-gray-900 mb-1 truncate">
-                      {list.title}
-                    </h3>
-                    <p className="text-sm text-gray-600 mb-2">
-                      by @{list.owner?.username || 'unknown'}
-                    </p>
-                    {list.description && (
-                      <p className="text-sm text-gray-700 line-clamp-2 mb-3">
-                        {list.description}
-                      </p>
-                    )}
-                    <div className="flex items-center gap-4 text-xs text-gray-500">
-                      <span>{list.itemCount || 0} items</span>
-                      {list.likeCount > 0 && <span>❤️ {list.likeCount}</span>}
-                      {list.viewCount > 0 && <span>👁 {list.viewCount}</span>}
+        <h3 className="text-3xl font-bold text-center text-gray-900 mb-3">
+          Trending right now
+        </h3>
+        <p className="text-center text-gray-600 mb-12">
+          See what people are adding to their wishlists
+        </p>
+
+        {trendingProducts.length > 0 ? (
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-8">
+            {trendingProducts.map((product, index) => (
+              <div key={index} className="bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-md hover:shadow-xl transition-all hover:-translate-y-1">
+                <div className="relative aspect-square bg-gray-100 overflow-hidden">
+                  {product.image ? (
+                    <Image
+                      src={product.image}
+                      alt={product.title}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-gray-100 to-gray-200">
+                      <svg className="w-12 h-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
+                      </svg>
                     </div>
+                  )}
+                </div>
+                <div className="p-3.5">
+                  <h4 className="text-sm font-semibold text-gray-900 line-clamp-2 mb-1.5 min-h-[40px]">
+                    {product.title}
+                  </h4>
+                  <div className="flex items-center justify-between">
+                    {product.price && (
+                      <span className="text-sm font-bold text-cyan-600">{product.price}</span>
+                    )}
+                    {product.merchant && (
+                      <span className="text-xs text-gray-500 truncate">{product.merchant}</span>
+                    )}
                   </div>
                 </div>
-              </Link>
+              </div>
             ))}
           </div>
+        ) : (
+          <div className="text-center py-12">
+            <div className="inline-block animate-spin rounded-full h-10 w-10 border-b-2 border-cyan-500 mb-4"></div>
+            <p className="text-gray-600">Loading trending products...</p>
+          </div>
         )}
+
+        <div className="text-center">
+          <Link href="/discover" className="inline-block px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white rounded-full font-bold text-lg hover:shadow-2xl transition-all hover:scale-105">
+            Explore More
+          </Link>
+        </div>
       </section>
 
       {/* CTA Section */}
-      <section className="bg-gradient-to-r from-cyan-500 to-cyan-500 py-16">
+      <section className="bg-gradient-to-r from-cyan-500 to-blue-600 py-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h3 className="text-3xl font-bold text-white mb-4">
             Ready to stop getting socks?
