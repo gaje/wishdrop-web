@@ -73,15 +73,21 @@ export default function Home() {
         {/* Social Proof */}
         <div className="flex flex-wrap justify-center gap-8 text-sm text-gray-600">
           <div className="flex items-center gap-2">
-            <span className="text-2xl">✨</span>
+            <svg className="w-5 h-5 text-cyan-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456z" />
+            </svg>
             <span>No ads, ever</span>
           </div>
           <div className="flex items-center gap-2">
-            <span className="text-2xl">🔒</span>
+            <svg className="w-5 h-5 text-cyan-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+            </svg>
             <span>100% private lists</span>
           </div>
           <div className="flex items-center gap-2">
-            <span className="text-2xl">💸</span>
+            <svg className="w-5 h-5 text-cyan-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
             <span>Completely free</span>
           </div>
         </div>
@@ -247,7 +253,9 @@ export default function Home() {
         <div className="grid md:grid-cols-3 gap-8">
           <div className="bg-white rounded-2xl p-8 shadow-lg">
             <div className="w-12 h-12 bg-gradient-to-br from-cyan-500 to-cyan-500 rounded-full flex items-center justify-center mb-4">
-              <span className="text-2xl">🎯</span>
+              <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 8a4 4 0 100 8 4 4 0 000-8zm0-4v2m0 12v2m8-8h-2M4 12H2" />
+              </svg>
             </div>
             <h4 className="text-xl font-bold text-gray-900 mb-3">Get What You Actually Want</h4>
             <p className="text-gray-600">
@@ -258,7 +266,9 @@ export default function Home() {
 
           <div className="bg-white rounded-2xl p-8 shadow-lg">
             <div className="w-12 h-12 bg-gradient-to-br from-cyan-500 to-cyan-500 rounded-full flex items-center justify-center mb-4">
-              <span className="text-2xl">👥</span>
+              <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
+              </svg>
             </div>
             <h4 className="text-xl font-bold text-gray-900 mb-3">Share the Burden</h4>
             <p className="text-gray-600">
@@ -269,7 +279,9 @@ export default function Home() {
 
           <div className="bg-white rounded-2xl p-8 shadow-lg">
             <div className="w-12 h-12 bg-gradient-to-br from-cyan-500 to-cyan-500 rounded-full flex items-center justify-center mb-4">
-              <span className="text-2xl">🔗</span>
+              <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+              </svg>
             </div>
             <h4 className="text-xl font-bold text-gray-900 mb-3">One Link to Rule Them All</h4>
             <p className="text-gray-600">
@@ -384,46 +396,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-white border-t border-gray-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="grid md:grid-cols-4 gap-8 mb-8">
-            <div>
-              <h4 className="text-lg font-bold bg-gradient-to-r from-cyan-500 to-cyan-500 bg-clip-text text-transparent mb-4">
-                Wishdrop
-              </h4>
-              <p className="text-gray-600 text-sm">
-                The smarter way to gift. No more guessing, just perfect gifts.
-              </p>
-            </div>
-            <div>
-              <h5 className="font-semibold text-gray-900 mb-3">Product</h5>
-              <ul className="space-y-2 text-sm text-gray-600">
-                <li><Link href="/signup" className="hover:text-cyan-600">Sign Up</Link></li>
-                <li><Link href="/login" className="hover:text-cyan-600">Login</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h5 className="font-semibold text-gray-900 mb-3">Legal</h5>
-              <ul className="space-y-2 text-sm text-gray-600">
-                <li><Link href="/legal/privacy" className="hover:text-cyan-600">Privacy Policy</Link></li>
-                <li><Link href="/legal/terms" className="hover:text-cyan-600">Terms of Service</Link></li>
-                <li><Link href="/legal/affiliate-disclosure" className="hover:text-cyan-600">Affiliate Disclosure</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h5 className="font-semibold text-gray-900 mb-3">Connect</h5>
-              <ul className="space-y-2 text-sm text-gray-600">
-                <li><a href="https://twitter.com/wishdropapp" target="_blank" rel="noopener noreferrer" className="hover:text-cyan-600">Twitter</a></li>
-                <li><a href="https://instagram.com/wishdropapp" target="_blank" rel="noopener noreferrer" className="hover:text-cyan-600">Instagram</a></li>
-              </ul>
-            </div>
-          </div>
-          <div className="border-t border-gray-200 pt-8 text-center text-sm text-gray-600">
-            <p>&copy; {new Date().getFullYear()} Wishdrop. Share your wishes with the world.</p>
-          </div>
-        </div>
-      </footer>
     </div>
   )
 }
