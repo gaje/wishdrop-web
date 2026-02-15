@@ -14,16 +14,11 @@ export default function Footer() {
           {/* Brand */}
           <div className="md:col-span-2">
             <Link href="/" className="flex items-center gap-2 mb-4">
-              <Image
-                src="/logo-circle.png"
+              <img
+                src="https://cdnifly.netlify.app/wishdrop/wishdrop-full.png"
                 alt="Wishdrop"
-                width={32}
-                height={32}
-                className="rounded-full"
+                className="h-7 w-auto brightness-0 invert"
               />
-              <span className="text-xl font-bold">
-                Wish<span className="text-teal-400">drop</span>
-              </span>
             </Link>
             <p className="text-gray-400 text-sm max-w-sm mb-4">
               Create and share wishlists with the people you love. Make gift-giving effortless and thoughtful.
@@ -62,18 +57,23 @@ export default function Footer() {
             </h4>
             <ul className="space-y-3">
               <li>
-                <Link href="/discover" className="text-gray-300 hover:text-teal-400 transition-colors text-sm">
+                <Link href="/discover" className="text-gray-300 hover:text-cyan-400 transition-colors text-sm">
                   Discover
                 </Link>
               </li>
               <li>
-                <Link href="/drops" className="text-gray-300 hover:text-teal-400 transition-colors text-sm">
+                <Link href="/drops" className="text-gray-300 hover:text-cyan-400 transition-colors text-sm">
                   Drops
                 </Link>
               </li>
               <li>
-                <Link href="/signup" className="text-gray-300 hover:text-teal-400 transition-colors text-sm">
+                <Link href="/signup" className="text-gray-300 hover:text-cyan-400 transition-colors text-sm">
                   Get Started
+                </Link>
+              </li>
+              <li>
+                <Link href="/login" className="text-gray-300 hover:text-cyan-400 transition-colors text-sm">
+                  Log In
                 </Link>
               </li>
             </ul>
@@ -85,22 +85,27 @@ export default function Footer() {
             </h4>
             <ul className="space-y-3">
               <li>
-                <Link href="/legal/terms" className="text-gray-300 hover:text-teal-400 transition-colors text-sm">
+                <Link href="/legal/terms" className="text-gray-300 hover:text-cyan-400 transition-colors text-sm">
                   Terms of Service
                 </Link>
               </li>
               <li>
-                <Link href="/legal/privacy" className="text-gray-300 hover:text-teal-400 transition-colors text-sm">
+                <Link href="/legal/privacy" className="text-gray-300 hover:text-cyan-400 transition-colors text-sm">
                   Privacy Policy
                 </Link>
               </li>
               <li>
-                <Link href="/legal/affiliate-disclosure" className="text-gray-300 hover:text-teal-400 transition-colors text-sm">
+                <Link href="/legal/affiliate-disclosure" className="text-gray-300 hover:text-cyan-400 transition-colors text-sm">
                   Affiliate Disclosure
                 </Link>
               </li>
               <li>
-                <a href="mailto:support@wishdrop.app" className="text-gray-300 hover:text-teal-400 transition-colors text-sm">
+                <Link href="/legal/community-guidelines" className="text-gray-300 hover:text-cyan-400 transition-colors text-sm">
+                  Community Guidelines
+                </Link>
+              </li>
+              <li>
+                <a href="mailto:support@wishdrop.app" className="text-gray-300 hover:text-cyan-400 transition-colors text-sm">
                   Contact Us
                 </a>
               </li>
@@ -120,7 +125,7 @@ export default function Footer() {
               href="https://instagram.com/wishdropapp"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-9 h-9 flex items-center justify-center rounded-full bg-white/10 hover:bg-teal-500 transition-colors"
+              className="w-9 h-9 flex items-center justify-center rounded-full bg-white/10 hover:bg-cyan-500 transition-colors"
               aria-label="Instagram"
             >
               <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
@@ -131,7 +136,7 @@ export default function Footer() {
               href="https://twitter.com/wishdropapp"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-9 h-9 flex items-center justify-center rounded-full bg-white/10 hover:bg-teal-500 transition-colors"
+              className="w-9 h-9 flex items-center justify-center rounded-full bg-white/10 hover:bg-cyan-500 transition-colors"
               aria-label="Twitter"
             >
               <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
@@ -142,7 +147,7 @@ export default function Footer() {
               href="https://facebook.com/wishdropapp"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-9 h-9 flex items-center justify-center rounded-full bg-white/10 hover:bg-teal-500 transition-colors"
+              className="w-9 h-9 flex items-center justify-center rounded-full bg-white/10 hover:bg-cyan-500 transition-colors"
               aria-label="Facebook"
             >
               <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
