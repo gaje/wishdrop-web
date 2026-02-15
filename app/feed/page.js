@@ -64,7 +64,7 @@ export default function FeedPage() {
   if (authLoading || !user) {
     return (
       <div className="min-h-screen bg-slate-50 flex items-center justify-center">
-        <div className="w-10 h-10 rounded-full border-[3px] border-slate-200 border-t-teal-500 animate-spin" />
+        <div className="w-10 h-10 rounded-full border-[3px] border-slate-200 border-t-cyan-500 animate-spin" />
       </div>
     )
   }
@@ -98,12 +98,12 @@ export default function FeedPage() {
         {/* Feed */}
         {loading ? (
           <div className="flex justify-center items-center py-20">
-            <div className="w-10 h-10 rounded-full border-[3px] border-slate-200 border-t-teal-500 animate-spin" />
+            <div className="w-10 h-10 rounded-full border-[3px] border-slate-200 border-t-cyan-500 animate-spin" />
           </div>
         ) : feed.length === 0 ? (
           <div className="text-center py-16 animate-fade-in">
-            <div className="w-20 h-20 mx-auto mb-5 rounded-2xl bg-gradient-to-br from-teal-100 to-cyan-100 flex items-center justify-center">
-              <svg className="w-10 h-10 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="w-20 h-20 mx-auto mb-5 rounded-2xl bg-gradient-to-br from-cyan-100 to-cyan-100 flex items-center justify-center">
+              <svg className="w-10 h-10 text-cyan-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
               </svg>
             </div>
@@ -113,7 +113,7 @@ export default function FeedPage() {
             </p>
             <Link
               href="/discover"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-teal-500 to-cyan-500 text-white rounded-xl font-semibold hover:shadow-lg hover:shadow-teal-200 transition-all duration-300"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-cyan-500 to-cyan-500 text-white rounded-xl font-semibold hover:shadow-lg hover:shadow-cyan-200 transition-all duration-300"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -132,7 +132,7 @@ export default function FeedPage() {
                   style={{ animationDelay: `${index * 0.05}s` }}
                 >
                   <div className="flex items-start gap-4 mb-4">
-                    <div className="w-11 h-11 rounded-full bg-gradient-to-br from-teal-400 to-cyan-500 flex items-center justify-center text-white text-sm font-semibold flex-shrink-0 shadow-sm">
+                    <div className="w-11 h-11 rounded-full bg-gradient-to-br from-cyan-400 to-cyan-500 flex items-center justify-center text-white text-sm font-semibold flex-shrink-0 shadow-sm">
                       {list.owner?.displayName?.charAt(0)?.toUpperCase() || list.owner?.username?.charAt(0)?.toUpperCase()}
                     </div>
                     <div className="flex-1 min-w-0">
@@ -153,17 +153,17 @@ export default function FeedPage() {
                       className="flex items-start gap-4"
                       style={{ viewTransitionName: `list-${list.slug}`, contain: 'layout paint' }}
                     >
-                      <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-teal-400 to-cyan-500 flex items-center justify-center flex-shrink-0 shadow-sm">
+                      <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-cyan-400 to-cyan-500 flex items-center justify-center flex-shrink-0 shadow-sm">
                         <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7" />
                         </svg>
                       </div>
                       <div className="flex-1 min-w-0">
-                        <h3 className="text-lg font-semibold text-slate-900 mb-1 group-hover:text-teal-600 transition-colors">
+                        <h3 className="text-lg font-semibold text-slate-900 mb-1 group-hover:text-cyan-600 transition-colors">
                           {list.title}
                         </h3>
                         {list.occasion && (
-                          <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-teal-50 text-teal-700 text-xs font-medium rounded-full border border-teal-200 mb-2">
+                          <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-cyan-50 text-cyan-700 text-xs font-medium rounded-full border border-cyan-200 mb-2">
                             {list.occasion}
                           </span>
                         )}
@@ -209,7 +209,7 @@ export default function FeedPage() {
                 <button
                   onClick={handleLoadMore}
                   disabled={loadingMore}
-                  className="px-6 py-2.5 bg-white border border-slate-200 text-slate-700 rounded-xl font-medium hover:border-teal-300 hover:text-teal-600 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="px-6 py-2.5 bg-white border border-slate-200 text-slate-700 rounded-xl font-medium hover:border-cyan-300 hover:text-cyan-600 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {loadingMore ? (
                     <span className="flex items-center justify-center gap-2">

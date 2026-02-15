@@ -379,7 +379,7 @@ export default function ProductDetailPage({ params }) {
             {lists.length > 0 && (
               <div className="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
                 <h2 className="text-base font-semibold text-slate-900 mb-4 flex items-center gap-2">
-                  <svg className="w-5 h-5 text-teal-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg className="w-5 h-5 text-cyan-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
                   </svg>
                   Found on {lists.length} {lists.length === 1 ? 'list' : 'lists'}
@@ -391,13 +391,13 @@ export default function ProductDetailPage({ params }) {
                       href={`/u/${list.owner?.username}/${list.slug}`}
                       className="group flex items-center gap-3 p-2.5 rounded-xl hover:bg-slate-50 transition-colors"
                     >
-                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-teal-400 to-cyan-500 flex items-center justify-center flex-shrink-0 ring-2 ring-white shadow-sm">
+                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-cyan-400 to-cyan-500 flex items-center justify-center flex-shrink-0 ring-2 ring-white shadow-sm">
                         <span className="text-sm text-white font-bold">
                           {list.title?.charAt(0)?.toUpperCase() || '?'}
                         </span>
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="text-sm font-semibold text-slate-900 truncate group-hover:text-teal-600 transition-colors">
+                        <p className="text-sm font-semibold text-slate-900 truncate group-hover:text-cyan-600 transition-colors">
                           {list.title}
                         </p>
                         <p className="text-xs text-slate-500 truncate">

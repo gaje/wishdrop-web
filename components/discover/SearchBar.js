@@ -100,11 +100,11 @@ export default function SearchBar() {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Search products and users..."
-          className="w-full pl-12 pr-12 py-3.5 rounded-xl border border-slate-200 focus:border-teal-500 focus:ring-2 focus:ring-teal-200 outline-none transition-all text-slate-900 placeholder:text-slate-400"
+          className="w-full pl-12 pr-12 py-3.5 rounded-xl border border-slate-200 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-200 outline-none transition-all text-slate-900 placeholder:text-slate-400"
         />
         {loading && (
           <div className="absolute right-12 top-1/2 -translate-y-1/2">
-            <div className="w-4 h-4 rounded-full border-2 border-slate-200 border-t-teal-500 animate-spin" />
+            <div className="w-4 h-4 rounded-full border-2 border-slate-200 border-t-cyan-500 animate-spin" />
           </div>
         )}
         {query && (
@@ -185,7 +185,7 @@ export default function SearchBar() {
                     onClick={() => handleUserClick(user)}
                     className="w-full flex items-center gap-3 p-2 rounded-lg hover:bg-slate-50 transition-colors text-left"
                   >
-                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-teal-400 to-cyan-500 flex items-center justify-center flex-shrink-0">
+                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-cyan-400 to-cyan-500 flex items-center justify-center flex-shrink-0">
                       {user.avatar ? (
                         <Image
                           src={user.avatar}

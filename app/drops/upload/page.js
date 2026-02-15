@@ -100,8 +100,8 @@ export default function VideoUploadPage() {
 
   if (authLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-cyan-50 via-teal-50 to-blue-50 flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-teal-500"></div>
+      <div className="min-h-screen bg-gradient-to-br from-cyan-50 via-cyan-50 to-blue-50 flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-cyan-500"></div>
       </div>
     )
   }
@@ -112,7 +112,7 @@ export default function VideoUploadPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-cyan-50 via-teal-50 to-blue-50">
+    <div className="min-h-screen bg-gradient-to-br from-cyan-50 via-cyan-50 to-blue-50">
       <Header />
 
       <main className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -134,7 +134,7 @@ export default function VideoUploadPage() {
 
           {/* File Upload Area */}
           {!selectedFile ? (
-            <div className="border-2 border-dashed border-gray-300 rounded-xl p-12 text-center hover:border-teal-500 transition-colors">
+            <div className="border-2 border-dashed border-gray-300 rounded-xl p-12 text-center hover:border-cyan-500 transition-colors">
               <input
                 ref={fileInputRef}
                 type="file"
@@ -147,7 +147,7 @@ export default function VideoUploadPage() {
                 htmlFor="video-upload"
                 className="cursor-pointer flex flex-col items-center"
               >
-                <div className="w-20 h-20 bg-gradient-to-br from-cyan-500 to-teal-500 rounded-full flex items-center justify-center mb-4">
+                <div className="w-20 h-20 bg-gradient-to-br from-cyan-500 to-cyan-500 rounded-full flex items-center justify-center mb-4">
                   <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
                   </svg>
@@ -200,7 +200,7 @@ export default function VideoUploadPage() {
                     disabled={uploading}
                     className={`flex-1 px-4 py-3 rounded-lg border-2 font-semibold transition-colors ${
                       visibility === 'public'
-                        ? 'border-teal-500 bg-teal-50 text-teal-700'
+                        ? 'border-cyan-500 bg-cyan-50 text-cyan-700'
                         : 'border-gray-200 bg-white text-gray-700 hover:border-gray-300'
                     }`}
                   >
@@ -211,7 +211,7 @@ export default function VideoUploadPage() {
                     disabled={uploading}
                     className={`flex-1 px-4 py-3 rounded-lg border-2 font-semibold transition-colors ${
                       visibility === 'unlisted'
-                        ? 'border-teal-500 bg-teal-50 text-teal-700'
+                        ? 'border-cyan-500 bg-cyan-50 text-cyan-700'
                         : 'border-gray-200 bg-white text-gray-700 hover:border-gray-300'
                     }`}
                   >
@@ -222,7 +222,7 @@ export default function VideoUploadPage() {
                     disabled={uploading}
                     className={`flex-1 px-4 py-3 rounded-lg border-2 font-semibold transition-colors ${
                       visibility === 'private'
-                        ? 'border-teal-500 bg-teal-50 text-teal-700'
+                        ? 'border-cyan-500 bg-cyan-50 text-cyan-700'
                         : 'border-gray-200 bg-white text-gray-700 hover:border-gray-300'
                     }`}
                   >
@@ -236,11 +236,11 @@ export default function VideoUploadPage() {
                 <div className="mb-6">
                   <div className="flex items-center justify-between mb-2">
                     <span className="text-sm font-semibold text-gray-700">Uploading...</span>
-                    <span className="text-sm font-semibold text-teal-600">{Math.round(uploadProgress)}%</span>
+                    <span className="text-sm font-semibold text-cyan-600">{Math.round(uploadProgress)}%</span>
                   </div>
                   <div className="w-full h-2 bg-gray-200 rounded-full overflow-hidden">
                     <div
-                      className="h-full bg-gradient-to-r from-cyan-500 to-teal-500 transition-all duration-300"
+                      className="h-full bg-gradient-to-r from-cyan-500 to-cyan-500 transition-all duration-300"
                       style={{ width: `${uploadProgress}%` }}
                     />
                   </div>
@@ -251,7 +251,7 @@ export default function VideoUploadPage() {
               <button
                 onClick={handleUpload}
                 disabled={uploading}
-                className="w-full px-6 py-4 bg-gradient-to-r from-cyan-500 to-teal-500 text-white font-bold rounded-xl hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+                className="w-full px-6 py-4 bg-gradient-to-r from-cyan-500 to-cyan-500 text-white font-bold rounded-xl hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
               >
                 {uploading ? 'Uploading...' : 'Upload Video'}
               </button>
@@ -263,7 +263,7 @@ export default function VideoUploadPage() {
         <div className="text-center mt-6">
           <button
             onClick={() => router.push('/drops')}
-            className="text-teal-600 hover:text-teal-700 font-semibold"
+            className="text-cyan-600 hover:text-cyan-700 font-semibold"
           >
             ← Back to Drops
           </button>

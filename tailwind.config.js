@@ -13,18 +13,18 @@ module.exports = {
           925: '#0d1117',
           950: '#0a0c10',
         },
-        // Refined brand colors
+        // Brand colors (Wishdrop cyan — matches mobile #00CAFF)
         brand: {
-          50: '#f0fdfa',
-          100: '#ccfbf1',
-          200: '#99f6e4',
-          300: '#5eead4',
-          400: '#2dd4bf',
-          500: '#14b8a6',
-          600: '#0d9488',
-          700: '#0f766e',
-          800: '#115e59',
-          900: '#134e4a',
+          50: '#ecfeff',
+          100: '#E6F9FF',
+          200: '#a5f3fc',
+          300: '#67e8f9',
+          400: '#33D6FF',
+          500: '#00CAFF',
+          600: '#00A8D4',
+          700: '#0e7490',
+          800: '#155e75',
+          900: '#164e63',
         },
         // Accent colors
         accent: {
@@ -43,8 +43,8 @@ module.exports = {
         '2xs': ['0.625rem', { lineHeight: '0.875rem' }],
       },
       boxShadow: {
-        'glow': '0 0 20px rgba(20, 184, 166, 0.15)',
-        'glow-lg': '0 0 40px rgba(20, 184, 166, 0.2)',
+        'glow': '0 0 20px rgba(0, 202, 255, 0.15)',
+        'glow-lg': '0 0 40px rgba(0, 202, 255, 0.2)',
         'inner-glow': 'inset 0 0 20px rgba(255, 255, 255, 0.05)',
         'elevation-1': '0 1px 2px rgba(0, 0, 0, 0.05)',
         'elevation-2': '0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05)',

@@ -73,7 +73,7 @@ export default function ProfileClient({ user, lists, stats }) {
                     href={user.website}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-teal-600 hover:text-teal-700 hover:underline"
+                    className="text-cyan-600 hover:text-cyan-700 hover:underline"
                   >
                     {user.website.replace(/^https?:\/\//, '').replace(/\/$/, '')}
                   </a>
@@ -136,17 +136,17 @@ export default function ProfileClient({ user, lists, stats }) {
                     className="flex items-start gap-4 mb-4"
                     style={{ viewTransitionName: `list-${list.slug}`, contain: 'layout paint' }}
                   >
-                    <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-teal-400 to-cyan-500 flex items-center justify-center flex-shrink-0 shadow-sm">
+                    <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-cyan-400 to-cyan-500 flex items-center justify-center flex-shrink-0 shadow-sm">
                       <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7" />
                       </svg>
                     </div>
                     <div className="flex-1 min-w-0">
-                      <h3 className="text-base font-semibold text-slate-900 mb-1 truncate group-hover:text-teal-600 transition-colors">
+                      <h3 className="text-base font-semibold text-slate-900 mb-1 truncate group-hover:text-cyan-600 transition-colors">
                         {list.title}
                       </h3>
                       {list.occasion && (
-                        <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-teal-50 text-teal-700 text-xs font-medium rounded-full border border-teal-200">
+                        <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-cyan-50 text-cyan-700 text-xs font-medium rounded-full border border-cyan-200">
                           {list.occasion}
                         </span>
                       )}

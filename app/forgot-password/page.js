@@ -93,7 +93,7 @@ export default function ForgotPasswordPage() {
       <div className="max-w-md w-full animate-fade-in">
         {/* Logo/Brand */}
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-teal-500 to-cyan-500 bg-clip-text text-transparent mb-2">
+          <h1 className="text-4xl font-bold bg-gradient-to-r from-cyan-500 to-cyan-500 bg-clip-text text-transparent mb-2">
             Wishdrop
           </h1>
           <p className="text-slate-500">Reset your password</p>
@@ -125,7 +125,7 @@ export default function ForgotPasswordPage() {
 
               <Link
                 href="/login"
-                className="block w-full bg-gradient-to-r from-teal-500 to-cyan-500 text-white font-semibold py-3 px-4 rounded-xl hover:shadow-lg hover:shadow-teal-200 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 transition-all text-center"
+                className="block w-full bg-gradient-to-r from-cyan-500 to-cyan-500 text-white font-semibold py-3 px-4 rounded-xl hover:shadow-lg hover:shadow-cyan-200 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2 transition-all text-center"
               >
                 Go to login
               </Link>
@@ -161,7 +161,7 @@ export default function ForgotPasswordPage() {
                     required
                     value={resetCode}
                     onChange={(e) => setResetCode(e.target.value.replace(/\D/g, ''))}
-                    className="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all text-slate-900 text-center text-2xl tracking-widest font-mono placeholder-slate-300"
+                    className="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all text-slate-900 text-center text-2xl tracking-widest font-mono placeholder-slate-300"
                     placeholder="000000"
                     disabled={loading}
                   />
@@ -178,7 +178,7 @@ export default function ForgotPasswordPage() {
                     required
                     value={newPassword}
                     onChange={(e) => setNewPassword(e.target.value)}
-                    className="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all text-slate-900 placeholder-slate-400"
+                    className="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all text-slate-900 placeholder-slate-400"
                     placeholder="••••••••"
                     disabled={loading}
                   />
@@ -196,7 +196,7 @@ export default function ForgotPasswordPage() {
                     required
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
-                    className="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all text-slate-900 placeholder-slate-400"
+                    className="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all text-slate-900 placeholder-slate-400"
                     placeholder="••••••••"
                     disabled={loading}
                   />
@@ -206,7 +206,7 @@ export default function ForgotPasswordPage() {
                 <button
                   type="submit"
                   disabled={loading || resetCode.length !== 6}
-                  className="w-full bg-gradient-to-r from-teal-500 to-cyan-500 text-white font-semibold py-3 px-4 rounded-xl hover:shadow-lg hover:shadow-teal-200 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full bg-gradient-to-r from-cyan-500 to-cyan-500 text-white font-semibold py-3 px-4 rounded-xl hover:shadow-lg hover:shadow-cyan-200 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {loading ? (
                     <span className="flex items-center justify-center gap-2">
@@ -233,7 +233,7 @@ export default function ForgotPasswordPage() {
                       setConfirmPassword('')
                       setError('')
                     }}
-                    className="text-teal-600 hover:text-teal-700 font-semibold"
+                    className="text-cyan-600 hover:text-cyan-700 font-semibold"
                   >
                     Try again
                   </button>
@@ -271,7 +271,7 @@ export default function ForgotPasswordPage() {
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all text-slate-900 placeholder-slate-400"
+                    className="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all text-slate-900 placeholder-slate-400"
                     placeholder="you@example.com"
                     disabled={loading}
                   />
@@ -281,7 +281,7 @@ export default function ForgotPasswordPage() {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full bg-gradient-to-r from-teal-500 to-cyan-500 text-white font-semibold py-3 px-4 rounded-xl hover:shadow-lg hover:shadow-teal-200 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full bg-gradient-to-r from-cyan-500 to-cyan-500 text-white font-semibold py-3 px-4 rounded-xl hover:shadow-lg hover:shadow-cyan-200 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {loading ? (
                     <span className="flex items-center justify-center gap-2">
@@ -299,7 +299,7 @@ export default function ForgotPasswordPage() {
 
               {/* Back to login link */}
               <div className="mt-6 text-center">
-                <Link href="/login" className="text-teal-600 hover:text-teal-700 font-semibold text-sm">
+                <Link href="/login" className="text-cyan-600 hover:text-cyan-700 font-semibold text-sm">
                   Back to login
                 </Link>
               </div>

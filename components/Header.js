@@ -109,16 +109,11 @@ export default function Header() {
             href={user ? "/dashboard" : "/"}
             className="flex items-center gap-2"
           >
-            <Image
-              src="/logo-circle.png"
+            <img
+              src="https://cdnifly.netlify.app/wishdrop/wishdrop-full.png"
               alt="Wishdrop"
-              width={36}
-              height={36}
-              className="rounded-full"
+              className="h-8 w-auto"
             />
-            <span className="text-2xl font-bold bg-gradient-to-r from-cyan-500 to-teal-500 bg-clip-text text-transparent">
-              Wishdrop
-            </span>
           </Link>
 
           {/* Show nothing while loading to prevent flash */}
@@ -128,13 +123,13 @@ export default function Header() {
             <nav className="flex items-center gap-4 lg:gap-6">
               {/* Navigation Links - Hidden on mobile when search is open */}
               <div className={`hidden md:flex items-center gap-6 ${showSearch ? 'lg:hidden' : ''}`}>
-                <Link href="/dashboard" className="text-slate-700 hover:text-teal-600 font-medium transition-colors">
+                <Link href="/dashboard" className="text-slate-700 hover:text-cyan-600 font-medium transition-colors">
                   My Lists
                 </Link>
-                <Link href="/feed" className="text-slate-700 hover:text-teal-600 font-medium transition-colors">
+                <Link href="/feed" className="text-slate-700 hover:text-cyan-600 font-medium transition-colors">
                   Following
                 </Link>
-                <Link href="/discover" className="text-slate-700 hover:text-teal-600 font-medium transition-colors">
+                <Link href="/discover" className="text-slate-700 hover:text-cyan-600 font-medium transition-colors">
                   Discover
                 </Link>
               </div>
@@ -152,7 +147,7 @@ export default function Header() {
                     <div
                       className={`absolute inset-0 rounded-xl transition-all duration-300 ${
                         showSearch
-                          ? 'bg-white border-2 border-teal-500 shadow-lg shadow-teal-100/50'
+                          ? 'bg-white border-2 border-cyan-500 shadow-lg shadow-cyan-100/50'
                           : 'bg-slate-100 hover:bg-slate-200 border border-transparent'
                       }`}
                     />
@@ -160,7 +155,7 @@ export default function Header() {
                       type="button"
                       onClick={() => !showSearch && setShowSearch(true)}
                       className={`relative z-10 flex items-center gap-2 px-3 h-10 transition-colors duration-300 ${
-                        showSearch ? 'text-teal-500' : 'text-slate-500'
+                        showSearch ? 'text-cyan-500' : 'text-slate-500'
                       }`}
                     >
                       <svg className="w-4 h-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -215,7 +210,7 @@ export default function Header() {
                   <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-xl border border-slate-200 shadow-xl overflow-hidden z-50">
                     {isSearching ? (
                       <div className="p-4 text-center">
-                        <div className="w-5 h-5 mx-auto border-2 border-slate-200 border-t-teal-500 rounded-full animate-spin" />
+                        <div className="w-5 h-5 mx-auto border-2 border-slate-200 border-t-cyan-500 rounded-full animate-spin" />
                       </div>
                     ) : (
                       <>
@@ -235,7 +230,7 @@ export default function Header() {
                                 {user.avatar ? (
                                   <img src={user.avatar} alt="" className="w-8 h-8 rounded-full object-cover" />
                                 ) : (
-                                  <div className="w-8 h-8 rounded-full bg-gradient-to-br from-teal-400 to-cyan-500 flex items-center justify-center text-white text-sm font-semibold">
+                                  <div className="w-8 h-8 rounded-full bg-gradient-to-br from-cyan-400 to-cyan-500 flex items-center justify-center text-white text-sm font-semibold">
                                     {user.username?.charAt(0)?.toUpperCase()}
                                   </div>
                                 )}
@@ -261,7 +256,7 @@ export default function Header() {
                                 onClick={closeSearch}
                                 className="flex items-center gap-3 px-3 py-2.5 hover:bg-slate-50 transition-colors"
                               >
-                                <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-teal-400 to-cyan-500 flex items-center justify-center">
+                                <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-cyan-400 to-cyan-500 flex items-center justify-center">
                                   <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7" />
                                   </svg>
@@ -300,7 +295,7 @@ export default function Header() {
                                 <div className="flex-1 min-w-0">
                                   <p className="text-sm font-medium text-slate-900 truncate">{item.title}</p>
                                   {item.price && (
-                                    <p className="text-xs text-teal-600 font-semibold">${item.price.toFixed(2)}</p>
+                                    <p className="text-xs text-cyan-600 font-semibold">${item.price.toFixed(2)}</p>
                                   )}
                                 </div>
                               </Link>
@@ -319,7 +314,7 @@ export default function Header() {
                         {(searchResults.users?.length > 0 || searchResults.lists?.length > 0 || searchResults.items?.length > 0) && (
                           <button
                             onClick={handleSearchSubmit}
-                            className="w-full px-3 py-3 bg-slate-50 text-sm font-medium text-teal-600 hover:bg-slate-100 transition-colors border-t border-slate-200"
+                            className="w-full px-3 py-3 bg-slate-50 text-sm font-medium text-cyan-600 hover:bg-slate-100 transition-colors border-t border-slate-200"
                           >
                             View all results
                           </button>
@@ -345,7 +340,7 @@ export default function Header() {
                       className="w-8 h-8 rounded-full object-cover"
                     />
                   ) : (
-                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-cyan-500 to-teal-500 flex items-center justify-center text-white text-sm font-semibold">
+                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-cyan-500 to-cyan-500 flex items-center justify-center text-white text-sm font-semibold">
                       {user.displayName?.charAt(0)?.toUpperCase() || user.username?.charAt(0)?.toUpperCase()}
                     </div>
                   )}
@@ -421,10 +416,10 @@ export default function Header() {
             </nav>
           ) : (
             <div className="flex items-center gap-4">
-              <Link href="/login" className="text-gray-700 hover:text-teal-600 font-medium py-2">
+              <Link href="/login" className="text-gray-700 hover:text-cyan-600 font-medium py-2">
                 Log in
               </Link>
-              <Link href="/signup" className="px-4 py-2 bg-gradient-to-r from-cyan-500 to-teal-500 text-white rounded-full font-medium hover:shadow-lg transition-shadow">
+              <Link href="/signup" className="px-4 py-2 bg-gradient-to-r from-cyan-500 to-cyan-500 text-white rounded-full font-medium hover:shadow-lg transition-shadow">
                 Sign up
               </Link>
             </div>

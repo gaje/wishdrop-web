@@ -82,7 +82,7 @@ const RELATIONSHIP_CONFIG = {
 }
 
 const AVATAR_GRADIENTS = [
-  'from-teal-400 to-cyan-500',
+  'from-cyan-400 to-cyan-500',
   'from-violet-400 to-purple-500',
   'from-rose-400 to-pink-500',
   'from-amber-400 to-orange-500',
@@ -148,7 +148,7 @@ export default function FamilyPage() {
     return (
       <div className="min-h-screen bg-slate-50 flex items-center justify-center">
         <div className="flex flex-col items-center gap-4">
-          <div className="w-12 h-12 rounded-full border-4 border-slate-200 border-t-teal-500 animate-spin"></div>
+          <div className="w-12 h-12 rounded-full border-4 border-slate-200 border-t-cyan-500 animate-spin"></div>
           <p className="text-slate-500 font-medium">Loading family...</p>
         </div>
       </div>
@@ -180,7 +180,7 @@ export default function FamilyPage() {
             </div>
             <Link
               href="/family/add"
-              className="inline-flex items-center gap-2 px-5 py-3 bg-gradient-to-r from-teal-500 to-cyan-500 text-white font-semibold rounded-xl hover:shadow-lg hover:shadow-teal-200/50 transition-all"
+              className="inline-flex items-center gap-2 px-5 py-3 bg-gradient-to-r from-cyan-500 to-cyan-500 text-white font-semibold rounded-xl hover:shadow-lg hover:shadow-cyan-200/50 transition-all"
             >
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
@@ -235,7 +235,7 @@ export default function FamilyPage() {
                   </p>
                   <Link
                     href="/family/add"
-                    className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-teal-500 to-cyan-500 text-white font-semibold rounded-xl hover:shadow-lg hover:shadow-teal-200/50 transition-all"
+                    className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-cyan-500 to-cyan-500 text-white font-semibold rounded-xl hover:shadow-lg hover:shadow-cyan-200/50 transition-all"
                   >
                     <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
@@ -327,11 +327,11 @@ export default function FamilyPage() {
                   {/* Add Another Card */}
                   <Link
                     href="/family/add"
-                    className="group block bg-white rounded-2xl p-5 border-2 border-dashed border-slate-300 hover:border-teal-400 hover:bg-teal-50/30 transition-all animate-fade-in-up"
+                    className="group block bg-white rounded-2xl p-5 border-2 border-dashed border-slate-300 hover:border-cyan-400 hover:bg-cyan-50/30 transition-all animate-fade-in-up"
                     style={{ animationDelay: `${members.length * 0.05}s` }}
                   >
-                    <div className="flex items-center justify-center gap-2 text-slate-500 group-hover:text-teal-600 transition-colors">
-                      <div className="w-10 h-10 rounded-xl bg-slate-100 group-hover:bg-teal-100 flex items-center justify-center transition-colors">
+                    <div className="flex items-center justify-center gap-2 text-slate-500 group-hover:text-cyan-600 transition-colors">
+                      <div className="w-10 h-10 rounded-xl bg-slate-100 group-hover:bg-cyan-100 flex items-center justify-center transition-colors">
                         <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
                         </svg>

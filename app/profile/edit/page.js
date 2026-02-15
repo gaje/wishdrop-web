@@ -114,8 +114,8 @@ export default function EditProfilePage() {
 
   if (authLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-cyan-50 via-teal-50 to-blue-50 flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-teal-500"></div>
+      <div className="min-h-screen bg-gradient-to-br from-cyan-50 via-cyan-50 to-blue-50 flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-cyan-500"></div>
       </div>
     )
   }
@@ -125,7 +125,7 @@ export default function EditProfilePage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-cyan-50 via-teal-50 to-blue-50">
+    <div className="min-h-screen bg-gradient-to-br from-cyan-50 via-cyan-50 to-blue-50">
       <Header />
 
       <main className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -157,7 +157,7 @@ export default function EditProfilePage() {
                   className="w-24 h-24 rounded-full object-cover border-4 border-white shadow-lg"
                 />
               ) : (
-                <div className="w-24 h-24 rounded-full bg-gradient-to-br from-cyan-500 to-teal-500 flex items-center justify-center text-white text-3xl font-bold border-4 border-white shadow-lg">
+                <div className="w-24 h-24 rounded-full bg-gradient-to-br from-cyan-500 to-cyan-500 flex items-center justify-center text-white text-3xl font-bold border-4 border-white shadow-lg">
                   {(formData.displayName || user.username || 'U').charAt(0).toUpperCase()}
                 </div>
               )}
@@ -180,7 +180,7 @@ export default function EditProfilePage() {
               type="button"
               onClick={handleAvatarClick}
               disabled={uploading}
-              className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-cyan-500 to-teal-500 text-white rounded-full font-medium hover:shadow-lg transition-all disabled:opacity-50"
+              className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-cyan-500 to-cyan-500 text-white rounded-full font-medium hover:shadow-lg transition-all disabled:opacity-50"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
@@ -211,7 +211,7 @@ export default function EditProfilePage() {
                   value={formData.displayName}
                   onChange={handleChange}
                   maxLength={100}
-                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-colors text-gray-900"
+                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-colors text-gray-900"
                   placeholder="Your display name"
                   disabled={saving}
                 />
@@ -231,7 +231,7 @@ export default function EditProfilePage() {
                 onChange={handleChange}
                 maxLength={500}
                 rows={4}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-colors resize-none text-gray-900"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-colors resize-none text-gray-900"
                 placeholder="Tell people about yourself..."
                 disabled={saving}
               />
@@ -257,7 +257,7 @@ export default function EditProfilePage() {
                   value={formData.location}
                   onChange={handleChange}
                   maxLength={100}
-                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-colors text-gray-900"
+                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-colors text-gray-900"
                   placeholder="New York, NY"
                   disabled={saving}
                 />
@@ -282,7 +282,7 @@ export default function EditProfilePage() {
                   value={formData.website}
                   onChange={handleChange}
                   maxLength={200}
-                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-colors text-gray-900"
+                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-colors text-gray-900"
                   placeholder="https://yourwebsite.com"
                   disabled={saving}
                 />
@@ -325,7 +325,7 @@ export default function EditProfilePage() {
               <button
                 type="submit"
                 disabled={saving}
-                className="flex-1 bg-gradient-to-r from-cyan-500 to-teal-500 text-white font-semibold py-4 px-6 rounded-lg hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                className="flex-1 bg-gradient-to-r from-cyan-500 to-cyan-500 text-white font-semibold py-4 px-6 rounded-lg hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {saving ? 'Saving...' : 'Save Changes'}
               </button>

@@ -40,6 +40,8 @@ export default function ItemCard({
   onClaim,
   onUnclaim,
   showActions = true,
+  connectionStatus = null,
+  onConnect,
 }) {
   const [imageError, setImageError] = useState(false)
 
@@ -48,13 +50,18 @@ export default function ItemCard({
     title,
     price,
     notes,
-    url,
+    url: originalUrl,
     image,
     imageUrl,
     priority,
     claimedBy,
     merchant,
+    affiliateCode,
   } = item
+
+  // Prefer affiliate redirect (routed through API server for click tracking), fall back to original URL
+  const API_BASE = process.env.NEXT_PUBLIC_API_BASE || 'http://localhost:4000'
+  const url = affiliateCode ? `${API_BASE}/r/${affiliateCode}` : originalUrl
 
   // Support both 'image' (API) and 'imageUrl' (legacy) field names
   const itemImage = image || imageUrl
@@ -155,7 +162,7 @@ export default function ItemCard({
 
         {/* Price */}
         {price?.amount ? (
-          <p className="text-lg font-bold text-teal-600 mb-1">
+          <p className="text-lg font-bold text-cyan-600 mb-1">
             ${typeof price.amount === 'number' ? price.amount.toFixed(2) : price.amount}
           </p>
         ) : (
@@ -181,7 +188,7 @@ export default function ItemCard({
                 href={url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1 inline-flex items-center justify-center gap-1.5 px-4 py-2.5 bg-gradient-to-r from-teal-500 to-cyan-500 text-white rounded-xl font-semibold text-sm hover:shadow-lg hover:shadow-teal-200 transition-all"
+                className="flex-1 inline-flex items-center justify-center gap-1.5 px-4 py-2.5 bg-gradient-to-r from-cyan-500 to-cyan-500 text-white rounded-xl font-semibold text-sm hover:shadow-lg hover:shadow-cyan-200 transition-all"
               >
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
@@ -212,12 +219,21 @@ export default function ItemCard({
                   )
                 ) : (
                   currentUserId && (
-                    <button
-                      onClick={() => onClaim?.(_id)}
-                      className="flex-1 px-4 py-2.5 bg-teal-50 hover:bg-teal-100 text-teal-700 rounded-xl font-semibold text-sm transition-colors border border-teal-200"
-                    >
-                      Claim This
-                    </button>
+                    connectionStatus === 'connected' ? (
+                      <button
+                        onClick={() => onClaim?.(_id)}
+                        className="flex-1 px-4 py-2.5 bg-cyan-50 hover:bg-cyan-100 text-cyan-700 rounded-xl font-semibold text-sm transition-colors border border-cyan-200"
+                      >
+                        Claim This
+                      </button>
+                    ) : (
+                      <button
+                        onClick={onConnect}
+                        className="flex-1 px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-semibold text-sm transition-colors"
+                      >
+                        Connect to Claim
+                      </button>
+                    )
                   )
                 )}
               </>

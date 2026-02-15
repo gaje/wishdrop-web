@@ -10,7 +10,7 @@ import Avatar from '@/components/ui/Avatar'
 import Modal from '@/components/ui/Modal'
 
 const AVATAR_GRADIENTS = [
-  'from-teal-400 to-cyan-500',
+  'from-cyan-400 to-cyan-500',
   'from-violet-400 to-purple-500',
   'from-rose-400 to-pink-500',
   'from-amber-400 to-orange-500',
@@ -189,7 +189,7 @@ export default function MyPeoplePage() {
       <>
         <Header />
         <div className="min-h-screen bg-slate-50 flex items-center justify-center">
-          <div className="w-8 h-8 border-2 border-teal-500 border-t-transparent rounded-full animate-spin" />
+          <div className="w-8 h-8 border-2 border-cyan-500 border-t-transparent rounded-full animate-spin" />
         </div>
       </>
     )
@@ -222,7 +222,7 @@ export default function MyPeoplePage() {
               </button>
               <button
                 onClick={() => setAddModalOpen(true)}
-                className="px-4 py-2.5 bg-gradient-to-r from-teal-500 to-cyan-500 text-white rounded-xl text-sm font-semibold hover:shadow-lg transition-all flex items-center gap-2"
+                className="px-4 py-2.5 bg-gradient-to-r from-cyan-500 to-cyan-500 text-white rounded-xl text-sm font-semibold hover:shadow-lg transition-all flex items-center gap-2"
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
@@ -239,7 +239,7 @@ export default function MyPeoplePage() {
                 onClick={() => setSelectedGroupId(null)}
                 className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
                   selectedGroupId === null
-                    ? 'bg-teal-500 text-white'
+                    ? 'bg-cyan-500 text-white'
                     : 'bg-white border border-slate-200 text-slate-600 hover:bg-slate-50'
                 }`}
               >
@@ -256,7 +256,7 @@ export default function MyPeoplePage() {
                     onClick={() => setSelectedGroupId(selectedGroupId === group._id ? null : group._id)}
                     className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
                       selectedGroupId === group._id
-                        ? 'bg-teal-500 text-white'
+                        ? 'bg-cyan-500 text-white'
                         : 'bg-white border border-slate-200 text-slate-600 hover:bg-slate-50'
                     }`}
                   >
@@ -271,7 +271,7 @@ export default function MyPeoplePage() {
           {/* Loading */}
           {loading ? (
             <div className="flex items-center justify-center py-20">
-              <div className="w-8 h-8 border-2 border-teal-500 border-t-transparent rounded-full animate-spin" />
+              <div className="w-8 h-8 border-2 border-cyan-500 border-t-transparent rounded-full animate-spin" />
             </div>
           ) : filteredContacts.length === 0 ? (
             /* Empty State */
@@ -291,7 +291,7 @@ export default function MyPeoplePage() {
               </p>
               <button
                 onClick={() => setAddModalOpen(true)}
-                className="px-6 py-3 bg-gradient-to-r from-teal-500 to-cyan-500 text-white rounded-xl font-semibold hover:shadow-lg transition-all"
+                className="px-6 py-3 bg-gradient-to-r from-cyan-500 to-cyan-500 text-white rounded-xl font-semibold hover:shadow-lg transition-all"
               >
                 Add Your First Contact
               </button>
@@ -323,7 +323,7 @@ export default function MyPeoplePage() {
                       <div className="flex-1 min-w-0">
                         <Link
                           href={`/u/${contact.user?.username}`}
-                          className="font-semibold text-slate-900 hover:text-teal-600 transition-colors"
+                          className="font-semibold text-slate-900 hover:text-cyan-600 transition-colors"
                         >
                           {displayName}
                         </Link>
@@ -351,7 +351,7 @@ export default function MyPeoplePage() {
                       <div className="flex items-center gap-1">
                         <button
                           onClick={() => handleEditContact(contact)}
-                          className="p-2 text-slate-400 hover:text-teal-500 hover:bg-teal-50 rounded-lg transition-colors"
+                          className="p-2 text-slate-400 hover:text-cyan-500 hover:bg-cyan-50 rounded-lg transition-colors"
                           title="Edit contact"
                         >
                           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -418,7 +418,7 @@ export default function MyPeoplePage() {
                 value={nickname}
                 onChange={(e) => setNickname(e.target.value)}
                 placeholder="Add a nickname..."
-                className="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:border-teal-500 focus:ring-2 focus:ring-teal-500/20 outline-none"
+                className="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 outline-none"
                 maxLength={50}
               />
             </div>
@@ -444,7 +444,7 @@ export default function MyPeoplePage() {
                         }}
                         className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
                           isSelected
-                            ? 'bg-teal-500 text-white'
+                            ? 'bg-cyan-500 text-white'
                             : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
                         }`}
                       >
@@ -468,7 +468,7 @@ export default function MyPeoplePage() {
               <button
                 onClick={handleSaveContact}
                 disabled={saving}
-                className="px-6 py-2 bg-gradient-to-r from-teal-500 to-cyan-500 text-white rounded-xl font-semibold hover:shadow-lg transition-all disabled:opacity-50"
+                className="px-6 py-2 bg-gradient-to-r from-cyan-500 to-cyan-500 text-white rounded-xl font-semibold hover:shadow-lg transition-all disabled:opacity-50"
               >
                 {saving ? 'Saving...' : editingContact ? 'Save Changes' : 'Add Contact'}
               </button>
@@ -491,12 +491,12 @@ export default function MyPeoplePage() {
                 value={searchQuery}
                 onChange={(e) => handleSearch(e.target.value)}
                 placeholder="Search users by name or username..."
-                className="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 focus:border-teal-500 focus:ring-2 focus:ring-teal-500/20 outline-none"
+                className="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 outline-none"
                 autoFocus
               />
               {searching && (
                 <div className="absolute right-3 top-1/2 -translate-y-1/2">
-                  <div className="w-5 h-5 border-2 border-teal-500 border-t-transparent rounded-full animate-spin" />
+                  <div className="w-5 h-5 border-2 border-cyan-500 border-t-transparent rounded-full animate-spin" />
                 </div>
               )}
             </div>
@@ -579,7 +579,7 @@ export default function MyPeoplePage() {
                 value={newGroupEmoji}
                 onChange={(e) => setNewGroupEmoji(e.target.value)}
                 placeholder="Emoji"
-                className="w-16 px-3 py-2.5 rounded-xl border border-slate-200 text-center focus:border-teal-500 focus:ring-2 focus:ring-teal-500/20 outline-none"
+                className="w-16 px-3 py-2.5 rounded-xl border border-slate-200 text-center focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 outline-none"
                 maxLength={2}
               />
               <input
@@ -587,13 +587,13 @@ export default function MyPeoplePage() {
                 value={newGroupName}
                 onChange={(e) => setNewGroupName(e.target.value)}
                 placeholder="Group name"
-                className="flex-1 px-4 py-2.5 rounded-xl border border-slate-200 focus:border-teal-500 focus:ring-2 focus:ring-teal-500/20 outline-none"
+                className="flex-1 px-4 py-2.5 rounded-xl border border-slate-200 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 outline-none"
                 maxLength={50}
               />
               <button
                 onClick={handleCreateGroup}
                 disabled={!newGroupName.trim()}
-                className="px-4 py-2.5 bg-gradient-to-r from-teal-500 to-cyan-500 text-white rounded-xl font-semibold hover:shadow-lg transition-all disabled:opacity-50"
+                className="px-4 py-2.5 bg-gradient-to-r from-cyan-500 to-cyan-500 text-white rounded-xl font-semibold hover:shadow-lg transition-all disabled:opacity-50"
               >
                 Add
               </button>

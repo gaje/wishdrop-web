@@ -269,7 +269,7 @@ function CreateListContent() {
   if (authLoading || !user) {
     return (
       <div className="min-h-screen bg-slate-50 flex items-center justify-center">
-        <div className="w-10 h-10 rounded-full border-[3px] border-slate-200 border-t-teal-500 animate-spin" />
+        <div className="w-10 h-10 rounded-full border-[3px] border-slate-200 border-t-cyan-500 animate-spin" />
       </div>
     )
   }
@@ -284,7 +284,7 @@ function CreateListContent() {
       <div className="bg-white border-b border-slate-200/80">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="flex items-center gap-4 animate-fade-in">
-            <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-teal-500 to-cyan-500 flex items-center justify-center shadow-lg shadow-teal-200">
+            <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-cyan-500 to-cyan-500 flex items-center justify-center shadow-lg shadow-cyan-200">
               <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7" />
               </svg>
@@ -320,8 +320,8 @@ function CreateListContent() {
                   className="w-full flex items-center justify-between p-4 hover:bg-gray-50 transition-colors"
                 >
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-teal-100 flex items-center justify-center">
-                      <svg className="w-5 h-5 text-teal-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <div className="w-10 h-10 rounded-full bg-cyan-100 flex items-center justify-center">
+                      <svg className="w-5 h-5 text-cyan-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                       </svg>
                     </div>
@@ -343,22 +343,22 @@ function CreateListContent() {
                       onClick={() => setSelectedFamilyMemberId(null)}
                       className={`w-full flex items-center gap-3 p-3 rounded-xl transition-colors ${
                         selectedFamilyMemberId === null
-                          ? 'bg-teal-50 border-2 border-teal-500'
+                          ? 'bg-cyan-50 border-2 border-cyan-500'
                           : 'bg-gray-50 hover:bg-gray-100'
                       }`}
                     >
                       <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
-                        selectedFamilyMemberId === null ? 'bg-teal-500' : 'bg-gray-300'
+                        selectedFamilyMemberId === null ? 'bg-cyan-500' : 'bg-gray-300'
                       }`}>
                         <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                         </svg>
                       </div>
-                      <span className={`font-medium ${selectedFamilyMemberId === null ? 'text-teal-700' : 'text-gray-700'}`}>
+                      <span className={`font-medium ${selectedFamilyMemberId === null ? 'text-cyan-700' : 'text-gray-700'}`}>
                         Me (Personal List)
                       </span>
                       {selectedFamilyMemberId === null && (
-                        <svg className="w-5 h-5 text-teal-500 ml-auto" fill="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-5 h-5 text-cyan-500 ml-auto" fill="currentColor" viewBox="0 0 24 24">
                           <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
                         </svg>
                       )}
@@ -372,7 +372,7 @@ function CreateListContent() {
                         onClick={() => setSelectedFamilyMemberId(member._id)}
                         className={`w-full flex items-center gap-3 p-3 rounded-xl transition-colors ${
                           selectedFamilyMemberId === member._id
-                            ? 'bg-teal-50 border-2 border-teal-500'
+                            ? 'bg-cyan-50 border-2 border-cyan-500'
                             : 'bg-gray-50 hover:bg-gray-100'
                         }`}
                       >
@@ -387,13 +387,13 @@ function CreateListContent() {
                           {getInitials(member.name)}
                         </div>
                         <div className="text-left">
-                          <p className={`font-medium ${selectedFamilyMemberId === member._id ? 'text-teal-700' : 'text-gray-700'}`}>
+                          <p className={`font-medium ${selectedFamilyMemberId === member._id ? 'text-cyan-700' : 'text-gray-700'}`}>
                             {member.displayName || member.name}
                           </p>
                           <p className="text-xs text-gray-500 capitalize">{member.relationship}</p>
                         </div>
                         {selectedFamilyMemberId === member._id && (
-                          <svg className="w-5 h-5 text-teal-500 ml-auto" fill="currentColor" viewBox="0 0 24 24">
+                          <svg className="w-5 h-5 text-cyan-500 ml-auto" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
                           </svg>
                         )}
@@ -402,7 +402,7 @@ function CreateListContent() {
 
                     <Link
                       href="/family/add"
-                      className="flex items-center justify-center gap-2 p-3 text-teal-600 hover:bg-teal-50 rounded-xl transition-colors"
+                      className="flex items-center justify-center gap-2 p-3 text-cyan-600 hover:bg-cyan-50 rounded-xl transition-colors"
                     >
                       <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
@@ -426,7 +426,7 @@ function CreateListContent() {
                 required
                 value={formData.title}
                 onChange={handleChange}
-                className="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all text-slate-900 placeholder-slate-400"
+                className="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all text-slate-900 placeholder-slate-400"
                 placeholder="e.g., Nick's Birthday Wishlist"
                 disabled={loading}
               />
@@ -443,7 +443,7 @@ function CreateListContent() {
                 rows={3}
                 value={formData.description}
                 onChange={handleChange}
-                className="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all resize-none text-slate-900 placeholder-slate-400"
+                className="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all resize-none text-slate-900 placeholder-slate-400"
                 placeholder="Tell people what this list is for..."
                 disabled={loading}
               />
@@ -459,7 +459,7 @@ function CreateListContent() {
                 name="occasion"
                 value={formData.occasion}
                 onChange={handleChange}
-                className="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all text-slate-900"
+                className="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all text-slate-900"
                 disabled={loading}
               >
                 <option value="">Select an occasion</option>
@@ -510,7 +510,7 @@ function CreateListContent() {
                           onClick={() => toggleCategory(category.id)}
                           className={`flex items-center gap-2 px-3 py-2 rounded-xl transition-all ${
                             isSelected
-                              ? 'bg-gradient-to-r from-teal-500 to-cyan-500 text-white shadow-sm'
+                              ? 'bg-gradient-to-r from-cyan-500 to-cyan-500 text-white shadow-sm'
                               : 'bg-white text-slate-700 border border-slate-200 hover:border-slate-300'
                           }`}
                         >
@@ -539,7 +539,7 @@ function CreateListContent() {
                     key={option.value}
                     className={`flex items-center gap-3 p-3 rounded-xl border-2 cursor-pointer transition-all ${
                       formData.privacy === option.value
-                        ? 'border-teal-500 bg-teal-50'
+                        ? 'border-cyan-500 bg-cyan-50'
                         : 'border-slate-200 hover:border-slate-300'
                     }`}
                   >
@@ -553,17 +553,17 @@ function CreateListContent() {
                       disabled={loading}
                     />
                     {option.icon === 'globe' && (
-                      <svg className={`w-5 h-5 ${formData.privacy === option.value ? 'text-teal-600' : 'text-slate-400'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className={`w-5 h-5 ${formData.privacy === option.value ? 'text-cyan-600' : 'text-slate-400'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                       </svg>
                     )}
                     {option.icon === 'link' && (
-                      <svg className={`w-5 h-5 ${formData.privacy === option.value ? 'text-teal-600' : 'text-slate-400'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className={`w-5 h-5 ${formData.privacy === option.value ? 'text-cyan-600' : 'text-slate-400'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
                       </svg>
                     )}
                     {option.icon === 'lock' && (
-                      <svg className={`w-5 h-5 ${formData.privacy === option.value ? 'text-teal-600' : 'text-slate-400'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className={`w-5 h-5 ${formData.privacy === option.value ? 'text-cyan-600' : 'text-slate-400'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                       </svg>
                     )}
@@ -572,7 +572,7 @@ function CreateListContent() {
                       <p className="text-xs text-slate-500">{option.desc}</p>
                     </div>
                     {formData.privacy === option.value && (
-                      <svg className="w-5 h-5 text-teal-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <svg className="w-5 h-5 text-cyan-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                       </svg>
                     )}
@@ -650,7 +650,7 @@ function CreateListContent() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-gradient-to-r from-teal-500 to-cyan-500 text-white font-semibold py-3 px-6 rounded-xl hover:shadow-lg hover:shadow-teal-200 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full bg-gradient-to-r from-cyan-500 to-cyan-500 text-white font-semibold py-3 px-6 rounded-xl hover:shadow-lg hover:shadow-cyan-200 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {loading ? (
                   <span className="flex items-center justify-center gap-2">
@@ -873,7 +873,7 @@ export default function CreateList() {
   return (
     <Suspense fallback={
       <div className="min-h-screen bg-slate-50 flex items-center justify-center">
-        <div className="w-10 h-10 rounded-full border-[3px] border-slate-200 border-t-teal-500 animate-spin" />
+        <div className="w-10 h-10 rounded-full border-[3px] border-slate-200 border-t-cyan-500 animate-spin" />
       </div>
     }>
       <CreateListContent />

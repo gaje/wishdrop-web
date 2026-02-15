@@ -14,14 +14,14 @@ import ProductModal from '@/components/discover/ProductModal'
 // Category icons and colors - refined palette
 const CATEGORY_CONFIG = {
   'Birthday': { icon: '🎂', gradient: 'from-rose-500 to-pink-600', bg: 'bg-rose-50', border: 'border-rose-200', text: 'text-rose-700' },
-  'Christmas': { icon: '🎄', gradient: 'from-emerald-500 to-teal-600', bg: 'bg-emerald-50', border: 'border-emerald-200', text: 'text-emerald-700' },
+  'Christmas': { icon: '🎄', gradient: 'from-emerald-500 to-cyan-600', bg: 'bg-emerald-50', border: 'border-emerald-200', text: 'text-emerald-700' },
   'Wedding': { icon: '💒', gradient: 'from-violet-500 to-purple-600', bg: 'bg-violet-50', border: 'border-violet-200', text: 'text-violet-700' },
   'Baby Shower': { icon: '👶', gradient: 'from-sky-400 to-blue-500', bg: 'bg-sky-50', border: 'border-sky-200', text: 'text-sky-700' },
   'Graduation': { icon: '🎓', gradient: 'from-indigo-500 to-blue-600', bg: 'bg-indigo-50', border: 'border-indigo-200', text: 'text-indigo-700' },
   'Housewarming': { icon: '🏠', gradient: 'from-amber-500 to-orange-600', bg: 'bg-amber-50', border: 'border-amber-200', text: 'text-amber-700' },
   'Anniversary': { icon: '💕', gradient: 'from-pink-500 to-rose-600', bg: 'bg-pink-50', border: 'border-pink-200', text: 'text-pink-700' },
   'Holiday': { icon: '🎉', gradient: 'from-fuchsia-500 to-purple-600', bg: 'bg-fuchsia-50', border: 'border-fuchsia-200', text: 'text-fuchsia-700' },
-  'Other': { icon: '🎁', gradient: 'from-teal-500 to-cyan-600', bg: 'bg-teal-50', border: 'border-teal-200', text: 'text-teal-700' },
+  'Other': { icon: '🎁', gradient: 'from-cyan-500 to-cyan-600', bg: 'bg-cyan-50', border: 'border-cyan-200', text: 'text-cyan-700' },
 }
 
 const getConfig = (category) => CATEGORY_CONFIG[category] || CATEGORY_CONFIG['Other']
@@ -103,15 +103,15 @@ function DiscoverPageContent() {
       {/* Hero Section */}
       <div className="relative bg-white border-b border-slate-200/80">
         {/* Subtle gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-teal-50/50 via-white to-violet-50/30" />
+        <div className="absolute inset-0 bg-gradient-to-br from-cyan-50/50 via-white to-violet-50/30" />
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-8 lg:pt-16 lg:pb-12">
           {/* Header content */}
           <div className="text-center mb-10 animate-fade-in">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-teal-50 border border-teal-200/60 text-sm text-teal-700 font-medium mb-5">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-50 border border-cyan-200/60 text-sm text-cyan-700 font-medium mb-5">
               <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-teal-500"></span>
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
               </span>
               Explore the community
             </div>
@@ -276,7 +276,7 @@ export default function DiscoverPage() {
   return (
     <Suspense fallback={
       <div className="min-h-screen bg-slate-50 flex items-center justify-center">
-        <div className="w-10 h-10 rounded-full border-[3px] border-slate-200 border-t-teal-500 animate-spin" />
+        <div className="w-10 h-10 rounded-full border-[3px] border-slate-200 border-t-cyan-500 animate-spin" />
       </div>
     }>
       <DiscoverPageContent />

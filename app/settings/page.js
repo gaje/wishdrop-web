@@ -314,7 +314,7 @@ export default function SettingsPage() {
     return (
       <div className="min-h-screen bg-slate-50 flex items-center justify-center">
         <div className="flex flex-col items-center gap-4">
-          <div className="w-12 h-12 rounded-full border-4 border-slate-200 border-t-teal-500 animate-spin"></div>
+          <div className="w-12 h-12 rounded-full border-4 border-slate-200 border-t-cyan-500 animate-spin"></div>
           <p className="text-slate-500 font-medium">Loading settings...</p>
         </div>
       </div>
@@ -333,7 +333,7 @@ export default function SettingsPage() {
         {/* Page Header */}
         <div className="mb-8 animate-fade-in">
           <div className="flex items-center gap-3 mb-2">
-            <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-teal-500 to-cyan-500 flex items-center justify-center shadow-lg shadow-teal-200/50">
+            <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-cyan-500 to-cyan-500 flex items-center justify-center shadow-lg shadow-cyan-200/50">
               <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -396,7 +396,7 @@ export default function SettingsPage() {
                   type="text"
                   value={displayName}
                   onChange={(e) => setDisplayName(e.target.value)}
-                  className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent focus:bg-white transition-all text-slate-900 placeholder-slate-400"
+                  className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-cyan-500 focus:border-transparent focus:bg-white transition-all text-slate-900 placeholder-slate-400"
                   placeholder="Enter your display name"
                   maxLength={100}
                 />
@@ -427,7 +427,7 @@ export default function SettingsPage() {
               <button
                 onClick={handleSaveProfile}
                 disabled={saving}
-                className="px-6 py-2.5 bg-gradient-to-r from-teal-500 to-cyan-500 text-white rounded-xl font-medium hover:shadow-lg hover:shadow-teal-200/50 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+                className="px-6 py-2.5 bg-gradient-to-r from-cyan-500 to-cyan-500 text-white rounded-xl font-medium hover:shadow-lg hover:shadow-cyan-200/50 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
               >
                 {saving ? (
                   <>
@@ -450,8 +450,8 @@ export default function SettingsPage() {
           <div className="bg-white rounded-2xl border border-slate-200/80 overflow-hidden animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
             <div className="px-6 py-4 border-b border-slate-100 bg-slate-50/50">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-teal-100 flex items-center justify-center">
-                  <svg className="w-5 h-5 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="w-10 h-10 rounded-xl bg-cyan-100 flex items-center justify-center">
+                  <svg className="w-5 h-5 text-cyan-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
                   </svg>
                 </div>
@@ -472,7 +472,7 @@ export default function SettingsPage() {
                     id="defaultList"
                     value={settings.defaultListId}
                     onChange={(e) => setSettings({ ...settings, defaultListId: e.target.value })}
-                    className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent focus:bg-white transition-all text-slate-900 appearance-none cursor-pointer"
+                    className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-cyan-500 focus:border-transparent focus:bg-white transition-all text-slate-900 appearance-none cursor-pointer"
                   >
                     <option value="">None selected</option>
                     {lists.map((list) => (
@@ -550,7 +550,7 @@ export default function SettingsPage() {
                         onClick={() => setSettings({ ...settings, currency: currency.value })}
                         className={`px-4 py-2.5 rounded-xl border-2 transition-all flex items-center gap-2 ${
                           isSelected
-                            ? 'border-teal-500 bg-teal-50 text-teal-700'
+                            ? 'border-cyan-500 bg-cyan-50 text-cyan-700'
                             : 'border-slate-200 bg-white hover:border-slate-300 text-slate-700'
                         }`}
                       >
@@ -565,7 +565,7 @@ export default function SettingsPage() {
               <button
                 onClick={handleSaveSettings}
                 disabled={saving}
-                className="px-6 py-2.5 bg-gradient-to-r from-teal-500 to-cyan-500 text-white rounded-xl font-medium hover:shadow-lg hover:shadow-teal-200/50 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+                className="px-6 py-2.5 bg-gradient-to-r from-cyan-500 to-cyan-500 text-white rounded-xl font-medium hover:shadow-lg hover:shadow-cyan-200/50 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
               >
                 {saving ? (
                   <>
@@ -603,7 +603,7 @@ export default function SettingsPage() {
             {notificationLoading ? (
               <div className="flex items-center justify-center py-12">
                 <div className="flex flex-col items-center gap-3">
-                  <div className="w-8 h-8 border-4 border-slate-200 border-t-teal-500 rounded-full animate-spin"></div>
+                  <div className="w-8 h-8 border-4 border-slate-200 border-t-cyan-500 rounded-full animate-spin"></div>
                   <p className="text-sm text-slate-500">Loading notifications...</p>
                 </div>
               </div>
@@ -626,7 +626,7 @@ export default function SettingsPage() {
                     onClick={() => toggleMasterNotifications(!notificationPrefs.masterToggle)}
                     disabled={savingNotifications}
                     className={`relative inline-flex h-7 w-12 items-center rounded-full transition-colors ${
-                      notificationPrefs.masterToggle ? 'bg-teal-500' : 'bg-slate-300'
+                      notificationPrefs.masterToggle ? 'bg-cyan-500' : 'bg-slate-300'
                     } ${savingNotifications ? 'opacity-50 cursor-not-allowed' : ''}`}
                   >
                     <span
@@ -660,7 +660,7 @@ export default function SettingsPage() {
                           disabled={savingNotifications || !notificationPrefs.masterToggle}
                           className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
                             notificationPrefs.types[type.key] && notificationPrefs.masterToggle
-                              ? 'bg-teal-500'
+                              ? 'bg-cyan-500'
                               : 'bg-slate-300'
                           } ${savingNotifications || !notificationPrefs.masterToggle ? 'opacity-50 cursor-not-allowed' : ''}`}
                         >
@@ -700,7 +700,7 @@ export default function SettingsPage() {
                         onClick={() => toggleSurpriseSetting('notifyOnClaim', !notificationPrefs.defaultSurpriseSettings.notifyOnClaim)}
                         disabled={savingNotifications}
                         className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
-                          notificationPrefs.defaultSurpriseSettings.notifyOnClaim ? 'bg-teal-500' : 'bg-slate-300'
+                          notificationPrefs.defaultSurpriseSettings.notifyOnClaim ? 'bg-cyan-500' : 'bg-slate-300'
                         } ${savingNotifications ? 'opacity-50 cursor-not-allowed' : ''}`}
                       >
                         <span
@@ -722,7 +722,7 @@ export default function SettingsPage() {
                         disabled={savingNotifications || !notificationPrefs.defaultSurpriseSettings.notifyOnClaim}
                         className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
                           notificationPrefs.defaultSurpriseSettings.revealClaimer && notificationPrefs.defaultSurpriseSettings.notifyOnClaim
-                            ? 'bg-teal-500'
+                            ? 'bg-cyan-500'
                             : 'bg-slate-300'
                         } ${savingNotifications || !notificationPrefs.defaultSurpriseSettings.notifyOnClaim ? 'opacity-50 cursor-not-allowed' : ''}`}
                       >
@@ -751,7 +751,7 @@ export default function SettingsPage() {
                 {/* Saving Indicator */}
                 {savingNotifications && (
                   <div className="flex items-center justify-center gap-3 p-4 bg-slate-50 rounded-xl border border-slate-200">
-                    <div className="w-4 h-4 border-2 border-slate-300 border-t-teal-500 rounded-full animate-spin"></div>
+                    <div className="w-4 h-4 border-2 border-slate-300 border-t-cyan-500 rounded-full animate-spin"></div>
                     <span className="text-sm text-slate-600 font-medium">Saving changes...</span>
                   </div>
                 )}

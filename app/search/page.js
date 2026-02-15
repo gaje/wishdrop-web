@@ -91,7 +91,7 @@ function SearchContent() {
   if (authLoading || !user) {
     return (
       <div className="min-h-screen bg-slate-50 flex items-center justify-center">
-        <div className="w-10 h-10 rounded-full border-[3px] border-slate-200 border-t-teal-500 animate-spin" />
+        <div className="w-10 h-10 rounded-full border-[3px] border-slate-200 border-t-cyan-500 animate-spin" />
       </div>
     )
   }
@@ -113,7 +113,7 @@ function SearchContent() {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search for users, wishlists, or items..."
-                className="w-full pl-12 pr-12 py-4 bg-slate-100 border border-slate-200 rounded-2xl text-base text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all"
+                className="w-full pl-12 pr-12 py-4 bg-slate-100 border border-slate-200 rounded-2xl text-base text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all"
               />
               <svg
                 className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400"
@@ -145,7 +145,7 @@ function SearchContent() {
                 onClick={() => setActiveFilter(filter.key)}
                 className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold transition-all whitespace-nowrap ${
                   activeFilter === filter.key
-                    ? 'bg-gradient-to-r from-teal-500 to-cyan-500 text-white shadow-md shadow-teal-200'
+                    ? 'bg-gradient-to-r from-cyan-500 to-cyan-500 text-white shadow-md shadow-cyan-200'
                     : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
                 }`}
               >
@@ -187,7 +187,7 @@ function SearchContent() {
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {loading ? (
           <div className="flex flex-col items-center justify-center py-16">
-            <div className="w-10 h-10 rounded-full border-[3px] border-slate-200 border-t-teal-500 animate-spin mb-4" />
+            <div className="w-10 h-10 rounded-full border-[3px] border-slate-200 border-t-cyan-500 animate-spin mb-4" />
             <p className="text-slate-500">Searching...</p>
           </div>
         ) : !searched ? (
@@ -235,7 +235,7 @@ function SearchContent() {
                       {resultUser.avatar ? (
                         <img src={resultUser.avatar} alt="" className="w-12 h-12 rounded-full object-cover" />
                       ) : (
-                        <div className="w-12 h-12 rounded-full bg-gradient-to-br from-teal-400 to-cyan-500 flex items-center justify-center text-white text-lg font-bold">
+                        <div className="w-12 h-12 rounded-full bg-gradient-to-br from-cyan-400 to-cyan-500 flex items-center justify-center text-white text-lg font-bold">
                           {resultUser.username?.charAt(0)?.toUpperCase()}
                         </div>
                       )}
@@ -275,7 +275,7 @@ function SearchContent() {
                       style={{ viewTransitionName: `list-${list.slug}`, contain: 'layout paint' }}
                     >
                       <div className="flex items-start gap-4 mb-3">
-                        <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-teal-400 to-cyan-500 flex items-center justify-center flex-shrink-0">
+                        <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-cyan-400 to-cyan-500 flex items-center justify-center flex-shrink-0">
                           <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7" />
                           </svg>
@@ -284,7 +284,7 @@ function SearchContent() {
                           <p className="font-semibold text-slate-900">{list.title}</p>
                           <p className="text-sm text-slate-500">by @{list.owner?.username}</p>
                           {list.occasion && (
-                            <span className="inline-flex items-center mt-2 px-2 py-0.5 rounded-full text-xs font-medium bg-teal-50 text-teal-700 border border-teal-200">
+                            <span className="inline-flex items-center mt-2 px-2 py-0.5 rounded-full text-xs font-medium bg-cyan-50 text-cyan-700 border border-cyan-200">
                               {list.occasion}
                             </span>
                           )}
@@ -343,7 +343,7 @@ function SearchContent() {
                       <div className="flex-1 min-w-0">
                         <p className="font-semibold text-slate-900 line-clamp-2">{item.title}</p>
                         {item.price?.amount && (
-                          <p className="text-teal-600 font-bold mt-1">${item.price.amount.toFixed(2)}</p>
+                          <p className="text-cyan-600 font-bold mt-1">${item.price.amount.toFixed(2)}</p>
                         )}
                         <p className="text-xs text-slate-400 mt-1 truncate">
                           From {item.list?.title} by @{item.list?.owner?.username}
@@ -365,7 +365,7 @@ export default function SearchPage() {
   return (
     <Suspense fallback={
       <div className="min-h-screen bg-slate-50 flex items-center justify-center">
-        <div className="w-10 h-10 rounded-full border-[3px] border-slate-200 border-t-teal-500 animate-spin" />
+        <div className="w-10 h-10 rounded-full border-[3px] border-slate-200 border-t-cyan-500 animate-spin" />
       </div>
     }>
       <SearchContent />

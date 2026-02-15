@@ -85,7 +85,7 @@ const OCCASION_CONFIG = {
   'Anniversary': { bg: 'bg-pink-50', border: 'border-pink-200', text: 'text-pink-700', iconColor: 'text-pink-600' },
   'Graduation': { bg: 'bg-indigo-50', border: 'border-indigo-200', text: 'text-indigo-700', iconColor: 'text-indigo-600' },
   'Housewarming': { bg: 'bg-amber-50', border: 'border-amber-200', text: 'text-amber-700', iconColor: 'text-amber-600' },
-  'Just Because': { bg: 'bg-teal-50', border: 'border-teal-200', text: 'text-teal-700', iconColor: 'text-teal-600' },
+  'Just Because': { bg: 'bg-cyan-50', border: 'border-cyan-200', text: 'text-cyan-700', iconColor: 'text-cyan-600' },
   'Other': { bg: 'bg-slate-50', border: 'border-slate-200', text: 'text-slate-700', iconColor: 'text-slate-600' },
 }
 
@@ -184,7 +184,7 @@ export default function DashboardPage() {
   if (authLoading || !user) {
     return (
       <div className="min-h-screen bg-slate-50 flex items-center justify-center">
-        <div className="w-10 h-10 rounded-full border-[3px] border-slate-200 border-t-teal-500 animate-spin" />
+        <div className="w-10 h-10 rounded-full border-[3px] border-slate-200 border-t-cyan-500 animate-spin" />
       </div>
     )
   }
@@ -214,7 +214,7 @@ export default function DashboardPage() {
                   Want It
                 </span>
                 {mainTab === 'want' && (
-                  <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-teal-500" />
+                  <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-cyan-500" />
                 )}
               </button>
               <button
@@ -262,7 +262,7 @@ export default function DashboardPage() {
             {mainTab === 'want' && (
               <button
                 onClick={() => setShowCreateModal(true)}
-                className="inline-flex items-center justify-center gap-2 px-5 py-3 bg-gradient-to-r from-teal-500 to-cyan-500 text-white rounded-xl font-semibold hover:shadow-lg hover:shadow-teal-200 transition-all duration-300 hover:-translate-y-0.5"
+                className="inline-flex items-center justify-center gap-2 px-5 py-3 bg-gradient-to-r from-cyan-500 to-cyan-500 text-white rounded-xl font-semibold hover:shadow-lg hover:shadow-cyan-200 transition-all duration-300 hover:-translate-y-0.5"
               >
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
@@ -288,7 +288,7 @@ export default function DashboardPage() {
 
         {/* Family Feature Banner - only show on Want It tab */}
         {mainTab === 'want' && showFamilyBanner && familyMembers.length === 0 && !loading && (
-          <div className="mb-6 relative overflow-hidden rounded-2xl bg-gradient-to-r from-teal-500 via-cyan-500 to-violet-500 p-6 shadow-lg">
+          <div className="mb-6 relative overflow-hidden rounded-2xl bg-gradient-to-r from-cyan-500 via-cyan-500 to-violet-500 p-6 shadow-lg">
             <button
               onClick={dismissBanner}
               className="absolute top-4 right-4 w-7 h-7 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center transition-colors"
@@ -312,7 +312,7 @@ export default function DashboardPage() {
                   <Link
                     href="/family/add"
                     onClick={dismissBanner}
-                    className="px-4 py-2.5 bg-white rounded-xl text-sm font-semibold text-teal-600 hover:bg-white/90 transition-colors shadow-sm"
+                    className="px-4 py-2.5 bg-white rounded-xl text-sm font-semibold text-cyan-600 hover:bg-white/90 transition-colors shadow-sm"
                   >
                     Get Started
                   </Link>
@@ -464,7 +464,7 @@ export default function DashboardPage() {
               </p>
               <button
                 onClick={() => setShowCreateModal(true)}
-                className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-teal-500 to-cyan-500 text-white rounded-xl font-semibold hover:shadow-lg hover:shadow-teal-200 transition-all duration-300"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-cyan-500 to-cyan-500 text-white rounded-xl font-semibold hover:shadow-lg hover:shadow-cyan-200 transition-all duration-300"
               >
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
@@ -539,7 +539,7 @@ export default function DashboardPage() {
                     <div className="flex border-t border-slate-100">
                       <button
                         onClick={() => router.push(`/edit/${user.username}/${list.slug}`)}
-                        className="flex-1 flex items-center justify-center gap-1.5 px-4 py-3 text-sm font-medium text-slate-600 hover:text-teal-600 hover:bg-slate-50 transition-colors"
+                        className="flex-1 flex items-center justify-center gap-1.5 px-4 py-3 text-sm font-medium text-slate-600 hover:text-cyan-600 hover:bg-slate-50 transition-colors"
                       >
                         <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />

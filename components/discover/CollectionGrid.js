@@ -28,7 +28,7 @@ export default function CollectionGrid({ collection, onProductClick, onSeeAll })
         {hasMore && onSeeAll && (
           <button
             onClick={() => onSeeAll(collection)}
-            className="text-sm font-semibold text-teal-600 hover:text-teal-700 flex items-center gap-1 transition-colors"
+            className="text-sm font-semibold text-cyan-600 hover:text-cyan-700 flex items-center gap-1 transition-colors"
           >
             See All
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>

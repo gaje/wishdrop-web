@@ -24,8 +24,11 @@ export default function ListDetailClient({ username, slug, list, initialItems })
   const [editingItem, setEditingItem] = useState(null)
   const [copySuccess, setCopySuccess] = useState(false)
   const [sharedWith, setSharedWith] = useState(list?.sharedWith || [])
+  const [connectionStatus, setConnectionStatus] = useState(null)
+  const [checkingConnection, setCheckingConnection] = useState(false)
 
   const isOwner = user && user.username === username
+  const listOwnerId = list?.owner?._id || list?.userId
 
   // Load shared users data
   useEffect(() => {
@@ -33,6 +36,26 @@ export default function ListDetailClient({ username, slug, list, initialItems })
       loadListData()
     }
   }, [isOwner, list?._id])
+
+  // Check connection status with list owner
+  useEffect(() => {
+    if (user && !isOwner && listOwnerId) {
+      checkConnectionStatus()
+    }
+  }, [user, isOwner, listOwnerId])
+
+  const checkConnectionStatus = async () => {
+    setCheckingConnection(true)
+    try {
+      const data = await api.connections.checkStatus(listOwnerId)
+      setConnectionStatus(data.status)
+    } catch (err) {
+      console.error('Failed to check connection status:', err)
+      setConnectionStatus(null)
+    } finally {
+      setCheckingConnection(false)
+    }
+  }
 
   const loadListData = async () => {
     try {
@@ -67,7 +90,22 @@ export default function ListDetailClient({ username, slug, list, initialItems })
       await reloadItems()
     } catch (err) {
       console.error('Failed to claim item:', err)
-      alert('Failed to claim item. Please try again.')
+      // Check if error is due to missing connection
+      if (err.status === 403 && err.message?.includes('connection')) {
+        alert('You need to connect with the list owner to claim items.')
+      } else {
+        alert(err.getUserMessage?.() || 'Failed to claim item. Please try again.')
+      }
+    }
+  }
+
+  const handleConnect = async () => {
+    try {
+      await api.connections.request(listOwnerId)
+      setConnectionStatus('pending_sent')
+      alert('Connection request sent!')
+    } catch (err) {
+      alert(err.getUserMessage?.() || 'Failed to send connection request')
     }
   }
 
@@ -132,11 +170,11 @@ export default function ListDetailClient({ username, slug, list, initialItems })
           {isOwner && sharedWith.length > 0 && (
             <button
               onClick={() => setShowShareSheet(true)}
-              className="flex items-center gap-2 px-3 py-2 bg-teal-50 border border-teal-200 rounded-xl hover:bg-teal-100 transition-colors"
+              className="flex items-center gap-2 px-3 py-2 bg-cyan-50 border border-cyan-200 rounded-xl hover:bg-cyan-100 transition-colors"
               title={`Shared with ${sharedWith.length} ${sharedWith.length === 1 ? 'person' : 'people'}`}
             >
               <AvatarStack users={sharedWith} max={3} size="sm" />
-              <span className="text-xs font-medium text-teal-700">
+              <span className="text-xs font-medium text-cyan-700">
                 {sharedWith.length} shared
               </span>
             </button>
@@ -189,7 +227,7 @@ export default function ListDetailClient({ username, slug, list, initialItems })
               </Link>
               <button
                 onClick={() => setShowAddModal(true)}
-                className="inline-flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-teal-500 to-cyan-500 text-white rounded-xl text-sm font-semibold hover:shadow-lg hover:shadow-teal-200 transition-all"
+                className="inline-flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-cyan-500 to-cyan-500 text-white rounded-xl text-sm font-semibold hover:shadow-lg hover:shadow-cyan-200 transition-all"
               >
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
@@ -204,8 +242,8 @@ export default function ListDetailClient({ username, slug, list, initialItems })
       {/* Items Grid */}
       {items.length === 0 ? (
         <div className="text-center py-16 animate-fade-in">
-          <div className="w-20 h-20 mx-auto mb-5 rounded-2xl bg-gradient-to-br from-teal-100 to-cyan-100 flex items-center justify-center">
-            <svg className="w-10 h-10 text-teal-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <div className="w-20 h-20 mx-auto mb-5 rounded-2xl bg-gradient-to-br from-cyan-100 to-cyan-100 flex items-center justify-center">
+            <svg className="w-10 h-10 text-cyan-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
             </svg>
           </div>
@@ -216,7 +254,7 @@ export default function ListDetailClient({ username, slug, list, initialItems })
           {isOwner && (
             <button
               onClick={() => setShowAddModal(true)}
-              className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-teal-500 to-cyan-500 text-white rounded-xl font-semibold hover:shadow-lg hover:shadow-teal-200 transition-all"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-cyan-500 to-cyan-500 text-white rounded-xl font-semibold hover:shadow-lg hover:shadow-cyan-200 transition-all"
             >
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
@@ -241,6 +279,8 @@ export default function ListDetailClient({ username, slug, list, initialItems })
                 onDelete={handleDeleteItem}
                 onClaim={handleClaimItem}
                 onUnclaim={handleUnclaimItem}
+                connectionStatus={connectionStatus}
+                onConnect={handleConnect}
               />
             </div>
           ))}

@@ -35,7 +35,7 @@ export default function Avatar({
     if (!name) return 'bg-gray-400'
     const colors = [
       'bg-cyan-500',
-      'bg-teal-500',
+      'bg-cyan-500',
       'bg-blue-500',
       'bg-indigo-500',
       'bg-purple-500',

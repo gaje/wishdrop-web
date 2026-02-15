@@ -19,7 +19,7 @@ const RELATIONSHIP_LABELS = {
 }
 
 const AVATAR_COLORS = [
-  'from-cyan-400 to-teal-500',
+  'from-cyan-400 to-cyan-500',
   'from-blue-400 to-indigo-500',
   'from-purple-400 to-pink-500',
   'from-pink-400 to-rose-500',
@@ -93,18 +93,18 @@ export default function FamilyMemberDetailPage({ params }) {
 
   if (authLoading || !user) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-cyan-50 via-teal-50 to-blue-50 flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-teal-500"></div>
+      <div className="min-h-screen bg-gradient-to-br from-cyan-50 via-cyan-50 to-blue-50 flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-cyan-500"></div>
       </div>
     )
   }
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-cyan-50 via-teal-50 to-blue-50">
+      <div className="min-h-screen bg-gradient-to-br from-cyan-50 via-cyan-50 to-blue-50">
         <Header />
         <div className="flex items-center justify-center py-32">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-teal-500"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-cyan-500"></div>
         </div>
       </div>
     )
@@ -112,7 +112,7 @@ export default function FamilyMemberDetailPage({ params }) {
 
   if (error || !member) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-cyan-50 via-teal-50 to-blue-50">
+      <div className="min-h-screen bg-gradient-to-br from-cyan-50 via-cyan-50 to-blue-50">
         <Header />
         <div className="max-w-4xl mx-auto px-4 py-20 text-center">
           <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-red-100 flex items-center justify-center">
@@ -122,7 +122,7 @@ export default function FamilyMemberDetailPage({ params }) {
           </div>
           <h1 className="text-2xl font-bold text-gray-900 mb-2">Family Member Not Found</h1>
           <p className="text-gray-600 mb-6">{error || 'This family member could not be found.'}</p>
-          <Link href="/family" className="inline-flex items-center gap-2 px-6 py-3 bg-teal-600 text-white rounded-xl hover:bg-teal-700 transition-colors">
+          <Link href="/family" className="inline-flex items-center gap-2 px-6 py-3 bg-cyan-600 text-white rounded-xl hover:bg-cyan-700 transition-colors">
             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
             </svg>
@@ -134,7 +134,7 @@ export default function FamilyMemberDetailPage({ params }) {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-cyan-50 via-teal-50 to-blue-50">
+    <div className="min-h-screen bg-gradient-to-br from-cyan-50 via-cyan-50 to-blue-50">
       <Header />
 
       {/* Hero Section */}
@@ -235,7 +235,7 @@ export default function FamilyMemberDetailPage({ params }) {
                 <h2 className="text-lg font-bold text-gray-900">Wishlists</h2>
                 <Link
                   href={`/create?familyMemberId=${id}`}
-                  className="inline-flex items-center gap-1 text-sm text-teal-600 hover:text-teal-700 font-medium"
+                  className="inline-flex items-center gap-1 text-sm text-cyan-600 hover:text-cyan-700 font-medium"
                 >
                   <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
@@ -254,7 +254,7 @@ export default function FamilyMemberDetailPage({ params }) {
                   <p className="text-gray-600 mb-4">No wishlists yet for {member.name}</p>
                   <Link
                     href={`/create?familyMemberId=${id}`}
-                    className="inline-flex items-center gap-2 px-4 py-2 bg-teal-500 text-white rounded-lg hover:bg-teal-600 transition-colors"
+                    className="inline-flex items-center gap-2 px-4 py-2 bg-cyan-500 text-white rounded-lg hover:bg-cyan-600 transition-colors"
                   >
                     <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />

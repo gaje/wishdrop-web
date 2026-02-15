@@ -55,7 +55,7 @@ function VerifyEmailContent() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-cyan-50 via-teal-50 to-blue-50">
+    <div className="min-h-screen bg-gradient-to-br from-cyan-50 via-cyan-50 to-blue-50">
       <Header />
 
       <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -63,7 +63,7 @@ function VerifyEmailContent() {
           {status === 'verifying' && (
             <>
               <div className="flex justify-center mb-6">
-                <div className="animate-spin rounded-full h-16 w-16 border-b-4 border-teal-500"></div>
+                <div className="animate-spin rounded-full h-16 w-16 border-b-4 border-cyan-500"></div>
               </div>
               <h1 className="text-3xl font-bold text-gray-900 mb-4">
                 Verifying your email...
@@ -101,13 +101,13 @@ function VerifyEmailContent() {
               <div className="flex gap-4 justify-center">
                 <Link
                   href="/login"
-                  className="px-8 py-4 bg-gradient-to-r from-cyan-500 to-teal-500 text-white rounded-full font-semibold hover:shadow-lg transition-shadow"
+                  className="px-8 py-4 bg-gradient-to-r from-cyan-500 to-cyan-500 text-white rounded-full font-semibold hover:shadow-lg transition-shadow"
                 >
                   Log in
                 </Link>
                 <Link
                   href="/"
-                  className="px-8 py-4 border-2 border-teal-500 text-teal-600 rounded-full font-semibold hover:bg-teal-50 transition-colors"
+                  className="px-8 py-4 border-2 border-cyan-500 text-cyan-600 rounded-full font-semibold hover:bg-cyan-50 transition-colors"
                 >
                   Go Home
                 </Link>
@@ -123,8 +123,8 @@ function VerifyEmailContent() {
 export default function VerifyEmail() {
   return (
     <Suspense fallback={
-      <div className="min-h-screen bg-gradient-to-br from-cyan-50 via-teal-50 to-blue-50 flex items-center justify-center">
-        <div className="animate-spin rounded-full h-16 w-16 border-b-4 border-teal-500"></div>
+      <div className="min-h-screen bg-gradient-to-br from-cyan-50 via-cyan-50 to-blue-50 flex items-center justify-center">
+        <div className="animate-spin rounded-full h-16 w-16 border-b-4 border-cyan-500"></div>
       </div>
     }>
       <VerifyEmailContent />

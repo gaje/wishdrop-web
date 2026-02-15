@@ -262,7 +262,7 @@ export default function CreateListModal({ isOpen, onClose, familyMemberId: initi
           <div className="p-6 border-b border-slate-100 flex-shrink-0">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-teal-500 to-cyan-500 flex items-center justify-center">
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-500 to-cyan-500 flex items-center justify-center">
                   <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7" />
                   </svg>
@@ -304,8 +304,8 @@ export default function CreateListModal({ isOpen, onClose, familyMemberId: initi
                     className="w-full flex items-center justify-between p-3 hover:bg-slate-50 transition-colors"
                   >
                     <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 rounded-full bg-teal-100 flex items-center justify-center">
-                        <svg className="w-4 h-4 text-teal-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <div className="w-8 h-8 rounded-full bg-cyan-100 flex items-center justify-center">
+                        <svg className="w-4 h-4 text-cyan-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                         </svg>
                       </div>
@@ -326,18 +326,18 @@ export default function CreateListModal({ isOpen, onClose, familyMemberId: initi
                         onClick={() => setSelectedFamilyMemberId(null)}
                         className={`w-full flex items-center gap-2 p-2 rounded-lg transition-colors ${
                           selectedFamilyMemberId === null
-                            ? 'bg-teal-50 border border-teal-500'
+                            ? 'bg-cyan-50 border border-cyan-500'
                             : 'hover:bg-slate-100'
                         }`}
                       >
                         <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                          selectedFamilyMemberId === null ? 'bg-teal-500' : 'bg-slate-300'
+                          selectedFamilyMemberId === null ? 'bg-cyan-500' : 'bg-slate-300'
                         }`}>
                           <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                           </svg>
                         </div>
-                        <span className={`text-sm font-medium ${selectedFamilyMemberId === null ? 'text-teal-700' : 'text-slate-700'}`}>
+                        <span className={`text-sm font-medium ${selectedFamilyMemberId === null ? 'text-cyan-700' : 'text-slate-700'}`}>
                           Me (Personal List)
                         </span>
                       </button>
@@ -349,7 +349,7 @@ export default function CreateListModal({ isOpen, onClose, familyMemberId: initi
                           onClick={() => setSelectedFamilyMemberId(member._id)}
                           className={`w-full flex items-center gap-2 p-2 rounded-lg transition-colors ${
                             selectedFamilyMemberId === member._id
-                              ? 'bg-teal-50 border border-teal-500'
+                              ? 'bg-cyan-50 border border-cyan-500'
                               : 'hover:bg-slate-100'
                           }`}
                         >
@@ -364,7 +364,7 @@ export default function CreateListModal({ isOpen, onClose, familyMemberId: initi
                             {getInitials(member.name)}
                           </div>
                           <div className="text-left">
-                            <p className={`text-sm font-medium ${selectedFamilyMemberId === member._id ? 'text-teal-700' : 'text-slate-700'}`}>
+                            <p className={`text-sm font-medium ${selectedFamilyMemberId === member._id ? 'text-cyan-700' : 'text-slate-700'}`}>
                               {member.displayName || member.name}
                             </p>
                             <p className="text-xs text-slate-500 capitalize">{member.relationship}</p>
@@ -388,7 +388,7 @@ export default function CreateListModal({ isOpen, onClose, familyMemberId: initi
                   required
                   value={formData.title}
                   onChange={handleChange}
-                  className="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all text-slate-900 placeholder-slate-400"
+                  className="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all text-slate-900 placeholder-slate-400"
                   placeholder="e.g., Nick's Birthday Wishlist"
                   disabled={loading}
                   autoFocus
@@ -406,7 +406,7 @@ export default function CreateListModal({ isOpen, onClose, familyMemberId: initi
                   rows={2}
                   value={formData.description}
                   onChange={handleChange}
-                  className="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all resize-none text-slate-900 placeholder-slate-400"
+                  className="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all resize-none text-slate-900 placeholder-slate-400"
                   placeholder="Tell people what this list is for..."
                   disabled={loading}
                 />
@@ -422,7 +422,7 @@ export default function CreateListModal({ isOpen, onClose, familyMemberId: initi
                   name="occasion"
                   value={formData.occasion}
                   onChange={handleChange}
-                  className="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all text-slate-900"
+                  className="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all text-slate-900"
                   disabled={loading}
                 >
                   <option value="">Select an occasion</option>
@@ -471,7 +471,7 @@ export default function CreateListModal({ isOpen, onClose, familyMemberId: initi
                             onClick={() => toggleCategory(category.id)}
                             className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg transition-all text-xs ${
                               isSelected
-                                ? 'bg-gradient-to-r from-teal-500 to-cyan-500 text-white'
+                                ? 'bg-gradient-to-r from-cyan-500 to-cyan-500 text-white'
                                 : 'bg-white text-slate-700 border border-slate-200 hover:border-slate-300'
                             }`}
                           >
@@ -500,27 +500,27 @@ export default function CreateListModal({ isOpen, onClose, familyMemberId: initi
                       onClick={() => setFormData({ ...formData, privacy: option.value })}
                       className={`p-3 rounded-xl border-2 transition-all text-center ${
                         formData.privacy === option.value
-                          ? 'border-teal-500 bg-teal-50'
+                          ? 'border-cyan-500 bg-cyan-50'
                           : 'border-slate-200 hover:border-slate-300'
                       }`}
                       disabled={loading}
                     >
                       {option.icon === 'globe' && (
-                        <svg className={`w-5 h-5 mx-auto mb-1 ${formData.privacy === option.value ? 'text-teal-600' : 'text-slate-400'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className={`w-5 h-5 mx-auto mb-1 ${formData.privacy === option.value ? 'text-cyan-600' : 'text-slate-400'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                       )}
                       {option.icon === 'link' && (
-                        <svg className={`w-5 h-5 mx-auto mb-1 ${formData.privacy === option.value ? 'text-teal-600' : 'text-slate-400'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className={`w-5 h-5 mx-auto mb-1 ${formData.privacy === option.value ? 'text-cyan-600' : 'text-slate-400'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
                         </svg>
                       )}
                       {option.icon === 'lock' && (
-                        <svg className={`w-5 h-5 mx-auto mb-1 ${formData.privacy === option.value ? 'text-teal-600' : 'text-slate-400'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className={`w-5 h-5 mx-auto mb-1 ${formData.privacy === option.value ? 'text-cyan-600' : 'text-slate-400'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                         </svg>
                       )}
-                      <p className={`text-xs font-medium ${formData.privacy === option.value ? 'text-teal-700' : 'text-slate-600'}`}>
+                      <p className={`text-xs font-medium ${formData.privacy === option.value ? 'text-cyan-700' : 'text-slate-600'}`}>
                         {option.label}
                       </p>
                     </button>
@@ -568,7 +568,7 @@ export default function CreateListModal({ isOpen, onClose, familyMemberId: initi
                 <button
                   type="submit"
                   disabled={loading}
-                  className="flex-1 px-4 py-2.5 bg-gradient-to-r from-teal-500 to-cyan-500 text-white rounded-xl font-medium hover:shadow-lg hover:shadow-teal-200 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="flex-1 px-4 py-2.5 bg-gradient-to-r from-cyan-500 to-cyan-500 text-white rounded-xl font-medium hover:shadow-lg hover:shadow-cyan-200 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {loading ? (
                     <span className="flex items-center justify-center gap-2">

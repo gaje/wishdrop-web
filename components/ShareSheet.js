@@ -187,7 +187,7 @@ export default function ShareSheet({ isOpen, onClose, list, onShareUpdate }) {
           onClick={() => setActiveTab('users')}
           className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${
             activeTab === 'users'
-              ? 'border-teal-500 text-teal-600'
+              ? 'border-cyan-500 text-cyan-600'
               : 'border-transparent text-gray-500 hover:text-gray-700'
           }`}
         >
@@ -197,7 +197,7 @@ export default function ShareSheet({ isOpen, onClose, list, onShareUpdate }) {
           onClick={() => setActiveTab('invite')}
           className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${
             activeTab === 'invite'
-              ? 'border-teal-500 text-teal-600'
+              ? 'border-cyan-500 text-cyan-600'
               : 'border-transparent text-gray-500 hover:text-gray-700'
           }`}
         >
@@ -207,7 +207,7 @@ export default function ShareSheet({ isOpen, onClose, list, onShareUpdate }) {
           onClick={() => setActiveTab('link')}
           className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${
             activeTab === 'link'
-              ? 'border-teal-500 text-teal-600'
+              ? 'border-cyan-500 text-cyan-600'
               : 'border-transparent text-gray-500 hover:text-gray-700'
           }`}
         >
@@ -217,7 +217,7 @@ export default function ShareSheet({ isOpen, onClose, list, onShareUpdate }) {
 
       {loading ? (
         <div className="flex items-center justify-center py-12">
-          <div className="w-8 h-8 border-2 border-teal-500 border-t-transparent rounded-full animate-spin" />
+          <div className="w-8 h-8 border-2 border-cyan-500 border-t-transparent rounded-full animate-spin" />
         </div>
       ) : (
         <>
@@ -238,7 +238,7 @@ export default function ShareSheet({ isOpen, onClose, list, onShareUpdate }) {
                         onClick={() => setSelectedGroupId(null)}
                         className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
                           selectedGroupId === null
-                            ? 'bg-teal-500 text-white'
+                            ? 'bg-cyan-500 text-white'
                             : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                         }`}
                       >
@@ -250,7 +250,7 @@ export default function ShareSheet({ isOpen, onClose, list, onShareUpdate }) {
                           onClick={() => setSelectedGroupId(selectedGroupId === group._id ? null : group._id)}
                           className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
                             selectedGroupId === group._id
-                              ? 'bg-teal-500 text-white'
+                              ? 'bg-cyan-500 text-white'
                               : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                           }`}
                         >
@@ -279,7 +279,7 @@ export default function ShareSheet({ isOpen, onClose, list, onShareUpdate }) {
                               avatar: user?.avatar,
                             })}
                             className={`flex flex-col items-center p-2 rounded-xl transition-colors ${
-                              isSelected ? 'bg-teal-50 ring-2 ring-teal-500' : 'hover:bg-gray-50'
+                              isSelected ? 'bg-cyan-50 ring-2 ring-cyan-500' : 'hover:bg-gray-50'
                             }`}
                             style={{ width: 72 }}
                           >
@@ -290,7 +290,7 @@ export default function ShareSheet({ isOpen, onClose, list, onShareUpdate }) {
                                 size="md"
                               />
                               {isSelected && (
-                                <div className="absolute -bottom-1 -right-1 w-5 h-5 bg-teal-500 rounded-full flex items-center justify-center">
+                                <div className="absolute -bottom-1 -right-1 w-5 h-5 bg-cyan-500 rounded-full flex items-center justify-center">
                                   <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                                   </svg>
@@ -328,11 +328,11 @@ export default function ShareSheet({ isOpen, onClose, list, onShareUpdate }) {
                     value={searchQuery}
                     onChange={(e) => handleSearch(e.target.value)}
                     placeholder="Search users by name or username..."
-                    className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-200 focus:border-teal-500 focus:ring-2 focus:ring-teal-500/20 outline-none transition-colors"
+                    className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-200 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 outline-none transition-colors"
                   />
                   {searching && (
                     <div className="absolute right-3 top-1/2 -translate-y-1/2">
-                      <div className="w-5 h-5 border-2 border-teal-500 border-t-transparent rounded-full animate-spin" />
+                      <div className="w-5 h-5 border-2 border-cyan-500 border-t-transparent rounded-full animate-spin" />
                     </div>
                   )}
                 </div>
@@ -355,7 +355,7 @@ export default function ShareSheet({ isOpen, onClose, list, onShareUpdate }) {
                             isShared
                               ? 'bg-gray-50 cursor-not-allowed'
                               : isSelected
-                              ? 'bg-teal-50'
+                              ? 'bg-cyan-50'
                               : 'hover:bg-gray-50'
                           }`}
                         >
@@ -371,7 +371,7 @@ export default function ShareSheet({ isOpen, onClose, list, onShareUpdate }) {
                           {isShared ? (
                             <span className="text-xs text-gray-400">Already shared</span>
                           ) : isSelected ? (
-                            <div className="w-5 h-5 bg-teal-500 rounded-full flex items-center justify-center">
+                            <div className="w-5 h-5 bg-cyan-500 rounded-full flex items-center justify-center">
                               <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                               </svg>
@@ -400,7 +400,7 @@ export default function ShareSheet({ isOpen, onClose, list, onShareUpdate }) {
                   <button
                     onClick={handleShare}
                     disabled={sharing}
-                    className="px-4 py-2 bg-gradient-to-r from-teal-500 to-cyan-500 text-white rounded-xl text-sm font-semibold hover:shadow-lg transition-all disabled:opacity-50"
+                    className="px-4 py-2 bg-gradient-to-r from-cyan-500 to-cyan-500 text-white rounded-xl text-sm font-semibold hover:shadow-lg transition-all disabled:opacity-50"
                   >
                     {sharing ? 'Sharing...' : 'Share'}
                   </button>
@@ -455,12 +455,12 @@ export default function ShareSheet({ isOpen, onClose, list, onShareUpdate }) {
                     value={inviteEmail}
                     onChange={(e) => setInviteEmail(e.target.value)}
                     placeholder="email@example.com"
-                    className="flex-1 px-4 py-2.5 rounded-xl border border-gray-200 focus:border-teal-500 focus:ring-2 focus:ring-teal-500/20 outline-none"
+                    className="flex-1 px-4 py-2.5 rounded-xl border border-gray-200 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 outline-none"
                   />
                   <button
                     onClick={() => handleCreateInvite(inviteEmail)}
                     disabled={!inviteEmail.includes('@')}
-                    className="px-4 py-2.5 bg-gradient-to-r from-teal-500 to-cyan-500 text-white rounded-xl text-sm font-semibold hover:shadow-lg transition-all disabled:opacity-50"
+                    className="px-4 py-2.5 bg-gradient-to-r from-cyan-500 to-cyan-500 text-white rounded-xl text-sm font-semibold hover:shadow-lg transition-all disabled:opacity-50"
                   >
                     Send Invite
                   </button>

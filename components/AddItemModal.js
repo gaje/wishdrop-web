@@ -294,7 +294,7 @@ export default function AddItemModal({
                 helperText={!metadata && !fetchingMetadata ? "Paste a link and we'll auto-fill the details" : undefined}
                 icon={
                   fetchingMetadata ? (
-                    <svg className="w-5 h-5 animate-spin text-teal-500" fill="none" viewBox="0 0 24 24">
+                    <svg className="w-5 h-5 animate-spin text-cyan-500" fill="none" viewBox="0 0 24 24">
                       <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                       <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
                     </svg>
@@ -354,7 +354,7 @@ export default function AddItemModal({
                         {formData.title || metadata?.title || 'No title found'}
                       </p>
                       {(formData.price || metadata?.price?.amount) && (
-                        <p className="text-teal-600 font-semibold text-sm">
+                        <p className="text-cyan-600 font-semibold text-sm">
                           ${formData.price || metadata?.price?.amount}
                         </p>
                       )}
@@ -363,6 +363,12 @@ export default function AddItemModal({
                       )}
                     </div>
                   </div>
+                  <p className="mt-3 text-xs text-slate-500 flex items-start gap-1.5">
+                    <svg className="w-3.5 h-3.5 mt-0.5 flex-shrink-0 text-amber-400" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M8.485 2.495c.673-1.167 2.357-1.167 3.03 0l6.28 10.875c.673 1.167-.17 2.625-1.516 2.625H3.72c-1.347 0-2.189-1.458-1.515-2.625L8.485 2.495zM10 6a.75.75 0 01.75.75v3.5a.75.75 0 01-1.5 0v-3.5A.75.75 0 0110 6zm0 9a1 1 0 100-2 1 1 0 000 2z" />
+                    </svg>
+                    We grabbed what we could! Double-check the title and price below — sometimes we get those a little off.
+                  </p>
                 </div>
               )}
             </div>
@@ -392,6 +398,7 @@ export default function AddItemModal({
                     placeholder="29.99"
                     value={formData.price}
                     onChange={(e) => setFormData(prev => ({ ...prev, price: e.target.value }))}
+                    helperText="Auto-detected price — feel free to correct it"
                     icon={<span className="text-slate-400 font-medium">$</span>}
                     iconPosition="left"
                   />
@@ -430,7 +437,7 @@ export default function AddItemModal({
                     placeholder="Any additional details (size, color, etc.)"
                     value={formData.notes}
                     onChange={(e) => setFormData(prev => ({ ...prev, notes: e.target.value }))}
-                    className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-teal-500 focus:ring-2 focus:ring-teal-500/20 outline-none transition-all resize-none text-slate-900 placeholder-slate-400"
+                    className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 outline-none transition-all resize-none text-slate-900 placeholder-slate-400"
                   />
                 </div>
               </>
@@ -448,7 +455,7 @@ export default function AddItemModal({
                 <button
                   type="button"
                   onClick={() => setShowStoreDropdown(!showStoreDropdown)}
-                  className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-left flex items-center justify-between hover:border-slate-300 transition-colors focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                  className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-left flex items-center justify-between hover:border-slate-300 transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
                 >
                   <span className={selectedStore ? 'text-slate-900' : 'text-slate-400'}>
                     {selectedStore || 'Select a store...'}
@@ -473,7 +480,7 @@ export default function AddItemModal({
                         placeholder="Search stores..."
                         value={storeSearchQuery}
                         onChange={(e) => setStoreSearchQuery(e.target.value)}
-                        className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                        className="w-full px-3 py-2 text-sm rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
                         autoFocus
                       />
                     </div>
@@ -485,7 +492,7 @@ export default function AddItemModal({
                           type="button"
                           onClick={() => handleStoreSelect(store)}
                           className={`w-full px-4 py-2.5 text-left text-sm hover:bg-slate-50 transition-colors flex items-center gap-2 ${
-                            selectedStore === store.name ? 'bg-teal-50 text-teal-700' : 'text-slate-700'
+                            selectedStore === store.name ? 'bg-cyan-50 text-cyan-700' : 'text-slate-700'
                           }`}
                         >
                           <svg className="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -499,7 +506,7 @@ export default function AddItemModal({
                         type="button"
                         onClick={() => handleStoreSelect({ name: 'Other', website: null })}
                         className={`w-full px-4 py-2.5 text-left text-sm hover:bg-slate-50 transition-colors flex items-center gap-2 border-t border-slate-100 ${
-                          selectedStore === 'Other' ? 'bg-teal-50 text-teal-700' : 'text-slate-700'
+                          selectedStore === 'Other' ? 'bg-cyan-50 text-cyan-700' : 'text-slate-700'
                         }`}
                       >
                         <svg className="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -520,7 +527,7 @@ export default function AddItemModal({
                     placeholder="Enter store name..."
                     value={customStore}
                     onChange={(e) => setCustomStore(e.target.value)}
-                    className="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent text-sm"
+                    className="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent text-sm"
                   />
                 </div>
               )}
@@ -645,7 +652,7 @@ export default function AddItemModal({
                 placeholder="Any additional details (size, color, etc.)"
                 value={formData.notes}
                 onChange={(e) => setFormData(prev => ({ ...prev, notes: e.target.value }))}
-                className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-teal-500 focus:ring-2 focus:ring-teal-500/20 outline-none transition-all resize-none text-slate-900 placeholder-slate-400"
+                className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 outline-none transition-all resize-none text-slate-900 placeholder-slate-400"
               />
             </div>
           </>
@@ -662,11 +669,11 @@ export default function AddItemModal({
         )}
 
         <ModalActions>
-          <Button variant="secondary" onClick={onClose} disabled={loading}>
+          <Button variant="secondary" onClick={onClose} disabled={loading || fetchingMetadata}>
             Cancel
           </Button>
-          <Button type="submit" loading={loading}>
-            Add Item
+          <Button type="submit" loading={loading} disabled={fetchingMetadata}>
+            {fetchingMetadata ? 'Fetching details...' : 'Add Item'}
           </Button>
         </ModalActions>
       </form>

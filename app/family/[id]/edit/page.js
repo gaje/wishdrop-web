@@ -185,7 +185,7 @@ export default function EditFamilyMemberPage({ params }) {
     return (
       <div className="min-h-screen bg-slate-50 flex items-center justify-center">
         <div className="flex flex-col items-center gap-4">
-          <div className="w-12 h-12 rounded-full border-4 border-slate-200 border-t-teal-500 animate-spin"></div>
+          <div className="w-12 h-12 rounded-full border-4 border-slate-200 border-t-cyan-500 animate-spin"></div>
           <p className="text-slate-500 font-medium">Loading...</p>
         </div>
       </div>
@@ -251,7 +251,7 @@ export default function EditFamilyMemberPage({ params }) {
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="e.g., Bobby"
-              className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent focus:bg-white transition-all"
+              className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent focus:bg-white transition-all"
             />
           </div>
 
@@ -289,10 +289,10 @@ export default function EditFamilyMemberPage({ params }) {
               value={birthday}
               onChange={(e) => setBirthday(e.target.value)}
               max={new Date().toISOString().split('T')[0]}
-              className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent focus:bg-white transition-all"
+              className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent focus:bg-white transition-all"
             />
             {age !== null && (
-              <div className="mt-2 inline-flex items-center gap-1.5 px-2.5 py-1 bg-teal-50 border border-teal-200 rounded-lg text-sm text-teal-700 font-medium">
+              <div className="mt-2 inline-flex items-center gap-1.5 px-2.5 py-1 bg-cyan-50 border border-cyan-200 rounded-lg text-sm text-cyan-700 font-medium">
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
@@ -339,7 +339,7 @@ export default function EditFamilyMemberPage({ params }) {
                   value={interests}
                   onChange={(e) => setInterests(e.target.value)}
                   placeholder="e.g., LEGO, dinosaurs, art"
-                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent focus:bg-white transition-all"
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent focus:bg-white transition-all"
                 />
                 <p className="mt-2 text-xs text-slate-500">Separate with commas</p>
               </div>
@@ -354,7 +354,7 @@ export default function EditFamilyMemberPage({ params }) {
                   value={favoriteColors}
                   onChange={(e) => setFavoriteColors(e.target.value)}
                   placeholder="e.g., blue, green"
-                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent focus:bg-white transition-all"
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent focus:bg-white transition-all"
                 />
                 <p className="mt-2 text-xs text-slate-500">Separate with commas</p>
               </div>
@@ -369,7 +369,7 @@ export default function EditFamilyMemberPage({ params }) {
                   value={hobbies}
                   onChange={(e) => setHobbies(e.target.value)}
                   placeholder="e.g., soccer, drawing, reading"
-                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent focus:bg-white transition-all"
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent focus:bg-white transition-all"
                 />
                 <p className="mt-2 text-xs text-slate-500">Separate with commas</p>
               </div>
@@ -387,7 +387,7 @@ export default function EditFamilyMemberPage({ params }) {
                       value={shirtSize}
                       onChange={(e) => setShirtSize(e.target.value)}
                       placeholder="e.g., Youth M"
-                      className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent focus:bg-white transition-all"
+                      className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent focus:bg-white transition-all"
                     />
                   </div>
                   <div>
@@ -397,7 +397,7 @@ export default function EditFamilyMemberPage({ params }) {
                       value={shoeSize}
                       onChange={(e) => setShoeSize(e.target.value)}
                       placeholder="e.g., 7"
-                      className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent focus:bg-white transition-all"
+                      className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent focus:bg-white transition-all"
                     />
                   </div>
                   <div>
@@ -407,7 +407,7 @@ export default function EditFamilyMemberPage({ params }) {
                       value={pantSize}
                       onChange={(e) => setPantSize(e.target.value)}
                       placeholder="e.g., 32x34"
-                      className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent focus:bg-white transition-all"
+                      className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent focus:bg-white transition-all"
                     />
                   </div>
                 </div>
@@ -423,7 +423,7 @@ export default function EditFamilyMemberPage({ params }) {
             className={`w-full py-4 rounded-2xl font-bold text-lg transition-all flex items-center justify-center gap-2 animate-fade-in-up ${
               saving || !name.trim() || !relationship
                 ? 'bg-slate-200 text-slate-400 cursor-not-allowed'
-                : 'bg-gradient-to-r from-teal-500 to-cyan-500 text-white hover:shadow-lg hover:shadow-teal-200/50'
+                : 'bg-gradient-to-r from-cyan-500 to-cyan-500 text-white hover:shadow-lg hover:shadow-cyan-200/50'
             }`}
             style={{ animationDelay: '0.2s' }}
           >

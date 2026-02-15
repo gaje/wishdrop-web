@@ -70,12 +70,12 @@ export default function ProductCard({ product, onClick }) {
 
       {/* Product Info */}
       <div className="p-3.5">
-        <h3 className="text-sm font-semibold text-slate-900 line-clamp-2 mb-1.5 group-hover:text-teal-600 transition-colors min-h-[40px]">
+        <h3 className="text-sm font-semibold text-slate-900 line-clamp-2 mb-1.5 group-hover:text-cyan-600 transition-colors min-h-[40px]">
           {product.title}
         </h3>
         <div className="flex items-center justify-between">
-          {product.price ? (
-            <span className="text-base font-bold text-slate-900">${product.price.toFixed(2)}</span>
+          {(typeof product.price === 'object' ? product.price.amount : product.price) ? (
+            <span className="text-base font-bold text-slate-900">${typeof product.price === 'object' ? product.price.amount?.toFixed(2) : Number(product.price).toFixed(2)}</span>
           ) : (
             <span className="text-xs text-slate-400">Price unavailable</span>
           )}

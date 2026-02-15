@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { useAuth } from '@/lib/AuthContext'
@@ -15,24 +15,31 @@ export default function SignupPage() {
     displayName: '',
     password: '',
     confirmPassword: '',
+    acceptedTerms: false,
   })
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
 
   // Redirect if already logged in
+  useEffect(() => {
+    if (user) {
+      router.push('/dashboard')
+    }
+  }, [user, router])
+
   if (user) {
-    router.push('/dashboard')
     return (
       <div className="min-h-screen bg-slate-50 flex items-center justify-center">
-        <div className="w-10 h-10 rounded-full border-[3px] border-slate-200 border-t-teal-500 animate-spin" />
+        <div className="w-10 h-10 rounded-full border-[3px] border-slate-200 border-t-cyan-500 animate-spin" />
       </div>
     )
   }
 
   const handleChange = (e) => {
+    const { name, type, checked, value } = e.target
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value,
+      [name]: type === 'checkbox' ? checked : value,
     })
   }
 
@@ -86,7 +93,7 @@ export default function SignupPage() {
     setLoading(true)
 
     try {
-      await signup(formData.email, formData.password, formData.username, formData.displayName)
+      await signup(formData.email, formData.password, formData.username, formData.displayName, { acceptedTerms: formData.acceptedTerms })
       router.push('/dashboard')
     } catch (err) {
       console.error('Signup error:', err)
@@ -105,7 +112,7 @@ export default function SignupPage() {
       <div className="max-w-md w-full animate-fade-in">
         {/* Logo/Brand */}
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-teal-500 to-cyan-500 bg-clip-text text-transparent mb-2">
+          <h1 className="text-4xl font-bold bg-gradient-to-r from-cyan-500 to-cyan-500 bg-clip-text text-transparent mb-2">
             Wishdrop
           </h1>
           <p className="text-slate-500">Start sharing your wishes</p>
@@ -137,7 +144,7 @@ export default function SignupPage() {
                 required
                 value={formData.email}
                 onChange={handleChange}
-                className="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all text-slate-900 placeholder-slate-400"
+                className="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all text-slate-900 placeholder-slate-400"
                 placeholder="you@example.com"
                 disabled={loading}
               />
@@ -155,29 +162,29 @@ export default function SignupPage() {
                 required
                 value={formData.username}
                 onChange={handleChange}
-                className="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all text-slate-900 placeholder-slate-400"
+                className="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all text-slate-900 placeholder-slate-400"
                 placeholder="johndoe"
                 disabled={loading}
               />
-              <p className="mt-1.5 text-xs text-slate-500">Letters, numbers, and underscores only</p>
+              <p className="mt-1.5 text-xs text-slate-500">This is your unique handle used in your public profile URL. Letters, numbers, and underscores only.</p>
             </div>
 
             {/* Display Name */}
             <div>
               <label htmlFor="displayName" className="block text-sm font-medium text-slate-700 mb-1.5">
-                Display name
+                Display name <span className="font-normal text-slate-400">(optional)</span>
               </label>
               <input
                 id="displayName"
                 name="displayName"
                 type="text"
-                required
                 value={formData.displayName}
                 onChange={handleChange}
-                className="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all text-slate-900 placeholder-slate-400"
+                className="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all text-slate-900 placeholder-slate-400"
                 placeholder="John Doe"
                 disabled={loading}
               />
+              <p className="mt-1.5 text-xs text-slate-500">The name others see on your profile and lists. If left blank, your username will be shown instead.</p>
             </div>
 
             {/* Password */}
@@ -192,7 +199,7 @@ export default function SignupPage() {
                 required
                 value={formData.password}
                 onChange={handleChange}
-                className="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all text-slate-900 placeholder-slate-400"
+                className="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all text-slate-900 placeholder-slate-400"
                 placeholder="••••••••"
                 disabled={loading}
               />
@@ -211,17 +218,40 @@ export default function SignupPage() {
                 required
                 value={formData.confirmPassword}
                 onChange={handleChange}
-                className="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all text-slate-900 placeholder-slate-400"
+                className="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all text-slate-900 placeholder-slate-400"
                 placeholder="••••••••"
                 disabled={loading}
               />
+            </div>
+
+            {/* Terms Acceptance */}
+            <div className="flex items-start gap-3">
+              <input
+                id="acceptedTerms"
+                name="acceptedTerms"
+                type="checkbox"
+                checked={formData.acceptedTerms}
+                onChange={handleChange}
+                className="mt-1 h-4 w-4 rounded border-slate-300 text-cyan-500 focus:ring-cyan-500"
+                disabled={loading}
+              />
+              <label htmlFor="acceptedTerms" className="text-sm text-slate-600">
+                I agree to the{' '}
+                <Link href="/legal/terms" target="_blank" className="text-cyan-600 hover:text-cyan-700 underline">
+                  Terms of Service
+                </Link>{' '}
+                and{' '}
+                <Link href="/legal/privacy" target="_blank" className="text-cyan-600 hover:text-cyan-700 underline">
+                  Privacy Policy
+                </Link>
+              </label>
             </div>
 
             {/* Submit Button */}
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-gradient-to-r from-teal-500 to-cyan-500 text-white font-semibold py-3 px-4 rounded-xl hover:shadow-lg hover:shadow-teal-200 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full bg-gradient-to-r from-cyan-500 to-cyan-500 text-white font-semibold py-3 px-4 rounded-xl hover:shadow-lg hover:shadow-cyan-200 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {loading ? (
                 <span className="flex items-center justify-center gap-2">
@@ -241,7 +271,7 @@ export default function SignupPage() {
           <div className="mt-6 text-center">
             <p className="text-slate-600">
               Already have an account?{' '}
-              <Link href="/login" className="text-teal-600 hover:text-teal-700 font-semibold">
+              <Link href="/login" className="text-cyan-600 hover:text-cyan-700 font-semibold">
                 Log in
               </Link>
             </p>

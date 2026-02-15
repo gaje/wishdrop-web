@@ -31,6 +31,7 @@ export default function EditListPage() {
     occasion: '',
     privacy: 'public',
   })
+  const [listId, setListId] = useState(null)
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
@@ -53,11 +54,12 @@ export default function EditListPage() {
       }
 
       // Check if user is the owner
-      if (response.list.userId._id !== user._id && response.list.userId !== user._id) {
+      if (user.username !== username) {
         router.push(`/u/${username}/${slug}`)
         return
       }
 
+      setListId(response.list._id)
       setFormData({
         title: response.list.title || '',
         description: response.list.description || '',
@@ -98,7 +100,7 @@ export default function EditListPage() {
         privacy: formData.privacy,
       }
 
-      await api.lists.update(username, slug, updateData)
+      await api.lists.update(listId, updateData)
 
       // Redirect back to the list (use new slug if title changed)
       router.push(`/u/${username}/${slug}`)
@@ -115,8 +117,8 @@ export default function EditListPage() {
 
   if (authLoading || loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-cyan-50 via-teal-50 to-blue-50 flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-teal-500"></div>
+      <div className="min-h-screen bg-gradient-to-br from-cyan-50 via-cyan-50 to-blue-50 flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-cyan-500"></div>
       </div>
     )
   }
@@ -126,14 +128,14 @@ export default function EditListPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-cyan-50 via-teal-50 to-blue-50">
+    <div className="min-h-screen bg-gradient-to-br from-cyan-50 via-cyan-50 to-blue-50">
       <Header />
 
       {/* Main Content */}
       <main className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="bg-white rounded-2xl shadow-xl p-8">
           <div className="text-center mb-8">
-            <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-cyan-500 to-teal-500 flex items-center justify-center">
+            <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-cyan-500 to-cyan-500 flex items-center justify-center">
               <span className="text-3xl">✏️</span>
             </div>
             <h1 className="text-3xl font-bold text-gray-900 mb-2">Edit List</h1>
@@ -159,7 +161,7 @@ export default function EditListPage() {
                 required
                 value={formData.title}
                 onChange={handleChange}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-colors text-gray-900"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-colors text-gray-900"
                 placeholder="e.g., Nick's Birthday Wishlist"
                 disabled={saving}
               />
@@ -176,7 +178,7 @@ export default function EditListPage() {
                 rows={4}
                 value={formData.description}
                 onChange={handleChange}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-colors resize-none text-gray-900"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-colors resize-none text-gray-900"
                 placeholder="Tell people what this list is for..."
                 disabled={saving}
               />
@@ -192,7 +194,7 @@ export default function EditListPage() {
                 name="occasion"
                 value={formData.occasion}
                 onChange={handleChange}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-colors text-gray-900"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-colors text-gray-900"
                 disabled={saving}
               >
                 <option value="">Select an occasion (optional)</option>
@@ -210,14 +212,14 @@ export default function EditListPage() {
                 Privacy Settings
               </label>
               <div className="space-y-3">
-                <label className="flex items-start p-4 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-teal-500 transition-colors">
+                <label className="flex items-start p-4 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-cyan-500 transition-colors">
                   <input
                     type="radio"
                     name="privacy"
                     value="public"
                     checked={formData.privacy === 'public'}
                     onChange={handleChange}
-                    className="mt-1 text-teal-500 focus:ring-teal-500"
+                    className="mt-1 text-cyan-500 focus:ring-cyan-500"
                     disabled={saving}
                   />
                   <div className="ml-3">
@@ -226,14 +228,14 @@ export default function EditListPage() {
                   </div>
                 </label>
 
-                <label className="flex items-start p-4 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-teal-500 transition-colors">
+                <label className="flex items-start p-4 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-cyan-500 transition-colors">
                   <input
                     type="radio"
                     name="privacy"
                     value="unlisted"
                     checked={formData.privacy === 'unlisted'}
                     onChange={handleChange}
-                    className="mt-1 text-teal-500 focus:ring-teal-500"
+                    className="mt-1 text-cyan-500 focus:ring-cyan-500"
                     disabled={saving}
                   />
                   <div className="ml-3">
@@ -242,14 +244,14 @@ export default function EditListPage() {
                   </div>
                 </label>
 
-                <label className="flex items-start p-4 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-teal-500 transition-colors">
+                <label className="flex items-start p-4 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-cyan-500 transition-colors">
                   <input
                     type="radio"
                     name="privacy"
                     value="private"
                     checked={formData.privacy === 'private'}
                     onChange={handleChange}
-                    className="mt-1 text-teal-500 focus:ring-teal-500"
+                    className="mt-1 text-cyan-500 focus:ring-cyan-500"
                     disabled={saving}
                   />
                   <div className="ml-3">
@@ -271,7 +273,7 @@ export default function EditListPage() {
               <button
                 type="submit"
                 disabled={saving}
-                className="flex-1 bg-gradient-to-r from-cyan-500 to-teal-500 text-white font-semibold py-4 px-6 rounded-lg hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                className="flex-1 bg-gradient-to-r from-cyan-500 to-cyan-500 text-white font-semibold py-4 px-6 rounded-lg hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {saving ? 'Saving...' : 'Save Changes'}
               </button>

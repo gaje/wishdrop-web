@@ -119,9 +119,23 @@ describe('ItemCard', () => {
     expect(handleDelete).toHaveBeenCalledWith('item-123')
   })
 
-  it('shows Claim button for logged in non-owner on unclaimed item', () => {
-    render(<ItemCard item={mockItem} isOwner={false} currentUserId="user-789" />)
+  it('shows Claim button for logged in non-owner on unclaimed item when connected', () => {
+    render(<ItemCard item={mockItem} isOwner={false} currentUserId="user-789" connectionStatus="connected" />)
     expect(screen.getByText('Claim This')).toBeInTheDocument()
+  })
+
+  it('shows Connect button when not connected', () => {
+    const handleConnect = jest.fn()
+    render(
+      <ItemCard
+        item={mockItem}
+        isOwner={false}
+        currentUserId="user-789"
+        connectionStatus={null}
+        onConnect={handleConnect}
+      />
+    )
+    expect(screen.getByText('Connect to Claim')).toBeInTheDocument()
   })
 
   it('calls onClaim when claim button clicked', () => {
@@ -131,6 +145,7 @@ describe('ItemCard', () => {
         item={mockItem}
         isOwner={false}
         currentUserId="user-789"
+        connectionStatus="connected"
         onClaim={handleClaim}
       />
     )

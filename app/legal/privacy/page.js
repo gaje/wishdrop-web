@@ -32,7 +32,7 @@ export default function PrivacyPolicy() {
       <Header />
 
       {/* Hero */}
-      <div className="bg-gradient-to-br from-teal-500 to-cyan-600 text-white">
+      <div className="bg-gradient-to-br from-cyan-500 to-cyan-600 text-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
           <div className="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-6">
             <svg className="w-8 h-8" viewBox="0 0 24 24" fill="currentColor">
@@ -50,14 +50,14 @@ export default function PrivacyPolicy() {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {loading ? (
           <div className="flex justify-center py-12">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-teal-500"></div>
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-cyan-500"></div>
           </div>
         ) : error ? (
           <div className="bg-white rounded-2xl shadow-sm p-8 text-center">
             <p className="text-red-500 mb-4">{error}</p>
             <button
               onClick={loadContent}
-              className="px-6 py-2 bg-teal-500 text-white rounded-lg hover:bg-teal-600 transition-colors"
+              className="px-6 py-2 bg-cyan-500 text-white rounded-lg hover:bg-cyan-600 transition-colors"
             >
               Retry
             </button>
@@ -79,7 +79,7 @@ export default function PrivacyPolicy() {
 
         {/* Back Link */}
         <div className="mt-8 text-center">
-          <Link href="/" className="text-teal-600 hover:text-teal-700 font-medium">
+          <Link href="/" className="text-cyan-600 hover:text-cyan-700 font-medium">
             &larr; Back to Home
           </Link>
         </div>
