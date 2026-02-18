@@ -5,7 +5,9 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useAuth } from '@/lib/AuthContext'
 import api from '@/lib/api'
+import { getOrCreateGuestToken, getGuestToken } from '@/lib/guestToken'
 import ItemCard from '@/components/ItemCard'
+import GuestClaimModal from '@/components/GuestClaimModal'
 import AddItemModal from '@/components/AddItemModal'
 import EditItemModal from '@/components/EditItemModal'
 import LikeButton from '@/components/LikeButton'
@@ -26,8 +28,12 @@ export default function ListDetailClient({ username, slug, list, initialItems })
   const [sharedWith, setSharedWith] = useState(list?.sharedWith || [])
   const [connectionStatus, setConnectionStatus] = useState(null)
   const [checkingConnection, setCheckingConnection] = useState(false)
+  const [guestClaimItem, setGuestClaimItem] = useState(null)
+  const [guestClaimers, setGuestClaimers] = useState(list?.guestClaimers || [])
 
   const isOwner = user && user.username === username
+  const isAuthenticated = !!user
+  const isSharedList = list?.privacy === 'shared'
   const listOwnerId = list?.owner?._id || list?.userId
 
   // Load shared users data
@@ -37,12 +43,12 @@ export default function ListDetailClient({ username, slug, list, initialItems })
     }
   }, [isOwner, list?._id])
 
-  // Check connection status with list owner
+  // Check connection status with list owner (for non-owner authenticated users on non-shared lists)
   useEffect(() => {
-    if (user && !isOwner && listOwnerId) {
+    if (user && !isOwner && listOwnerId && !isSharedList) {
       checkConnectionStatus()
     }
-  }, [user, isOwner, listOwnerId])
+  }, [user, isOwner, listOwnerId, isSharedList])
 
   const checkConnectionStatus = async () => {
     setCheckingConnection(true)
@@ -70,9 +76,16 @@ export default function ListDetailClient({ username, slug, list, initialItems })
 
   const reloadItems = async () => {
     try {
-      const response = await api.lists.getPublic(username, slug)
+      const guestToken = getGuestToken()
+      const endpoint = guestToken
+        ? `/api/lists/${username}/${slug}?guestToken=${guestToken}`
+        : `/api/lists/${username}/${slug}`
+      const response = await api.lists.getPublicWithToken(username, slug, guestToken)
       if (response && response.items) {
         setItems(response.items)
+      }
+      if (response?.list?.guestClaimers) {
+        setGuestClaimers(response.list.guestClaimers)
       }
     } catch (err) {
       console.error('Failed to reload items:', err)
@@ -90,7 +103,6 @@ export default function ListDetailClient({ username, slug, list, initialItems })
       await reloadItems()
     } catch (err) {
       console.error('Failed to claim item:', err)
-      // Check if error is due to missing connection
       if (err.status === 403 && err.message?.includes('connection')) {
         alert('You need to connect with the list owner to claim items.')
       } else {
@@ -117,6 +129,26 @@ export default function ListDetailClient({ username, slug, list, initialItems })
       console.error('Failed to unclaim item:', err)
       alert('Failed to unclaim item. Please try again.')
     }
+  }
+
+  const handleGuestClaim = (item) => {
+    setGuestClaimItem(item)
+  }
+
+  const handleGuestUnclaim = async (itemId) => {
+    try {
+      const guestToken = getGuestToken()
+      if (!guestToken) return
+      await api.items.guestUnclaim(itemId, guestToken)
+      await reloadItems()
+    } catch (err) {
+      console.error('Failed to guest unclaim item:', err)
+      alert('Failed to unclaim item. Please try again.')
+    }
+  }
+
+  const handleGuestClaimSuccess = async () => {
+    await reloadItems()
   }
 
   const handleDeleteItem = async (itemId) => {
@@ -148,6 +180,11 @@ export default function ListDetailClient({ username, slug, list, initialItems })
     await navigator.clipboard.writeText(url)
     setCopySuccess(true)
     setTimeout(() => setCopySuccess(false), 2000)
+  }
+
+  // Determine if a given item was claimed by the current guest session
+  const isItemGuestClaimedByMe = (item) => {
+    return !!item.isClaimedByMe && !user
   }
 
   return (
@@ -239,6 +276,28 @@ export default function ListDetailClient({ username, slug, list, initialItems })
         </div>
       </div>
 
+      {/* Owner: Guest Claimers Summary */}
+      {isOwner && guestClaimers.length > 0 && (
+        <div className="bg-violet-50 border border-violet-200 rounded-2xl p-4 mb-6">
+          <h3 className="text-sm font-semibold text-violet-800 mb-2 flex items-center gap-1.5">
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+            </svg>
+            Gift Claimers
+          </h3>
+          <div className="space-y-1">
+            {guestClaimers.map((g) => (
+              <div key={g.name} className="text-sm text-violet-700">
+                <span className="font-medium">{g.name}</span>{' '}
+                <span className="text-violet-600">
+                  claimed {g.claimCount} item{g.claimCount !== 1 ? 's' : ''}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
       {/* Items Grid */}
       {items.length === 0 ? (
         <div className="text-center py-16 animate-fade-in">
@@ -279,8 +338,12 @@ export default function ListDetailClient({ username, slug, list, initialItems })
                 onDelete={handleDeleteItem}
                 onClaim={handleClaimItem}
                 onUnclaim={handleUnclaimItem}
-                connectionStatus={connectionStatus}
+                connectionStatus={isSharedList ? 'connected' : connectionStatus}
                 onConnect={handleConnect}
+                onGuestClaim={handleGuestClaim}
+                onGuestUnclaim={handleGuestUnclaim}
+                isGuestClaimedByMe={isItemGuestClaimedByMe(item)}
+                listPrivacy={list?.privacy}
               />
             </div>
           ))}
@@ -344,6 +407,14 @@ export default function ListDetailClient({ username, slug, list, initialItems })
           onShareUpdate={loadListData}
         />
       )}
+
+      {/* Guest Claim Modal */}
+      <GuestClaimModal
+        isOpen={!!guestClaimItem}
+        onClose={() => setGuestClaimItem(null)}
+        item={guestClaimItem}
+        onSuccess={handleGuestClaimSuccess}
+      />
     </>
   )
 }

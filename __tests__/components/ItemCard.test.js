@@ -79,13 +79,13 @@ describe('ItemCard', () => {
     expect(screen.getByText('Claimed')).toBeInTheDocument()
   })
 
-  it('shows "Claimed by you" when claimed by current user', () => {
+  it('shows "You claimed this" when claimed by current user', () => {
     const claimedItem = {
       ...mockItem,
       claimedBy: { _id: 'user-456', username: 'testuser' },
     }
     render(<ItemCard item={claimedItem} currentUserId="user-456" />)
-    expect(screen.getByText('Claimed by you')).toBeInTheDocument()
+    expect(screen.getByText('You claimed this')).toBeInTheDocument()
   })
 
   it('shows "Someone\'s got it!" for owner viewing claimed item', () => {

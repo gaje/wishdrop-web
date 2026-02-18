@@ -42,6 +42,10 @@ export default function ItemCard({
   showActions = true,
   connectionStatus = null,
   onConnect,
+  onGuestClaim,
+  onGuestUnclaim,
+  isGuestClaimedByMe = false,
+  listPrivacy = null,
 }) {
   const [imageError, setImageError] = useState(false)
 
@@ -55,6 +59,7 @@ export default function ItemCard({
     imageUrl,
     priority,
     claimedBy,
+    guestClaim,
     merchant,
     affiliateCode,
   } = item
@@ -70,6 +75,7 @@ export default function ItemCard({
   const displayTitle = useMemo(() => decodeHtmlEntities(title), [title])
 
   const isClaimed = !!claimedBy
+  const isGuestClaimed = !!guestClaim?.name
   const isClaimedByMe = claimedBy?._id === currentUserId
 
   // Priority badge config
@@ -114,10 +120,10 @@ export default function ItemCard({
         )}
 
         {/* Claimed Badge */}
-        {isClaimed && (
+        {(isClaimed || isGuestClaimed) && (
           <div
             className={`absolute top-3 right-3 px-2.5 py-1 rounded-lg text-xs font-semibold text-white flex items-center gap-1.5 shadow-sm ${
-              isClaimedByMe
+              isClaimedByMe || isGuestClaimedByMe
                 ? 'bg-emerald-500'
                 : isOwner
                 ? 'bg-violet-500'
@@ -127,7 +133,11 @@ export default function ItemCard({
             <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
             </svg>
-            {isClaimedByMe ? 'Claimed by you' : isOwner ? "Someone's got it!" : 'Claimed'}
+            {isClaimedByMe || isGuestClaimedByMe
+              ? 'You claimed this'
+              : isOwner
+              ? (guestClaim?.name ? `${guestClaim.name} claimed this` : "Someone's got it!")
+              : 'Claimed'}
           </div>
         )}
 
@@ -208,7 +218,16 @@ export default function ItemCard({
             ) : (
               /* Visitor Actions */
               <>
-                {isClaimed ? (
+                {/* Guest unclaim — when current guest previously claimed this */}
+                {isGuestClaimedByMe ? (
+                  <button
+                    onClick={() => onGuestUnclaim?.(_id)}
+                    className="flex-1 px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-semibold text-sm transition-colors"
+                  >
+                    Unclaim
+                  </button>
+                ) : isClaimed || isGuestClaimed ? (
+                  /* Already claimed by someone else — show nothing for authenticated unclaim check */
                   isClaimedByMe && (
                     <button
                       onClick={() => onUnclaim?.(_id)}
@@ -218,8 +237,17 @@ export default function ItemCard({
                     </button>
                   )
                 ) : (
-                  currentUserId && (
-                    connectionStatus === 'connected' ? (
+                  /* Not claimed — show appropriate claim action */
+                  listPrivacy === 'shared' && !currentUserId ? (
+                    /* Guest on a shared list */
+                    <button
+                      onClick={() => onGuestClaim?.(item)}
+                      className="flex-1 px-4 py-2.5 bg-cyan-50 hover:bg-cyan-100 text-cyan-700 rounded-xl font-semibold text-sm transition-colors border border-cyan-200"
+                    >
+                      Claim This
+                    </button>
+                  ) : currentUserId && (
+                    connectionStatus === 'connected' || listPrivacy === 'shared' ? (
                       <button
                         onClick={() => onClaim?.(_id)}
                         className="flex-1 px-4 py-2.5 bg-cyan-50 hover:bg-cyan-100 text-cyan-700 rounded-xl font-semibold text-sm transition-colors border border-cyan-200"
