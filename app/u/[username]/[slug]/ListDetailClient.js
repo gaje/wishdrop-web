@@ -84,8 +84,8 @@ export default function ListDetailClient({ username, slug, list, initialItems })
       if (response && response.items) {
         setItems(response.items)
       }
-      if (response?.list?.guestClaimers) {
-        setGuestClaimers(response.list.guestClaimers)
+      if (response?.guestClaimers) {
+        setGuestClaimers(response.guestClaimers)
       }
     } catch (err) {
       console.error('Failed to reload items:', err)
