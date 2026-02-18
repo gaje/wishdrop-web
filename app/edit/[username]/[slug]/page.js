@@ -224,7 +224,7 @@ export default function EditListPage() {
                   />
                   <div className="ml-3">
                     <p className="font-medium text-gray-900">Public</p>
-                    <p className="text-sm text-gray-600">Anyone can find and view this list</p>
+                    <p className="text-sm text-gray-600">Discoverable by anyone. Only your connections can claim.</p>
                   </div>
                 </label>
 
@@ -232,15 +232,15 @@ export default function EditListPage() {
                   <input
                     type="radio"
                     name="privacy"
-                    value="unlisted"
-                    checked={formData.privacy === 'unlisted'}
+                    value="shared"
+                    checked={formData.privacy === 'shared'}
                     onChange={handleChange}
                     className="mt-1 text-cyan-500 focus:ring-cyan-500"
                     disabled={saving}
                   />
                   <div className="ml-3">
-                    <p className="font-medium text-gray-900">Unlisted</p>
-                    <p className="text-sm text-gray-600">Only people with the link can view</p>
+                    <p className="font-medium text-gray-900">Shared</p>
+                    <p className="text-sm text-gray-600">Only people you share the link with. Anyone with the link can claim.</p>
                   </div>
                 </label>
 
@@ -256,7 +256,7 @@ export default function EditListPage() {
                   />
                   <div className="ml-3">
                     <p className="font-medium text-gray-900">Private</p>
-                    <p className="text-sm text-gray-600">Only you can view and edit</p>
+                    <p className="text-sm text-gray-600">Only you can see this list.</p>
                   </div>
                 </label>
               </div>

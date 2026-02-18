@@ -16,9 +16,9 @@ const CURRENCIES = [
 ]
 
 const PRIVACY_OPTIONS = [
-  { value: 'public', label: 'Public', description: 'Anyone can find and view', color: 'emerald' },
-  { value: 'unlisted', label: 'Unlisted', description: 'Only people with the link', color: 'amber' },
-  { value: 'private', label: 'Private', description: 'Only you can view', color: 'rose' },
+  { value: 'public', label: 'Public', description: 'Discoverable by anyone. Only your connections can claim.', color: 'emerald' },
+  { value: 'shared', label: 'Shared', description: 'Only people you share the link with. Anyone with the link can claim.', color: 'amber' },
+  { value: 'private', label: 'Private', description: 'Only you can see this list.', color: 'rose' },
 ]
 
 const PrivacyIcon = ({ type, className }) => {
@@ -29,7 +29,7 @@ const PrivacyIcon = ({ type, className }) => {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
       )
-    case 'unlisted':
+    case 'shared':
       return (
         <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
@@ -54,6 +54,7 @@ const NOTIFICATION_TYPES = [
   { key: 'listShared', icon: 'share', label: 'List Shared', description: 'When someone shares a list with you', color: 'cyan' },
   { key: 'itemClaimed', icon: 'gift', label: 'Items Claimed', description: 'When someone claims an item from your list', color: 'emerald' },
   { key: 'newListFromFollowing', icon: 'document', label: 'New Lists', description: 'When people you follow create lists', color: 'purple' },
+  { key: 'connectionRequests', icon: 'link', label: 'Connection Requests', description: 'When someone wants to connect with you', color: 'teal' },
 ]
 
 const ICON_COLORS = {
@@ -64,6 +65,7 @@ const ICON_COLORS = {
   cyan: 'bg-cyan-50 text-cyan-600 border-cyan-200',
   emerald: 'bg-emerald-50 text-emerald-600 border-emerald-200',
   purple: 'bg-purple-50 text-purple-600 border-purple-200',
+  teal: 'bg-teal-50 text-teal-600 border-teal-200',
 }
 
 export default function SettingsPage() {
@@ -231,6 +233,12 @@ export default function SettingsPage() {
         return (
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+          </svg>
+        )
+      case 'link':
+        return (
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
           </svg>
         )
       default:
@@ -848,6 +856,26 @@ export default function SettingsPage() {
                   <div>
                     <span className="text-slate-900 font-medium">Edit Profile</span>
                     <p className="text-sm text-slate-500">Update your bio and avatar</p>
+                  </div>
+                </div>
+                <svg className="w-5 h-5 text-slate-400 group-hover:text-slate-600 group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </Link>
+
+              <Link
+                href="/connections"
+                className="flex items-center justify-between p-4 rounded-xl hover:bg-slate-50 transition-colors group"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-teal-100 group-hover:bg-white border border-transparent group-hover:border-teal-200 flex items-center justify-center transition-all">
+                    <svg className="w-5 h-5 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+                    </svg>
+                  </div>
+                  <div>
+                    <span className="text-slate-900 font-medium">Connections & Blocked</span>
+                    <p className="text-sm text-slate-500">Manage your connections and blocked users</p>
                   </div>
                 </div>
                 <svg className="w-5 h-5 text-slate-400 group-hover:text-slate-600 group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">

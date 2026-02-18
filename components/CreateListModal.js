@@ -491,7 +491,7 @@ export default function CreateListModal({ isOpen, onClose, familyMemberId: initi
                 <div className="grid grid-cols-3 gap-2">
                   {[
                     { value: 'public', label: 'Public', icon: 'globe' },
-                    { value: 'unlisted', label: 'Unlisted', icon: 'link' },
+                    { value: 'shared', label: 'Shared', icon: 'link' },
                     { value: 'private', label: 'Private', icon: 'lock' },
                   ].map((option) => (
                     <button

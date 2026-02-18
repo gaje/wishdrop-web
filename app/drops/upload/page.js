@@ -207,15 +207,15 @@ export default function VideoUploadPage() {
                     Public
                   </button>
                   <button
-                    onClick={() => setVisibility('unlisted')}
+                    onClick={() => setVisibility('shared')}
                     disabled={uploading}
                     className={`flex-1 px-4 py-3 rounded-lg border-2 font-semibold transition-colors ${
-                      visibility === 'unlisted'
+                      visibility === 'shared'
                         ? 'border-cyan-500 bg-cyan-50 text-cyan-700'
                         : 'border-gray-200 bg-white text-gray-700 hover:border-gray-300'
                     }`}
                   >
-                    Unlisted
+                    Shared
                   </button>
                   <button
                     onClick={() => setVisibility('private')}

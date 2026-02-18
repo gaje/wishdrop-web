@@ -531,9 +531,9 @@ function CreateListContent() {
               </label>
               <div className="space-y-2">
                 {[
-                  { value: 'public', label: 'Public', desc: 'Anyone can find and view', icon: 'globe' },
-                  { value: 'unlisted', label: 'Unlisted', desc: 'Only people with link', icon: 'link' },
-                  { value: 'private', label: 'Private', desc: 'Only you can view', icon: 'lock' },
+                  { value: 'public', label: 'Public', desc: 'Discoverable by anyone. Only your connections can claim.', icon: 'globe' },
+                  { value: 'shared', label: 'Shared', desc: 'Only people you share the link with. Anyone with the link can claim.', icon: 'link' },
+                  { value: 'private', label: 'Private', desc: 'Only you can see this list.', icon: 'lock' },
                 ].map((option) => (
                   <label
                     key={option.value}
