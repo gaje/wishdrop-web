@@ -1,7 +1,6 @@
 'use client'
 
-import { useState } from 'react'
-import Image from 'next/image'
+import ProductImage from '../ui/ProductImage'
 
 /**
  * ProductCard - Grid card for product display
@@ -10,15 +9,8 @@ import Image from 'next/image'
  * Hover effects: translate-y, shadow
  */
 export default function ProductCard({ product, onClick }) {
-  const [imageError, setImageError] = useState(false)
-
   if (!product) return null
 
-  const handleImageError = () => {
-    setImageError(true)
-  }
-
-  const hasImage = product.image && !imageError
   const showSocialProof = product.stats && (product.stats.wishlistCount >= 3 || product.stats.videoCount >= 3)
 
   return (
@@ -28,22 +20,12 @@ export default function ProductCard({ product, onClick }) {
     >
       {/* Product Image - Square aspect ratio */}
       <div className="relative aspect-square bg-slate-100 overflow-hidden">
-        {hasImage ? (
-          <Image
-            src={product.image}
-            alt={product.title}
-            fill
-            className="object-cover transition-transform duration-500 group-hover:scale-105"
-            sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-            onError={handleImageError}
-          />
-        ) : (
-          <div className="w-full h-full flex items-center justify-center">
-            <svg className="w-12 h-12 text-slate-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
-            </svg>
-          </div>
-        )}
+        <ProductImage
+          src={product.image}
+          alt={product.title}
+          className="w-full h-full"
+          imgClassName="object-cover transition-transform duration-500 group-hover:scale-105"
+        />
 
         {/* Social Proof Overlay - Only show when >= 3 */}
         {showSocialProof && (
