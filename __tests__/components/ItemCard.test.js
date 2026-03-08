@@ -197,9 +197,16 @@ describe('ItemCard', () => {
     expect(img).toHaveAttribute('src', 'https://example.com/image.jpg')
   })
 
-  it('shows placeholder when no image', () => {
-    const itemWithoutImage = { ...mockItem, imageUrl: null }
-    const { container } = render(<ItemCard item={itemWithoutImage} />)
-    expect(container.querySelector('svg')).toBeInTheDocument()
+  it('shows fallback when no image', () => {
+    const itemWithoutImage = { ...mockItem, imageUrl: null, image: null }
+    render(<ItemCard item={itemWithoutImage} />)
+    expect(screen.getByText('Image unavailable')).toBeInTheDocument()
+  })
+
+  it('shows fallback when image fails to load', () => {
+    render(<ItemCard item={mockItem} />)
+    const img = screen.getByAltText('Test Product')
+    fireEvent.error(img)
+    expect(screen.getByText('Image unavailable')).toBeInTheDocument()
   })
 })

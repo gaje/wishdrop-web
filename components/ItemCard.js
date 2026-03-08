@@ -1,6 +1,7 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useMemo } from 'react'
+import ProductImage from './ui/ProductImage'
 
 /**
  * Decode HTML entities in text for display
@@ -47,8 +48,6 @@ export default function ItemCard({
   isGuestClaimedByMe = false,
   listPrivacy = null,
 }) {
-  const [imageError, setImageError] = useState(false)
-
   const {
     _id,
     title,
@@ -76,7 +75,8 @@ export default function ItemCard({
 
   const isClaimed = !!claimedBy
   const isGuestClaimed = !!guestClaim?.name
-  const isClaimedByMe = claimedBy?._id === currentUserId
+  const claimerId = typeof claimedBy === 'object' ? claimedBy?._id : claimedBy
+  const isClaimedByMe = !!currentUserId && claimerId === currentUserId
 
   // Priority badge config
   const priorityConfig = {
@@ -86,38 +86,16 @@ export default function ItemCard({
     low: { bg: 'bg-slate-50', border: 'border-slate-200', text: 'text-slate-600', label: 'Low' },
   }
 
-  const handleImageError = () => {
-    setImageError(true)
-  }
-
   return (
     <div className="bg-white rounded-2xl overflow-hidden border border-slate-200/80 hover:border-slate-300 hover:shadow-xl hover:shadow-slate-200/50 transition-all duration-300 group">
       {/* Image Section */}
       <div className="relative aspect-square bg-slate-100">
-        {itemImage && !imageError ? (
-          <img
-            src={itemImage}
-            alt={displayTitle}
-            className="w-full h-full object-cover"
-            onError={handleImageError}
-          />
-        ) : (
-          <div className="w-full h-full flex items-center justify-center">
-            <svg
-              className="w-12 h-12 text-slate-300"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={1.5}
-                d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-              />
-            </svg>
-          </div>
-        )}
+        <ProductImage
+          src={itemImage}
+          alt={displayTitle}
+          className="w-full h-full"
+          imgClassName="object-cover"
+        />
 
         {/* Claimed Badge */}
         {(isClaimed || isGuestClaimed) && (
