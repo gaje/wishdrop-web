@@ -65,6 +65,9 @@ module.exports = {
         'shimmer': 'shimmer 2s linear infinite',
         'pulse-soft': 'pulseSoft 2s ease-in-out infinite',
         'float': 'float 6s ease-in-out infinite',
+        'blob-drift-1': 'blobDrift1 8s ease-in-out infinite',
+        'blob-drift-2': 'blobDrift2 10s ease-in-out infinite',
+        'shimmer-sweep': 'shimmerSweep 3s ease-in-out infinite',
       },
       keyframes: {
         fadeIn: {
@@ -98,6 +101,18 @@ module.exports = {
         float: {
           '0%, 100%': { transform: 'translateY(0)' },
           '50%': { transform: 'translateY(-10px)' },
+        },
+        blobDrift1: {
+          '0%, 100%': { transform: 'translate(0,0) scale(1)' },
+          '50%': { transform: 'translate(15px,10px) scale(1.05)' },
+        },
+        blobDrift2: {
+          '0%, 100%': { transform: 'translate(0,0) scale(1)' },
+          '50%': { transform: 'translate(-10px,-15px) scale(1.08)' },
+        },
+        shimmerSweep: {
+          '0%': { transform: 'translateX(-100%)' },
+          '100%': { transform: 'translateX(100%)' },
         },
       },
       backdropBlur: {
