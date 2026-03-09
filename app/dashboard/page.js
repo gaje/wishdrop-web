@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation'
 import { Link } from 'next-view-transitions'
 import { useAuth } from '@/lib/AuthContext'
 import api from '@/lib/api'
-import Header from '@/components/Header'
+
 import CreateListModal from '@/components/CreateListModal'
 import AddProductModal from '@/components/AddProductModal'
 
@@ -183,15 +183,41 @@ export default function DashboardPage() {
 
   if (authLoading || !user) {
     return (
-      <div className="min-h-screen bg-slate-50 flex items-center justify-center">
-        <div className="w-10 h-10 rounded-full border-[3px] border-slate-200 border-t-cyan-500 animate-spin" />
+      <div className="min-h-screen bg-slate-50 animate-pulse">
+        <div className="bg-white border-b border-slate-200/80">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-8">
+            <div className="flex justify-center mb-6">
+              <div className="h-12 w-64 rounded-2xl bg-slate-100" />
+            </div>
+            <div>
+              <div className="h-8 bg-slate-200 rounded-lg w-48 mb-2" />
+              <div className="h-5 bg-slate-100 rounded-lg w-64" />
+            </div>
+          </div>
+        </div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {[...Array(6)].map((_, i) => (
+              <div key={i} className="bg-white rounded-2xl p-5 border border-slate-200">
+                <div className="flex items-start gap-4 mb-4">
+                  <div className="w-14 h-14 rounded-xl bg-slate-100" />
+                  <div className="flex-1">
+                    <div className="h-5 bg-slate-100 rounded-lg w-3/4 mb-2" />
+                    <div className="h-4 bg-slate-100 rounded-lg w-1/2" />
+                  </div>
+                </div>
+                <div className="h-4 bg-slate-100 rounded-lg w-full mb-2" />
+                <div className="h-4 bg-slate-100 rounded-lg w-2/3" />
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     )
   }
 
   return (
     <div className="min-h-screen bg-slate-50">
-      <Header />
 
       {/* Hero Section with Want It / Have It Switcher */}
       <div className="bg-white border-b border-slate-200/80">

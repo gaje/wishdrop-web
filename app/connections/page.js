@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import api from '@/lib/api'
-import Header from '@/components/Header'
+
 
 export default function ConnectionsPage() {
   const router = useRouter()
@@ -11,6 +11,7 @@ export default function ConnectionsPage() {
   const [activeTab, setActiveTab] = useState('connections')
   const [connections, setConnections] = useState([])
   const [pending, setPending] = useState([])
+  const [sent, setSent] = useState([])
   const [blocked, setBlocked] = useState([])
   const [inviteCode, setInviteCode] = useState(null)
   const [loading, setLoading] = useState(true)
@@ -42,8 +43,12 @@ export default function ConnectionsPage() {
         const data = await api.connections.getAll()
         setConnections(data.connections || [])
       } else if (activeTab === 'pending') {
-        const data = await api.connections.getPending()
-        setPending(data.requests || [])
+        const [incomingData, sentData] = await Promise.all([
+          api.connections.getPending(),
+          api.connections.getSentPending(),
+        ])
+        setPending(incomingData.requests || [])
+        setSent(sentData.requests || [])
       } else if (activeTab === 'blocked') {
         const data = await api.blocks.getAll()
         setBlocked(data.blocks || [])
@@ -113,12 +118,10 @@ export default function ConnectionsPage() {
     return <div className="min-h-screen bg-gray-50" />
   }
 
-  const pendingCount = pending.length
+  const pendingCount = pending.length + sent.length
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <Header user={user} />
-
       <div className="max-w-4xl mx-auto px-4 py-8">
         <div className="bg-white rounded-xl shadow-sm p-6 mb-6">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">
@@ -137,7 +140,7 @@ export default function ConnectionsPage() {
                 onClick={() => setActiveTab('connections')}
                 className={`px-6 py-4 text-sm font-medium border-b-2 transition ${
                   activeTab === 'connections'
-                    ? 'border-blue-600 text-blue-600'
+                    ? 'border-cyan-500 text-cyan-600'
                     : 'border-transparent text-gray-600 hover:text-gray-900 hover:border-gray-300'
                 }`}
               >
@@ -147,13 +150,13 @@ export default function ConnectionsPage() {
                 onClick={() => setActiveTab('pending')}
                 className={`px-6 py-4 text-sm font-medium border-b-2 transition relative ${
                   activeTab === 'pending'
-                    ? 'border-blue-600 text-blue-600'
+                    ? 'border-cyan-500 text-cyan-600'
                     : 'border-transparent text-gray-600 hover:text-gray-900 hover:border-gray-300'
                 }`}
               >
                 Pending Requests
                 {pendingCount > 0 && (
-                  <span className="ml-2 px-2 py-1 text-xs bg-blue-600 text-white rounded-full">
+                  <span className="ml-2 px-2 py-1 text-xs bg-cyan-500 text-white rounded-full">
                     {pendingCount}
                   </span>
                 )}
@@ -162,7 +165,7 @@ export default function ConnectionsPage() {
                 onClick={() => setActiveTab('blocked')}
                 className={`px-6 py-4 text-sm font-medium border-b-2 transition ${
                   activeTab === 'blocked'
-                    ? 'border-blue-600 text-blue-600'
+                    ? 'border-cyan-500 text-cyan-600'
                     : 'border-transparent text-gray-600 hover:text-gray-900 hover:border-gray-300'
                 }`}
               >
@@ -213,44 +216,83 @@ export default function ConnectionsPage() {
 
                 {/* Pending Tab */}
                 {activeTab === 'pending' && (
-                  <div>
-                    {pending.length === 0 ? (
-                      <div className="text-center py-8 text-gray-600">
-                        No pending requests.
-                      </div>
-                    ) : (
-                      <div className="space-y-4">
-                        {pending.map((request) => (
-                          <div
-                            key={request._id}
-                            className="border border-gray-200 rounded-lg p-4 flex items-center justify-between"
-                          >
-                            <div>
-                              <h3 className="font-semibold text-gray-900">
-                                {request.requester.displayName}
-                              </h3>
-                              <p className="text-sm text-gray-600">
-                                @{request.requester.username}
-                              </p>
+                  <div className="space-y-8">
+                    {/* Incoming Requests */}
+                    <div>
+                      <h3 className="text-sm font-semibold text-slate-500 uppercase tracking-wide mb-3">
+                        Received ({pending.length})
+                      </h3>
+                      {pending.length === 0 ? (
+                        <div className="text-center py-6 text-gray-500 text-sm">
+                          No incoming requests.
+                        </div>
+                      ) : (
+                        <div className="space-y-3">
+                          {pending.map((request) => (
+                            <div
+                              key={request._id}
+                              className="border border-gray-200 rounded-lg p-4 flex items-center justify-between"
+                            >
+                              <div>
+                                <h3 className="font-semibold text-gray-900">
+                                  {request.requester.displayName || request.requester.username}
+                                </h3>
+                                <p className="text-sm text-gray-600">
+                                  @{request.requester.username}
+                                </p>
+                              </div>
+                              <div className="flex gap-2">
+                                <button
+                                  onClick={() => handleAcceptRequest(request._id)}
+                                  className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition"
+                                >
+                                  Accept
+                                </button>
+                                <button
+                                  onClick={() => handleDeclineRequest(request._id)}
+                                  className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition"
+                                >
+                                  Decline
+                                </button>
+                              </div>
                             </div>
-                            <div className="flex gap-2">
-                              <button
-                                onClick={() => handleAcceptRequest(request._id)}
-                                className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition"
-                              >
-                                Accept
-                              </button>
-                              <button
-                                onClick={() => handleDeclineRequest(request._id)}
-                                className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition"
-                              >
-                                Decline
-                              </button>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Sent Requests */}
+                    <div>
+                      <h3 className="text-sm font-semibold text-slate-500 uppercase tracking-wide mb-3">
+                        Sent ({sent.length})
+                      </h3>
+                      {sent.length === 0 ? (
+                        <div className="text-center py-6 text-gray-500 text-sm">
+                          No sent requests.
+                        </div>
+                      ) : (
+                        <div className="space-y-3">
+                          {sent.map((request) => (
+                            <div
+                              key={request._id}
+                              className="border border-gray-200 rounded-lg p-4 flex items-center justify-between"
+                            >
+                              <div>
+                                <h3 className="font-semibold text-gray-900">
+                                  {request.recipient?.displayName || request.recipient?.username || 'Unknown'}
+                                </h3>
+                                <p className="text-sm text-gray-600">
+                                  {request.recipient?.username ? `@${request.recipient.username}` : ''}
+                                </p>
+                              </div>
+                              <span className="px-3 py-1.5 bg-slate-100 text-slate-500 text-sm font-medium rounded-lg">
+                                Awaiting response
+                              </span>
                             </div>
-                          </div>
-                        ))}
-                      </div>
-                    )}
+                          ))}
+                        </div>
+                      )}
+                    </div>
                   </div>
                 )}
 
@@ -278,7 +320,7 @@ export default function ConnectionsPage() {
                             </div>
                             <button
                               onClick={() => handleUnblock(block.blockedUser._id)}
-                              className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+                              className="px-4 py-2 bg-cyan-500 text-white rounded-lg hover:bg-cyan-600 transition"
                             >
                               Unblock
                             </button>
@@ -306,7 +348,7 @@ export default function ConnectionsPage() {
             {!inviteCode ? (
               <button
                 onClick={handleGenerateInvite}
-                className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+                className="px-6 py-3 bg-cyan-500 text-white rounded-lg hover:bg-cyan-600 transition"
               >
                 Generate Invite Link
               </button>
@@ -321,7 +363,7 @@ export default function ConnectionsPage() {
                   />
                   <button
                     onClick={handleCopyInvite}
-                    className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+                    className="px-6 py-2 bg-cyan-500 text-white rounded-lg hover:bg-cyan-600 transition"
                   >
                     {copiedCode ? 'Copied!' : 'Copy'}
                   </button>

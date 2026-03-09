@@ -4,7 +4,7 @@ import { useState, useEffect, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { Link } from 'next-view-transitions'
 import api from '@/lib/api'
-import Header from '@/components/Header'
+
 import HeroSpotlight from '@/components/discover/HeroSpotlight'
 import CollectionGrid from '@/components/discover/CollectionGrid'
 import ProductCard from '@/components/discover/ProductCard'
@@ -98,8 +98,6 @@ function DiscoverPageContent() {
 
   return (
     <div className="min-h-screen bg-slate-50">
-      <Header />
-
       {/* Hero Section */}
       <div className="relative bg-white border-b border-slate-200/80">
         {/* Subtle gradient overlay */}
@@ -107,7 +105,7 @@ function DiscoverPageContent() {
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-8 lg:pt-16 lg:pb-12">
           {/* Header content */}
-          <div className="text-center mb-10 animate-fade-in">
+          <div className="text-center mb-10">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-50 border border-cyan-200/60 text-sm text-cyan-700 font-medium mb-5">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
@@ -125,7 +123,7 @@ function DiscoverPageContent() {
 
           {/* Categories */}
           {categories.length > 0 && (
-            <div className="animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
+            <div>
               <div className="flex gap-2.5 overflow-x-auto pb-2 -mx-4 px-4 sm:mx-0 sm:px-0 sm:flex-wrap sm:justify-center sm:overflow-visible scrollbar-hide">
                 {categories.slice(0, 9).map((category) => {
                   const config = getConfig(category.name)
@@ -202,14 +200,14 @@ function DiscoverPageContent() {
           <>
             {/* Hero Spotlight */}
             {feed?.hero && feed.hero.length > 0 && (
-              <div className="mb-12 animate-fade-in-up">
+              <div className="mb-12">
                 <HeroSpotlight items={feed.hero} />
               </div>
             )}
 
             {/* Trending Products */}
             {feed?.trending && feed.trending.length > 0 && (
-              <div className="mb-12 animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
+              <div className="mb-12">
                 <div className="flex items-center justify-between mb-6">
                   <div>
                     <h2 className="text-xl font-bold text-slate-900">Trending Now</h2>
@@ -234,7 +232,7 @@ function DiscoverPageContent() {
 
             {/* Collection Sections */}
             {feed?.collections && feed.collections.length > 0 && (
-              <div className="animate-fade-in-up" style={{ animationDelay: '0.15s' }}>
+              <div>
                 {feed.collections.map((collection, index) => (
                   <CollectionGrid
                     key={collection._id || collection.slug || index}

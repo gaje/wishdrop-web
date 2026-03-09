@@ -1,4 +1,4 @@
-import Header from '@/components/Header'
+
 import { notFound } from 'next/navigation'
 import ProfileClient from './ProfileClient'
 
@@ -84,7 +84,6 @@ export default async function UserProfilePage({ params }) {
 
   return (
     <div className="min-h-screen bg-slate-50">
-      <Header />
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <ProfileClient user={user} lists={lists} stats={stats} />

@@ -1,5 +1,5 @@
 import { Link } from 'next-view-transitions'
-import Header from '@/components/Header'
+
 import ListDetailClient from './ListDetailClient'
 
 const API_BASE = (process.env.NEXT_PUBLIC_API_BASE || 'http://localhost:4000') + '/api'
@@ -158,7 +158,7 @@ export default async function ListDetailPage({ params }) {
   if (data.error) {
     return (
       <div className="min-h-screen bg-slate-50">
-        <Header />
+
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="bg-white rounded-2xl p-12 text-center border border-slate-200/80 shadow-sm animate-fade-in">
             <div className="w-20 h-20 mx-auto mb-5 rounded-2xl bg-slate-100 flex items-center justify-center">
@@ -187,7 +187,6 @@ export default async function ListDetailPage({ params }) {
 
   return (
     <div className="min-h-screen bg-slate-50">
-      <Header />
 
       {/* Hero Section */}
       <div className="bg-white border-b border-slate-200/80">

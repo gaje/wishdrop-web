@@ -14,6 +14,7 @@ import LikeButton from '@/components/LikeButton'
 import CommentsSection from '@/components/CommentsSection'
 import ShareSheet from '@/components/ShareSheet'
 import AvatarStack from '@/components/ui/AvatarStack'
+import GuestWelcomeGuide from '@/components/GuestWelcomeGuide'
 
 export default function ListDetailClient({ username, slug, list, initialItems }) {
   const router = useRouter()
@@ -276,6 +277,9 @@ export default function ListDetailClient({ username, slug, list, initialItems })
         </div>
       </div>
 
+      {/* Guest Welcome Guide */}
+      {!isOwner && isSharedList && <GuestWelcomeGuide username={username} />}
+
       {/* Owner: Guest Claimers Summary */}
       {isOwner && guestClaimers.length > 0 && (
         <div className="bg-violet-50 border border-violet-200 rounded-2xl p-4 mb-6">
@@ -333,7 +337,7 @@ export default function ListDetailClient({ username, slug, list, initialItems })
               <ItemCard
                 item={item}
                 isOwner={isOwner}
-                currentUserId={user?._id}
+                currentUserId={user?.id || user?._id}
                 onEdit={handleEditItem}
                 onDelete={handleDeleteItem}
                 onClaim={handleClaimItem}

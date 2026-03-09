@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation'
 import { Link } from 'next-view-transitions'
 import { useAuth } from '@/lib/AuthContext'
 import api from '@/lib/api'
-import Header from '@/components/Header'
+
 
 export default function FeedPage() {
   const router = useRouter()
@@ -63,20 +63,49 @@ export default function FeedPage() {
 
   if (authLoading || !user) {
     return (
-      <div className="min-h-screen bg-slate-50 flex items-center justify-center">
-        <div className="w-10 h-10 rounded-full border-[3px] border-slate-200 border-t-cyan-500 animate-spin" />
+      <div className="min-h-screen bg-slate-50 animate-pulse">
+        <div className="bg-white border-b border-slate-200/80">
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
+            <div className="h-8 bg-slate-200 rounded-lg w-40 mb-2" />
+            <div className="h-5 bg-slate-100 rounded-lg w-64" />
+          </div>
+        </div>
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <div className="space-y-5">
+            {[...Array(4)].map((_, i) => (
+              <div key={i} className="bg-white rounded-2xl border border-slate-200/80 p-6">
+                <div className="flex items-start gap-4 mb-4">
+                  <div className="w-11 h-11 rounded-full bg-slate-200 flex-shrink-0" />
+                  <div className="flex-1">
+                    <div className="h-4 bg-slate-200 rounded-lg w-32 mb-2" />
+                    <div className="h-3 bg-slate-100 rounded-lg w-24" />
+                  </div>
+                </div>
+                <div className="flex items-start gap-4">
+                  <div className="w-14 h-14 rounded-xl bg-slate-200 flex-shrink-0" />
+                  <div className="flex-1">
+                    <div className="h-5 bg-slate-200 rounded-lg w-3/4 mb-2" />
+                    <div className="h-4 bg-slate-100 rounded-lg w-1/2 mb-3" />
+                    <div className="flex gap-4">
+                      <div className="h-3 bg-slate-100 rounded-lg w-16" />
+                      <div className="h-3 bg-slate-100 rounded-lg w-12" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     )
   }
 
   return (
     <div className="min-h-screen bg-slate-50">
-      <Header />
-
       {/* Hero Section */}
       <div className="bg-white border-b border-slate-200/80">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
-          <div className="animate-fade-in">
+          <div>
             <h1 className="text-3xl font-bold text-slate-900 mb-1">Following</h1>
             <p className="text-slate-500">See what your friends are wishing for</p>
           </div>
@@ -97,11 +126,32 @@ export default function FeedPage() {
 
         {/* Feed */}
         {loading ? (
-          <div className="flex justify-center items-center py-20">
-            <div className="w-10 h-10 rounded-full border-[3px] border-slate-200 border-t-cyan-500 animate-spin" />
+          <div className="space-y-5">
+            {[...Array(4)].map((_, i) => (
+              <div key={i} className="bg-white rounded-2xl border border-slate-200/80 p-6 animate-pulse">
+                <div className="flex items-start gap-4 mb-4">
+                  <div className="w-11 h-11 rounded-full bg-slate-200 flex-shrink-0" />
+                  <div className="flex-1">
+                    <div className="h-4 bg-slate-200 rounded-lg w-32 mb-2" />
+                    <div className="h-3 bg-slate-100 rounded-lg w-24" />
+                  </div>
+                </div>
+                <div className="flex items-start gap-4 ml-0 sm:ml-15">
+                  <div className="w-14 h-14 rounded-xl bg-slate-200 flex-shrink-0" />
+                  <div className="flex-1">
+                    <div className="h-5 bg-slate-200 rounded-lg w-3/4 mb-2" />
+                    <div className="h-4 bg-slate-100 rounded-lg w-1/2 mb-3" />
+                    <div className="flex gap-4">
+                      <div className="h-3 bg-slate-100 rounded-lg w-16" />
+                      <div className="h-3 bg-slate-100 rounded-lg w-12" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         ) : feed.length === 0 ? (
-          <div className="text-center py-16 animate-fade-in">
+          <div className="text-center py-16">
             <div className="w-20 h-20 mx-auto mb-5 rounded-2xl bg-gradient-to-br from-cyan-100 to-cyan-100 flex items-center justify-center">
               <svg className="w-10 h-10 text-cyan-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
@@ -128,8 +178,7 @@ export default function FeedPage() {
                 <Link
                   key={list._id}
                   href={`/u/${list.owner?.username}/${list.slug}`}
-                  className="block bg-white rounded-2xl border border-slate-200/80 hover:border-slate-300 p-6 hover:shadow-xl hover:shadow-slate-200/50 transition-all duration-300 animate-fade-in-up"
-                  style={{ animationDelay: `${index * 0.05}s` }}
+                  className="block bg-white rounded-2xl border border-slate-200/80 hover:border-slate-300 p-6 hover:shadow-xl hover:shadow-slate-200/50 transition-all duration-300"
                 >
                   <div className="flex items-start gap-4 mb-4">
                     <div className="w-11 h-11 rounded-full bg-gradient-to-br from-cyan-400 to-cyan-500 flex items-center justify-center text-white text-sm font-semibold flex-shrink-0 shadow-sm">

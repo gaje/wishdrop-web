@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import api from '@/lib/api'
-import Header from '@/components/Header'
+
 
 export default function InviteAcceptPage() {
   const params = useParams()
@@ -57,8 +57,6 @@ export default function InviteAcceptPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <Header user={user} />
-
       <div className="max-w-md mx-auto px-4 py-16">
         <div className="bg-white rounded-xl shadow-sm p-8 text-center">
           {loading && (

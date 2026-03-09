@@ -1,8 +1,12 @@
 'use client'
 
 import { Link } from 'next-view-transitions'
+import { useState, useEffect, useRef } from 'react'
 import { useAuth } from '@/lib/AuthContext'
 import FollowButton from '@/components/FollowButton'
+import ConnectionButton from '@/components/ConnectionButton'
+import ReportModal from '@/components/ReportModal'
+import api from '@/lib/api'
 import Avatar from '@/components/ui/Avatar'
 import EmptyState from '@/components/ui/EmptyState'
 import LikeButton from '@/components/LikeButton'
@@ -14,6 +18,37 @@ import LikeButton from '@/components/LikeButton'
 export default function ProfileClient({ user, lists, stats }) {
   const { user: currentUser } = useAuth()
   const isOwnProfile = currentUser?.username === user.username
+  const [showMoreMenu, setShowMoreMenu] = useState(false)
+  const [showReportModal, setShowReportModal] = useState(false)
+  const [showBlockModal, setShowBlockModal] = useState(false)
+  const [blockLoading, setBlockLoading] = useState(false)
+  const moreMenuRef = useRef(null)
+
+  const handleBlock = async () => {
+    setBlockLoading(true)
+    try {
+      await api.blocks.block(user._id)
+      setShowBlockModal(false)
+    } catch (err) {
+      console.error('Failed to block user:', err)
+      alert(err.getUserMessage?.() || 'Failed to block user')
+    } finally {
+      setBlockLoading(false)
+    }
+  }
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (moreMenuRef.current && !moreMenuRef.current.contains(event.target)) {
+        setShowMoreMenu(false)
+      }
+    }
+
+    if (showMoreMenu) {
+      document.addEventListener('mousedown', handleClickOutside)
+      return () => document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [showMoreMenu])
 
   return (
     <>
@@ -39,12 +74,55 @@ export default function ProfileClient({ user, lists, stats }) {
                 <p className="text-slate-400 mb-3">@{user.username}</p>
               </div>
 
-              {/* Follow Button - only show if not own profile and user is logged in */}
+              {/* Action Buttons - only show if not own profile and user is logged in */}
               {!isOwnProfile && currentUser && (
-                <FollowButton
-                  userId={user._id}
-                  size="md"
-                />
+                <div className="flex items-center gap-2">
+                  <FollowButton
+                    userId={user._id}
+                    size="md"
+                  />
+                  <ConnectionButton userId={user._id} />
+                  <div className="relative" ref={moreMenuRef}>
+                    <button
+                      onClick={() => setShowMoreMenu(!showMoreMenu)}
+                      className="w-9 h-9 flex items-center justify-center rounded-lg border border-slate-200 hover:bg-slate-50 transition-colors text-slate-500 hover:text-slate-700"
+                    >
+                      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                        <circle cx="12" cy="5" r="1.5" />
+                        <circle cx="12" cy="12" r="1.5" />
+                        <circle cx="12" cy="19" r="1.5" />
+                      </svg>
+                    </button>
+                    {showMoreMenu && (
+                      <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-slate-200 py-1 z-50">
+                        <button
+                          onClick={() => {
+                            setShowMoreMenu(false)
+                            setShowBlockModal(true)
+                          }}
+                          className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors flex items-center gap-2"
+                        >
+                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" />
+                          </svg>
+                          Block User
+                        </button>
+                        <button
+                          onClick={() => {
+                            setShowMoreMenu(false)
+                            setShowReportModal(true)
+                          }}
+                          className="w-full text-left px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 transition-colors flex items-center gap-2"
+                        >
+                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9" />
+                          </svg>
+                          Report User
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                </div>
               )}
             </div>
 
@@ -103,6 +181,48 @@ export default function ProfileClient({ user, lists, stats }) {
           </div>
         </div>
       </div>
+
+      {/* Block Confirmation Modal */}
+      {showBlockModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center">
+          <div
+            className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+            onClick={() => !blockLoading && setShowBlockModal(false)}
+          />
+          <div className="relative bg-white rounded-xl shadow-2xl max-w-md w-full mx-4 p-6">
+            <h2 className="text-2xl font-bold text-gray-900 mb-4">
+              Block {user.displayName || user.username}?
+            </h2>
+            <p className="text-gray-600 mb-6">
+              They won't be able to see your profile, lists, or content. This will also remove any existing connection.
+            </p>
+            <div className="flex gap-3">
+              <button
+                onClick={() => setShowBlockModal(false)}
+                disabled={blockLoading}
+                className="flex-1 px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition disabled:opacity-50"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleBlock}
+                disabled={blockLoading}
+                className="flex-1 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition disabled:opacity-50"
+              >
+                {blockLoading ? 'Blocking...' : 'Confirm Block'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Report Modal */}
+      <ReportModal
+        isOpen={showReportModal}
+        onClose={() => setShowReportModal(false)}
+        contentType="user"
+        contentId={user._id}
+      />
 
       {/* Lists Section */}
       <div>
