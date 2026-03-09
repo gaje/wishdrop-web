@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { discover } from '../lib/api'
-import Header from '@/components/Header'
+
 
 export default function Home() {
   const [trendingProducts, setTrendingProducts] = useState([])
@@ -24,8 +24,6 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-cyan-50 via-cyan-50 to-blue-50">
-      <Header />
-
       {/* Hero Section */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
         <div className="mb-6">
@@ -86,145 +84,35 @@ export default function Home() {
         </p>
 
         {/* Phone Mockups */}
-        <div className="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-4 md:grid md:grid-cols-3 md:overflow-visible md:pb-0">
-          {/* Card 1: Create Lists */}
-          <div className="flex-shrink-0 w-80 snap-center md:w-auto">
-            <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
-              {/* Phone Frame */}
-              <div className="bg-gradient-to-br from-gray-100 to-gray-200 p-4">
-                <div className="aspect-[9/16] max-h-80 rounded-3xl overflow-hidden bg-gradient-to-br from-cyan-400 to-cyan-600 p-6 relative">
-                  {/* Status bar mockup */}
-                  <div className="flex items-center justify-between mb-6">
-                    <div className="text-white text-xs font-semibold">9:41</div>
-                    <div className="flex gap-1">
-                      <div className="w-4 h-4 rounded-full bg-white/30"></div>
-                      <div className="w-4 h-4 rounded-full bg-white/30"></div>
-                      <div className="w-4 h-4 rounded-full bg-white/30"></div>
-                    </div>
-                  </div>
-
-                  {/* List view mockup */}
-                  <div className="space-y-3">
-                    {/* Header */}
-                    <div className="bg-white/20 backdrop-blur-sm rounded-xl p-3">
-                      <div className="h-6 bg-white/40 rounded w-3/4 mb-2"></div>
-                      <div className="h-3 bg-white/30 rounded w-1/2"></div>
-                    </div>
-
-                    {/* Item cards */}
-                    {[1, 2, 3].map((i) => (
-                      <div key={i} className="bg-white rounded-xl p-3 flex gap-3">
-                        <div className="w-16 h-16 bg-gradient-to-br from-gray-200 to-gray-300 rounded-lg"></div>
-                        <div className="flex-1">
-                          <div className="h-3 bg-gray-200 rounded w-full mb-2"></div>
-                          <div className="h-3 bg-gray-200 rounded w-2/3 mb-2"></div>
-                          <div className="h-3 bg-cyan-200 rounded w-1/4"></div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
+        <div className="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-4 md:grid md:grid-cols-3 md:overflow-visible md:pb-0 justify-items-center">
+          {[
+            { src: '/screenshots/dashboard.png', alt: 'Wishdrop dashboard showing wishlists', title: 'Create Lists', desc: 'Add products from any store' },
+            { src: '/screenshots/share.png', alt: 'Wishdrop share modal for sending lists', title: 'Share Instantly', desc: 'One link to share with everyone' },
+            { src: '/screenshots/discover.png', alt: 'Wishdrop discover page with trending products', title: 'Discover Products', desc: 'Explore trending items and lists' },
+          ].map((card) => (
+            <div key={card.title} className="flex-shrink-0 w-80 snap-center md:w-auto flex flex-col items-center">
+              {/* Phone device frame */}
+              <div className="relative bg-gray-900 rounded-[1.8rem] p-[5px] shadow-2xl mx-auto" style={{ width: 200 }}>
+                {/* Dynamic island */}
+                <div className="absolute top-[8px] left-1/2 -translate-x-1/2 w-14 h-[4px] bg-gray-900 rounded-full z-10" />
+                {/* Screen */}
+                <div className="relative rounded-[1.5rem] overflow-hidden bg-white" style={{ aspectRatio: '9/19.5' }}>
+                  <Image
+                    src={card.src}
+                    alt={card.alt}
+                    fill
+                    className="object-cover object-top"
+                    sizes="200px"
+                  />
                 </div>
               </div>
-
               {/* Label */}
-              <div className="p-4 text-center">
-                <h4 className="font-semibold text-gray-900 mb-1">Create Lists</h4>
-                <p className="text-sm text-gray-600">Add products from any store</p>
+              <div className="mt-5 text-center">
+                <h4 className="font-semibold text-gray-900 mb-1">{card.title}</h4>
+                <p className="text-sm text-gray-600">{card.desc}</p>
               </div>
             </div>
-          </div>
-
-          {/* Card 2: Share Instantly */}
-          <div className="flex-shrink-0 w-80 snap-center md:w-auto">
-            <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
-              {/* Phone Frame */}
-              <div className="bg-gradient-to-br from-gray-100 to-gray-200 p-4">
-                <div className="aspect-[9/16] max-h-80 rounded-3xl overflow-hidden bg-gradient-to-br from-cyan-400 to-cyan-600 p-6 relative">
-                  {/* Status bar mockup */}
-                  <div className="flex items-center justify-between mb-6">
-                    <div className="text-white text-xs font-semibold">9:41</div>
-                    <div className="flex gap-1">
-                      <div className="w-4 h-4 rounded-full bg-white/30"></div>
-                      <div className="w-4 h-4 rounded-full bg-white/30"></div>
-                      <div className="w-4 h-4 rounded-full bg-white/30"></div>
-                    </div>
-                  </div>
-
-                  {/* Share sheet mockup */}
-                  <div className="absolute inset-0 flex items-end p-6">
-                    <div className="bg-white rounded-t-3xl w-full p-6 space-y-4">
-                      {/* Link preview */}
-                      <div className="bg-gradient-to-r from-cyan-100 to-blue-100 rounded-xl p-4">
-                        <div className="h-4 bg-cyan-600 rounded w-3/4 mb-2"></div>
-                        <div className="h-3 bg-cyan-400 rounded w-1/2"></div>
-                      </div>
-
-                      {/* Share buttons */}
-                      <div className="flex gap-3 justify-around pt-2">
-                        {[1, 2, 3, 4].map((i) => (
-                          <div key={i} className="flex flex-col items-center gap-2">
-                            <div className="w-12 h-12 bg-gradient-to-br from-gray-200 to-gray-300 rounded-full"></div>
-                            <div className="h-2 bg-gray-200 rounded w-12"></div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Label */}
-              <div className="p-4 text-center">
-                <h4 className="font-semibold text-gray-900 mb-1">Share Instantly</h4>
-                <p className="text-sm text-gray-600">One link to share with everyone</p>
-              </div>
-            </div>
-          </div>
-
-          {/* Card 3: Discover Products */}
-          <div className="flex-shrink-0 w-80 snap-center md:w-auto">
-            <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
-              {/* Phone Frame */}
-              <div className="bg-gradient-to-br from-gray-100 to-gray-200 p-4">
-                <div className="aspect-[9/16] max-h-80 rounded-3xl overflow-hidden bg-gradient-to-br from-cyan-400 to-cyan-600 p-6 relative">
-                  {/* Status bar mockup */}
-                  <div className="flex items-center justify-between mb-6">
-                    <div className="text-white text-xs font-semibold">9:41</div>
-                    <div className="flex gap-1">
-                      <div className="w-4 h-4 rounded-full bg-white/30"></div>
-                      <div className="w-4 h-4 rounded-full bg-white/30"></div>
-                      <div className="w-4 h-4 rounded-full bg-white/30"></div>
-                    </div>
-                  </div>
-
-                  {/* Product grid mockup */}
-                  <div className="space-y-3">
-                    {/* Search bar */}
-                    <div className="bg-white/20 backdrop-blur-sm rounded-xl p-3">
-                      <div className="h-4 bg-white/40 rounded w-1/2"></div>
-                    </div>
-
-                    {/* Product grid (2 rows × 2 cols) */}
-                    <div className="grid grid-cols-2 gap-2">
-                      {[1, 2, 3, 4].map((i) => (
-                        <div key={i} className="bg-white rounded-lg p-2">
-                          <div className="aspect-square bg-gradient-to-br from-gray-200 to-gray-300 rounded mb-2"></div>
-                          <div className="h-2 bg-gray-200 rounded w-full mb-1"></div>
-                          <div className="h-2 bg-cyan-200 rounded w-1/2"></div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Label */}
-              <div className="p-4 text-center">
-                <h4 className="font-semibold text-gray-900 mb-1">Discover Products</h4>
-                <p className="text-sm text-gray-600">Explore trending items and lists</p>
-              </div>
-            </div>
-          </div>
+          ))}
         </div>
       </section>
 
@@ -400,9 +288,16 @@ export default function Home() {
             ))}
           </div>
         ) : (
-          <div className="text-center py-12">
-            <div className="inline-block animate-spin rounded-full h-10 w-10 border-b-2 border-cyan-500 mb-4"></div>
-            <p className="text-gray-600">Loading trending products...</p>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+            {[...Array(8)].map((_, i) => (
+              <div key={i} className="bg-white rounded-2xl overflow-hidden border border-gray-200 animate-pulse">
+                <div className="aspect-square bg-gray-100" />
+                <div className="p-3.5">
+                  <div className="h-4 bg-gray-100 rounded-lg w-3/4 mb-2" />
+                  <div className="h-4 bg-gray-100 rounded-lg w-1/2" />
+                </div>
+              </div>
+            ))}
           </div>
         )}
 
