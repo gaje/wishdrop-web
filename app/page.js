@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { discover } from '../lib/api'
@@ -33,6 +33,56 @@ export default function Home() {
       console.error('Failed to load trending products:', error)
     }
   }
+
+  const screenshots = [
+    { src: '/screenshots/dashboard.png', alt: 'Wishdrop dashboard showing wishlists', title: 'Create Lists', desc: 'Add products from any store' },
+    { src: '/screenshots/share.png', alt: 'Wishdrop share modal for sending lists', title: 'Share Instantly', desc: 'One link to share with everyone' },
+    { src: '/screenshots/discover.png', alt: 'Wishdrop discover page with trending products', title: 'Discover Products', desc: 'Explore trending items and lists' },
+  ]
+
+  const scrollRef = useRef(null)
+  const [activeIndex, setActiveIndex] = useState(0)
+  const pauseRef = useRef(false)
+  const pauseTimerRef = useRef(null)
+
+  const scrollToIndex = useCallback((index) => {
+    const el = scrollRef.current
+    if (!el || !el.children[index]) return
+    const card = el.children[index]
+    const scrollLeft = card.offsetLeft - (el.offsetWidth - card.offsetWidth) / 2
+    el.scrollTo({ left: scrollLeft, behavior: 'smooth' })
+  }, [])
+
+  const handleScroll = useCallback(() => {
+    const el = scrollRef.current
+    if (!el) return
+    const scrollLeft = el.scrollLeft
+    const cardWidth = el.firstElementChild?.offsetWidth || 1
+    const gap = 24 // gap-6
+    const index = Math.round(scrollLeft / (cardWidth + gap))
+    setActiveIndex(Math.min(index, screenshots.length - 1))
+  }, [screenshots.length])
+
+  // Pause auto-rotate on user interaction, resume after 5s
+  const handleUserInteraction = useCallback(() => {
+    pauseRef.current = true
+    clearTimeout(pauseTimerRef.current)
+    pauseTimerRef.current = setTimeout(() => { pauseRef.current = false }, 5000)
+  }, [])
+
+  // Auto-rotate every 4s (mobile only, skips when paused or not visible)
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (pauseRef.current) return
+      const el = scrollRef.current
+      if (!el) return
+      // Skip if viewport is md+ (grid mode, no scrolling)
+      if (window.matchMedia('(min-width: 768px)').matches) return
+      const next = (activeIndex + 1) % screenshots.length
+      scrollToIndex(next)
+    }, 4000)
+    return () => clearInterval(interval)
+  }, [activeIndex, screenshots.length, scrollToIndex])
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-cyan-50 via-cyan-50 to-blue-50">
@@ -67,9 +117,9 @@ export default function Home() {
         <div className="flex flex-wrap justify-center gap-8 text-sm text-gray-600">
           <div className="flex items-center gap-2">
             <svg className="w-5 h-5 text-cyan-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456z" />
+              <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 21v-7.5a.75.75 0 01.75-.75h3a.75.75 0 01.75.75V21m-4.5 0H2.36m11.14 0H18m0 0h3.64m-1.39 0V9.349m-16.5 11.65V9.35m0 0a3.001 3.001 0 003.75-.615A2.993 2.993 0 009.75 9.75c.896 0 1.7-.393 2.25-1.016a2.993 2.993 0 002.25 1.016c.896 0 1.7-.393 2.25-1.016A3.001 3.001 0 0021 9.349m-18 0a2.999 2.999 0 002.25-1.033 2.999 2.999 0 002.25 1.033 2.999 2.999 0 002.25-1.033 2.999 2.999 0 002.25 1.033 2.999 2.999 0 002.25-1.033A3 3 0 0021 9.35" />
             </svg>
-            <span>No ads, ever</span>
+            <span>Works with any store</span>
           </div>
           <div className="flex items-center gap-2">
             <svg className="w-5 h-5 text-cyan-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -96,13 +146,16 @@ export default function Home() {
         </p>
 
         {/* Phone Mockups */}
-        <div className="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-4 md:grid md:grid-cols-3 md:overflow-visible md:pb-0 justify-items-center">
-          {[
-            { src: '/screenshots/dashboard.png', alt: 'Wishdrop dashboard showing wishlists', title: 'Create Lists', desc: 'Add products from any store' },
-            { src: '/screenshots/share.png', alt: 'Wishdrop share modal for sending lists', title: 'Share Instantly', desc: 'One link to share with everyone' },
-            { src: '/screenshots/discover.png', alt: 'Wishdrop discover page with trending products', title: 'Discover Products', desc: 'Explore trending items and lists' },
-          ].map((card) => (
-            <div key={card.title} className="flex-shrink-0 w-80 snap-center md:w-auto flex flex-col items-center">
+        <div
+          ref={scrollRef}
+          onScroll={handleScroll}
+          onTouchStart={handleUserInteraction}
+          onMouseDown={handleUserInteraction}
+          className="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-4 px-[15vw] md:px-0 md:grid md:grid-cols-3 md:overflow-visible md:pb-0 justify-items-center scrollbar-hide"
+          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none', WebkitOverflowScrolling: 'touch' }}
+        >
+          {screenshots.map((card) => (
+            <div key={card.title} className="flex-shrink-0 w-[70vw] snap-center md:w-auto flex flex-col items-center">
               {/* Phone device frame */}
               <div className="relative bg-gray-900 rounded-[1.8rem] p-[5px] shadow-2xl mx-auto" style={{ width: 200 }}>
                 {/* Dynamic island */}
@@ -124,6 +177,23 @@ export default function Home() {
                 <p className="text-sm text-gray-600">{card.desc}</p>
               </div>
             </div>
+          ))}
+        </div>
+
+        {/* Scroll indicator dots - mobile only */}
+        <div className="flex justify-center gap-2 mt-4 md:hidden">
+          {screenshots.map((_, i) => (
+            <button
+              key={i}
+              aria-label={`Go to screenshot ${i + 1}`}
+              onClick={() => {
+                handleUserInteraction()
+                scrollToIndex(i)
+              }}
+              className={`h-2 rounded-full transition-all duration-300 ${
+                i === activeIndex ? 'w-6 bg-cyan-500' : 'w-2 bg-gray-300'
+              }`}
+            />
           ))}
         </div>
       </section>

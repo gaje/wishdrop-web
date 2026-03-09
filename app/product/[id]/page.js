@@ -191,10 +191,8 @@ export default function ProductDetailPage({ params }) {
                     priority
                   />
                 ) : (
-                  <div className="w-full h-full flex items-center justify-center bg-slate-100">
-                    <svg className="w-24 h-24 text-slate-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
-                    </svg>
+                  <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-sky-50 via-purple-50 to-pink-50">
+                    <img src="/logo-w.png" alt="Wishdrop" className="w-24 opacity-30 object-contain" />
                   </div>
                 )}
               </div>

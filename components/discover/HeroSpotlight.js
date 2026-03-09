@@ -107,10 +107,8 @@ export default function HeroSpotlight({ items = [] }) {
                 sizes="(max-width: 768px) 100vw, 50vw"
               />
             ) : (
-              <div className="w-full h-full bg-slate-200 flex items-center justify-center">
-                <svg className="w-16 h-16 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
-                </svg>
+              <div className="w-full h-full bg-gradient-to-br from-sky-50 via-purple-50 to-pink-50 flex items-center justify-center">
+                <img src="/logo-w.png" alt="Wishdrop" className="w-20 opacity-40 object-contain" />
               </div>
             )}
           </div>

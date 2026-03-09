@@ -176,17 +176,17 @@ export default function ProductModal({ product, isOpen, onClose }) {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm animate-fade-in"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/50 backdrop-blur-sm animate-fade-in"
       onClick={onClose}
     >
       <div
-        className="relative bg-white rounded-2xl shadow-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto animate-scale-in"
+        className="relative bg-white rounded-2xl shadow-2xl max-w-xl w-full max-h-[85vh] overflow-hidden animate-scale-in"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Close Button */}
+        {/* Close Button - fixed above scroll area */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 z-10 w-8 h-8 rounded-full bg-white/90 hover:bg-white shadow-lg flex items-center justify-center transition-colors"
+          className="absolute top-3 right-3 z-20 w-10 h-10 rounded-full bg-white/90 hover:bg-white shadow-lg flex items-center justify-center transition-colors"
           aria-label="Close"
         >
           <svg className="w-5 h-5 text-slate-900" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
@@ -194,8 +194,11 @@ export default function ProductModal({ product, isOpen, onClose }) {
           </svg>
         </button>
 
+        {/* Scrollable content */}
+        <div className="overflow-y-auto max-h-[85vh]">
+
         {/* Large Product Image */}
-        <div className="relative w-full aspect-square bg-slate-100 rounded-t-2xl overflow-hidden">
+        <div className="relative w-full aspect-[4/3] bg-slate-100 rounded-t-2xl overflow-hidden">
           {hasImage ? (
             <Image
               src={displayProduct.image}
@@ -206,10 +209,8 @@ export default function ProductModal({ product, isOpen, onClose }) {
               onError={handleImageError}
             />
           ) : (
-            <div className="w-full h-full flex items-center justify-center">
-              <svg className="w-20 h-20 text-slate-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
-              </svg>
+            <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-sky-50 via-purple-50 to-pink-50">
+              <img src="/logo-w.png" alt="Wishdrop" className="w-20 opacity-40 object-contain" />
             </div>
           )}
 
@@ -225,7 +226,7 @@ export default function ProductModal({ product, isOpen, onClose }) {
 
           {/* Social Proof Overlay */}
           {showSocialProof && (
-            <div className="absolute top-4 right-4 flex flex-col gap-2 items-end">
+            <div className="absolute bottom-3 left-3 flex items-center gap-2">
               {stats.wishlistCount >= 3 && (
                 <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/95 shadow-sm backdrop-blur-sm text-sm font-semibold text-slate-700">
                   <svg className="w-4 h-4 text-rose-500" fill="currentColor" viewBox="0 0 24 24">
@@ -247,7 +248,7 @@ export default function ProductModal({ product, isOpen, onClose }) {
         </div>
 
         {/* Content */}
-        <div className="p-6">
+        <div className="px-6 sm:px-8 pt-6 pb-8">
           {loading ? (
             <div className="flex items-center justify-center py-8">
               <div className="w-8 h-8 border-4 border-cyan-500 border-t-transparent rounded-full animate-spin"></div>
@@ -255,12 +256,12 @@ export default function ProductModal({ product, isOpen, onClose }) {
           ) : (
             <>
               {/* Title */}
-              <h2 className="text-2xl font-bold text-slate-900 mb-2">{displayProduct.title}</h2>
+              <h2 className="text-xl sm:text-2xl font-semibold text-slate-900 leading-snug mb-3">{displayProduct.title}</h2>
 
               {/* Price & Merchant */}
-              <div className="flex items-center justify-between mb-4">
+              <div className="flex items-baseline justify-between mb-5">
                 {displayProduct.price ? (
-                  <span className="text-3xl font-bold text-cyan-600">${typeof displayProduct.price === 'object' ? displayProduct.price.amount?.toFixed(2) : Number(displayProduct.price).toFixed(2)}</span>
+                  <span className="text-2xl font-bold text-brand-500">${typeof displayProduct.price === 'object' ? displayProduct.price.amount?.toFixed(2) : Number(displayProduct.price).toFixed(2)}</span>
                 ) : (
                   <span className="text-sm text-slate-400">Price unavailable</span>
                 )}
@@ -273,15 +274,15 @@ export default function ProductModal({ product, isOpen, onClose }) {
 
               {/* Description (if available) */}
               {displayProduct.description && (
-                <p className="text-sm text-slate-600 mb-6 leading-relaxed">
+                <p className="text-sm text-slate-500 mb-6 leading-relaxed line-clamp-4">
                   {displayProduct.description}
                 </p>
               )}
 
               {/* Also Available At Section */}
               {alternativeRetailers.length > 0 && (
-                <div className="mb-6">
-                  <h3 className="text-lg font-semibold text-gray-800 mb-3">Also Available At</h3>
+                <div className="mb-6 pt-5 border-t border-slate-100">
+                  <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-3">Also Available At</h3>
                   <div className="space-y-0 border border-gray-200 rounded-lg overflow-hidden">
                     {alternativeRetailers.map((retailer, index) => (
                       <a
@@ -305,9 +306,9 @@ export default function ProductModal({ product, isOpen, onClose }) {
 
               {/* You Might Also Like Section */}
               {relatedProducts.length > 0 && (
-                <div className="mb-6">
-                  <h3 className="text-lg font-semibold text-gray-800 mb-3">You Might Also Like</h3>
-                  <div className="grid grid-cols-2 gap-3">
+                <div className="mb-6 pt-5 border-t border-slate-100">
+                  <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-3">You Might Also Like</h3>
+                  <div className="grid grid-cols-2 gap-4">
                     {relatedProducts.slice(0, 4).map((related, index) => (
                       <div
                         key={index}
@@ -320,7 +321,7 @@ export default function ProductModal({ product, isOpen, onClose }) {
                             router.push(`/product/${encodeURIComponent(related.normalizedUrl)}`)
                           }, 100)
                         }}
-                        className="cursor-pointer bg-slate-50 rounded-lg p-3 hover:bg-slate-100 transition-colors"
+                        className="cursor-pointer bg-slate-50/70 rounded-xl p-3.5 hover:bg-slate-100 transition-colors"
                       >
                         {related.image && (
                           <div className="relative w-full aspect-square mb-2 bg-white rounded-md overflow-hidden">
@@ -349,10 +350,10 @@ export default function ProductModal({ product, isOpen, onClose }) {
               )}
 
               {/* Action Buttons */}
-              <div className="flex flex-col gap-3">
+              <div className="flex flex-col gap-3 pt-5 border-t border-slate-100">
                 <button
                   onClick={handleAddToList}
-                  className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-cyan-500 to-cyan-500 hover:from-cyan-600 hover:to-cyan-600 text-white rounded-xl font-semibold transition-all hover:shadow-lg"
+                  className="w-full flex items-center justify-center gap-2 px-6 py-3.5 bg-brand-500 hover:bg-brand-600 text-white rounded-xl font-semibold transition-all hover:shadow-glow"
                 >
                   <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
@@ -363,7 +364,7 @@ export default function ProductModal({ product, isOpen, onClose }) {
                 <div className="grid grid-cols-2 gap-3">
                   <button
                     onClick={handleViewDetails}
-                    className="flex items-center justify-center gap-1.5 px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-900 rounded-xl font-semibold transition-colors"
+                    className="flex items-center justify-center gap-1.5 px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-medium transition-colors"
                   >
                     <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -373,7 +374,7 @@ export default function ProductModal({ product, isOpen, onClose }) {
 
                   <button
                     onClick={() => handleBuy()}
-                    className="flex items-center justify-center gap-1.5 px-4 py-2.5 bg-slate-900 hover:bg-slate-800 text-white rounded-xl font-semibold transition-colors"
+                    className="flex items-center justify-center gap-1.5 px-4 py-2.5 bg-slate-800 hover:bg-slate-900 text-white rounded-xl font-medium transition-colors"
                   >
                     <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
@@ -384,7 +385,7 @@ export default function ProductModal({ product, isOpen, onClose }) {
               </div>
 
               {/* Report an Issue Link */}
-              <div className="mt-4 text-center">
+              <div className="mt-6 pt-4 text-center">
                 <button
                   onClick={handleReportIssue}
                   className="text-sm text-gray-400 hover:text-gray-600 cursor-pointer transition-colors"
@@ -462,6 +463,7 @@ export default function ProductModal({ product, isOpen, onClose }) {
               )}
             </>
           )}
+        </div>
         </div>
       </div>
     </div>
