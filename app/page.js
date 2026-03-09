@@ -15,8 +15,9 @@ export default function Home() {
 
   const loadTrendingProducts = async () => {
     try {
-      const response = await discover.trendingItems(8)
-      setTrendingProducts(response.items || [])
+      const response = await discover.trendingItems(16)
+      const withImages = (response.items || []).filter(item => item.image)
+      setTrendingProducts(withImages.slice(0, 8))
     } catch (error) {
       console.error('Failed to load trending products:', error)
     }
