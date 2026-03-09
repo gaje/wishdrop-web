@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import Header from '@/components/Header'
+
 import { useAuth } from '@/lib/AuthContext'
 import api, { APIError } from '@/lib/api'
 
@@ -335,7 +335,6 @@ export default function SettingsPage() {
 
   return (
     <div className="min-h-screen bg-slate-50">
-      <Header />
 
       <main className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
         {/* Page Header */}

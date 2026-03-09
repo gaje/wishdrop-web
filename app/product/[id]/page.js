@@ -6,7 +6,7 @@ import { Link } from 'next-view-transitions'
 import Image from 'next/image'
 import { useAuth } from '@/lib/AuthContext'
 import api from '@/lib/api'
-import Header from '@/components/Header'
+
 
 export default function ProductDetailPage({ params }) {
   const { id } = use(params)
@@ -122,7 +122,7 @@ export default function ProductDetailPage({ params }) {
   if (loading) {
     return (
       <div className="min-h-screen bg-slate-50">
-        <Header />
+
         <div className="flex items-center justify-center py-32">
           <div className="relative">
             <div className="w-10 h-10 rounded-full border-[3px] border-slate-200 border-t-violet-500 animate-spin" />
@@ -135,7 +135,7 @@ export default function ProductDetailPage({ params }) {
   if (error || !product) {
     return (
       <div className="min-h-screen bg-slate-50">
-        <Header />
+
         <div className="max-w-4xl mx-auto px-4 py-20 text-center">
           <div className="w-20 h-20 mx-auto mb-5 rounded-full bg-rose-50 border border-rose-200 flex items-center justify-center">
             <svg className="w-10 h-10 text-rose-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -160,7 +160,6 @@ export default function ProductDetailPage({ params }) {
 
   return (
     <div className="min-h-screen bg-slate-50">
-      <Header />
 
       {/* Hero Section */}
       <div className="bg-white border-b border-slate-200/80">

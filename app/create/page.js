@@ -3,7 +3,7 @@
 import { useState, useEffect, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
-import Header from '@/components/Header'
+
 import { useAuth } from '@/lib/AuthContext'
 import api, { APIError } from '@/lib/api'
 
@@ -278,7 +278,6 @@ function CreateListContent() {
 
   return (
     <div className="min-h-screen bg-slate-50">
-      <Header />
 
       {/* Hero Section */}
       <div className="bg-white border-b border-slate-200/80">

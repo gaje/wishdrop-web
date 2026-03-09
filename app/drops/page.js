@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation'
 import { Link } from 'next-view-transitions'
 import { useAuth } from '@/lib/AuthContext'
 import api from '@/lib/api'
-import Header from '@/components/Header'
+
 
 /**
  * Video Player Component with HLS Support
@@ -241,8 +241,6 @@ export default function DropsPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-cyan-50 via-cyan-50 to-blue-50">
-      <Header />
-
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Page Header */}
         <div className="flex items-center justify-between mb-8">

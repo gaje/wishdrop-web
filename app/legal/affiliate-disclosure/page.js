@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { Link } from 'next-view-transitions'
-import Header from '@/components/Header'
+
 import api from '@/lib/api'
 
 export default function AffiliateDisclosure() {
@@ -29,10 +29,8 @@ export default function AffiliateDisclosure() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <Header />
-
-      {/* Hero - Amber/Gold gradient for affiliate/money theme */}
-      <div className="bg-gradient-to-br from-amber-500 to-orange-600 text-white">
+      {/* Hero */}
+      <div className="bg-gradient-to-br from-teal-500 to-blue-600 text-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
           <div className="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-6">
             {/* Link/chain icon */}

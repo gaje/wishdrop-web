@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation'
 import { Link } from 'next-view-transitions'
 import { useAuth } from '@/lib/AuthContext'
 import api from '@/lib/api'
-import Header from '@/components/Header'
+
 import Avatar from '@/components/ui/Avatar'
 import Modal from '@/components/ui/Modal'
 
@@ -187,7 +187,7 @@ export default function MyPeoplePage() {
   if (authLoading || !user) {
     return (
       <>
-        <Header />
+
         <div className="min-h-screen bg-slate-50 flex items-center justify-center">
           <div className="w-8 h-8 border-2 border-cyan-500 border-t-transparent rounded-full animate-spin" />
         </div>
@@ -197,7 +197,6 @@ export default function MyPeoplePage() {
 
   return (
     <>
-      <Header />
       <main className="min-h-screen bg-slate-50 pt-20 pb-12">
         <div className="max-w-4xl mx-auto px-4">
           {/* Header */}

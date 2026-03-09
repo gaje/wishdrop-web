@@ -4,7 +4,7 @@ import { useState, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import { useAuth } from '@/lib/AuthContext'
 import api from '@/lib/api'
-import Header from '@/components/Header'
+
 
 const MAX_FILE_SIZE = 100 * 1024 * 1024 // 100MB
 const MAX_DURATION = 20 // seconds
@@ -113,8 +113,6 @@ export default function VideoUploadPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-cyan-50 via-cyan-50 to-blue-50">
-      <Header />
-
       <main className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Page Header */}
         <div className="text-center mb-8">

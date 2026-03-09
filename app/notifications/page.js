@@ -5,7 +5,7 @@ import { Link } from 'next-view-transitions'
 import { useRouter } from 'next/navigation'
 import { useAuth } from '@/lib/AuthContext'
 import api from '@/lib/api'
-import Header from '@/components/Header'
+
 import Avatar from '@/components/ui/Avatar'
 import Button from '@/components/ui/Button'
 import EmptyState from '@/components/ui/EmptyState'
@@ -185,7 +185,7 @@ export default function NotificationsPage() {
   if (authLoading || !user) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-cyan-50 via-cyan-50 to-blue-50">
-        <Header />
+
         <div className="flex items-center justify-center py-20">
           <svg className="w-8 h-8 animate-spin text-cyan-500" fill="none" viewBox="0 0 24 24">
             <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
@@ -200,7 +200,7 @@ export default function NotificationsPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-cyan-50 via-cyan-50 to-blue-50">
-      <Header />
+
 
       <main className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Header */}

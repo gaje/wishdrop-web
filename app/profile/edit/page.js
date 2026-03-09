@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import Header from '@/components/Header'
+
 import { useAuth } from '@/lib/AuthContext'
 import api, { APIError } from '@/lib/api'
 
@@ -126,8 +126,6 @@ export default function EditProfilePage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-cyan-50 via-cyan-50 to-blue-50">
-      <Header />
-
       <main className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="bg-white rounded-2xl shadow-xl p-8">
           <div className="text-center mb-8">

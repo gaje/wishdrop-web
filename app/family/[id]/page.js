@@ -6,7 +6,7 @@ import { Link } from 'next-view-transitions'
 import Image from 'next/image'
 import { useAuth } from '@/lib/AuthContext'
 import api from '@/lib/api'
-import Header from '@/components/Header'
+
 
 const RELATIONSHIP_LABELS = {
   child: 'Child',
@@ -102,7 +102,7 @@ export default function FamilyMemberDetailPage({ params }) {
   if (loading) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-cyan-50 via-cyan-50 to-blue-50">
-        <Header />
+
         <div className="flex items-center justify-center py-32">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-cyan-500"></div>
         </div>
@@ -113,7 +113,7 @@ export default function FamilyMemberDetailPage({ params }) {
   if (error || !member) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-cyan-50 via-cyan-50 to-blue-50">
-        <Header />
+
         <div className="max-w-4xl mx-auto px-4 py-20 text-center">
           <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-red-100 flex items-center justify-center">
             <svg className="w-10 h-10 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -135,7 +135,6 @@ export default function FamilyMemberDetailPage({ params }) {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-cyan-50 via-cyan-50 to-blue-50">
-      <Header />
 
       {/* Hero Section */}
       <div className="bg-gradient-to-br from-cyan-500 via-blue-500 to-purple-600">

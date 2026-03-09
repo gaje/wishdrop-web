@@ -3,7 +3,7 @@
 import { useState, useEffect, Suspense } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 import Link from 'next/link'
-import Header from '@/components/Header'
+
 
 const API_BASE = process.env.NEXT_PUBLIC_API_BASE || 'http://localhost:4000'
 
@@ -56,8 +56,6 @@ function VerifyEmailContent() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-cyan-50 via-cyan-50 to-blue-50">
-      <Header />
-
       <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="bg-white rounded-3xl p-12 shadow-xl text-center">
           {status === 'verifying' && (

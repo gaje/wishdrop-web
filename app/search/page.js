@@ -5,7 +5,7 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import { Link } from 'next-view-transitions'
 import { useAuth } from '@/lib/AuthContext'
 import api from '@/lib/api'
-import Header from '@/components/Header'
+
 
 // Helper to validate image URLs
 const isValidImageUrl = (url) => {
@@ -98,8 +98,6 @@ function SearchContent() {
 
   return (
     <div className="min-h-screen bg-slate-50">
-      <Header />
-
       {/* Search Hero */}
       <div className="bg-white border-b border-slate-200/80">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
