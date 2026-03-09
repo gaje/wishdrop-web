@@ -257,15 +257,15 @@ export default function DashboardPage() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                   Have It
+                  {ownedProducts.filter(p => !p.hasVideo).length > 0 && (
+                    <span
+                      className="w-5 h-5 rounded-full text-xs text-white flex items-center justify-center font-bold"
+                      style={{ backgroundColor: ACCENT_ROSE }}
+                    >
+                      {ownedProducts.filter(p => !p.hasVideo).length > 9 ? '9+' : ownedProducts.filter(p => !p.hasVideo).length}
+                    </span>
+                  )}
                 </span>
-                {ownedProducts.filter(p => !p.hasVideo).length > 0 && (
-                  <span
-                    className="ml-1.5 w-5 h-5 rounded-full text-xs text-white flex items-center justify-center font-bold"
-                    style={{ backgroundColor: ACCENT_ROSE }}
-                  >
-                    {ownedProducts.filter(p => !p.hasVideo).length > 9 ? '9+' : ownedProducts.filter(p => !p.hasVideo).length}
-                  </span>
-                )}
                 {mainTab === 'have' && (
                   <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full" style={{ backgroundColor: ACCENT_ROSE }} />
                 )}
