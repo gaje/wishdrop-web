@@ -43,6 +43,7 @@ export default function ItemCard({
   onUnclaim,
   showActions = true,
   connectionStatus = null,
+  connectLoading = false,
   onConnect,
   onGuestClaim,
   onGuestUnclaim,
@@ -249,12 +250,32 @@ export default function ItemCard({
                         Claim This
                       </button>
                     ) : (
-                      <button
-                        onClick={onConnect}
-                        className="flex-1 px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-semibold text-sm transition-colors"
-                      >
-                        Connect to Claim
-                      </button>
+                      connectionStatus === 'pending_sent' ? (
+                        <span className="flex-1 inline-flex items-center justify-center gap-1.5 px-4 py-2.5 bg-slate-100 text-slate-500 rounded-xl font-semibold text-sm cursor-default">
+                          <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+                          </svg>
+                          Request Sent
+                        </span>
+                      ) : (
+                        <button
+                          onClick={onConnect}
+                          disabled={connectLoading}
+                          className="flex-1 inline-flex items-center justify-center gap-1.5 px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-semibold text-sm transition-colors disabled:opacity-70"
+                        >
+                          {connectLoading ? (
+                            <>
+                              <svg className="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
+                                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+                              </svg>
+                              Sending...
+                            </>
+                          ) : (
+                            'Connect to Claim'
+                          )}
+                        </button>
+                      )
                     )
                   )
                 )}

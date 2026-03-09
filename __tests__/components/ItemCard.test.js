@@ -209,4 +209,31 @@ describe('ItemCard', () => {
     fireEvent.error(img)
     expect(screen.getByText('Image unavailable')).toBeInTheDocument()
   })
+
+  it('shows "Request Sent" when connection is pending_sent', () => {
+    render(
+      <ItemCard
+        item={mockItem}
+        isOwner={false}
+        currentUserId="user-789"
+        connectionStatus="pending_sent"
+      />
+    )
+    expect(screen.getByText('Request Sent')).toBeInTheDocument()
+    expect(screen.queryByText('Connect to Claim')).not.toBeInTheDocument()
+  })
+
+  it('shows "Sending..." spinner when connectLoading is true', () => {
+    render(
+      <ItemCard
+        item={mockItem}
+        isOwner={false}
+        currentUserId="user-789"
+        connectionStatus={null}
+        connectLoading={true}
+        onConnect={jest.fn()}
+      />
+    )
+    expect(screen.getByText('Sending...')).toBeInTheDocument()
+  })
 })

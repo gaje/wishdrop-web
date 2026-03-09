@@ -31,6 +31,7 @@ export default function ListDetailClient({ username, slug, list, initialItems })
   const [checkingConnection, setCheckingConnection] = useState(false)
   const [guestClaimItem, setGuestClaimItem] = useState(null)
   const [guestClaimers, setGuestClaimers] = useState(list?.guestClaimers || [])
+  const [connectLoading, setConnectLoading] = useState(false)
 
   const isOwner = user && user.username === username
   const isAuthenticated = !!user
@@ -113,12 +114,14 @@ export default function ListDetailClient({ username, slug, list, initialItems })
   }
 
   const handleConnect = async () => {
+    setConnectLoading(true)
     try {
       await api.connections.request(listOwnerId)
       setConnectionStatus('pending_sent')
-      alert('Connection request sent!')
     } catch (err) {
-      alert(err.getUserMessage?.() || 'Failed to send connection request')
+      console.error('Failed to send connection request:', err)
+    } finally {
+      setConnectLoading(false)
     }
   }
 
@@ -343,6 +346,7 @@ export default function ListDetailClient({ username, slug, list, initialItems })
                 onClaim={handleClaimItem}
                 onUnclaim={handleUnclaimItem}
                 connectionStatus={isSharedList ? 'connected' : connectionStatus}
+                connectLoading={connectLoading}
                 onConnect={handleConnect}
                 onGuestClaim={handleGuestClaim}
                 onGuestUnclaim={handleGuestUnclaim}
