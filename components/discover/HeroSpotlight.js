@@ -86,7 +86,7 @@ export default function HeroSpotlight({ items = [] }) {
               </div>
             )}
             <Link
-              href={`/product/${encodeURIComponent(currentItem.normalizedUrl)}`}
+              href={currentItem.slug ? `/product/${currentItem.slug}` : `/product/${encodeURIComponent(currentItem.normalizedUrl)}`}
               className="inline-flex items-center gap-2 px-6 py-3 bg-slate-900 hover:bg-slate-800 text-white rounded-xl font-semibold transition-all hover:shadow-lg"
             >
               View Details

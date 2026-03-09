@@ -89,7 +89,11 @@ export default function ProductModal({ product, isOpen, onClose }) {
   }
 
   const handleViewDetails = () => {
-    router.push(`/product/${encodeURIComponent(product.normalizedUrl)}`)
+    if (product.slug) {
+      router.push(`/product/${product.slug}`)
+    } else {
+      router.push(`/product/${encodeURIComponent(product.normalizedUrl)}`)
+    }
   }
 
   const handleBuy = async (retailer = null) => {
@@ -330,7 +334,11 @@ export default function ProductModal({ product, isOpen, onClose }) {
                           setTimeout(() => {
                             // This would ideally trigger opening the new product modal
                             // For now, navigate to product detail page
-                            router.push(`/product/${encodeURIComponent(related.normalizedUrl)}`)
+                            if (related.slug) {
+                              router.push(`/product/${related.slug}`)
+                            } else {
+                              router.push(`/product/${encodeURIComponent(related.normalizedUrl)}`)
+                            }
                           }, 100)
                         }}
                         className="cursor-pointer bg-slate-50/70 rounded-xl p-3.5 hover:bg-slate-100 transition-colors"
