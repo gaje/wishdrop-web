@@ -3,6 +3,7 @@ import './animations.css'
 import { AuthProvider } from '@/lib/AuthContext'
 import { ViewTransitions } from 'next-view-transitions'
 import PostHogProvider from '@/components/PostHogProvider'
+import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 
 export const metadata = {
@@ -31,6 +32,7 @@ export default function RootLayout({ children }) {
       <html lang="en">
         <body className="min-h-screen flex flex-col">
           <AuthProvider>
+            <Header />
             <div className="flex-1">
               {children}
             </div>
