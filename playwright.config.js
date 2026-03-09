@@ -1,5 +1,9 @@
 import { defineConfig, devices } from '@playwright/test'
 
+// Connection & claiming E2E tests (require seeded accounts + backend):
+//   cd wishlist-server && npm run seed:test-accounts
+//   RUN_E2E_CONNECTION_TESTS=1 npx playwright test e2e/connections-claiming.spec.js --project=chromium
+
 export default defineConfig({
   testDir: './e2e',
   fullyParallel: true,
