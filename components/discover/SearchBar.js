@@ -162,7 +162,7 @@ export default function SearchBar() {
                     <div className="flex-1 min-w-0">
                       <p className="text-sm font-semibold text-slate-900 truncate">{product.title}</p>
                       <p className="text-xs text-slate-500">
-                        {product.price ? `$${product.price.toFixed(2)}` : 'Price unavailable'}
+                        {product.price ? `$${(typeof product.price === 'number' ? product.price : product.price?.amount || 0).toFixed(2)}` : 'Price unavailable'}
                         {product.merchant && ` · ${product.merchant}`}
                       </p>
                     </div>

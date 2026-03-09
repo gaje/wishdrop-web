@@ -213,6 +213,7 @@ export default function AddItemModal({
         description: metadata?.description || undefined,
         merchant: merchant,
         brand: metadata?.brand || undefined,
+        isManual: entryMode === 'manual' || undefined,
       }
 
       // Price from user input or metadata

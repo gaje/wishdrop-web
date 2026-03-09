@@ -6,23 +6,28 @@ import api from '@/lib/api'
 export default function ConnectionButton({ userId, onStatusChange }) {
   const [status, setStatus] = useState(null)
   const [connectionId, setConnectionId] = useState(null)
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(false)
+  const [statusChecked, setStatusChecked] = useState(false)
   const [showDropdown, setShowDropdown] = useState(false)
 
   useEffect(() => {
-    fetchStatus()
+    if (userId) {
+      fetchStatus()
+    }
   }, [userId])
 
   const fetchStatus = async () => {
     setLoading(true)
     try {
       const data = await api.connections.checkStatus(userId)
-      setStatus(data.status)
+      setStatus(data.status || null)
       setConnectionId(data.connectionId || null)
     } catch (err) {
       console.error('Failed to check connection status:', err)
+      setStatus(null)
     } finally {
       setLoading(false)
+      setStatusChecked(true)
     }
   }
 
@@ -87,24 +92,14 @@ export default function ConnectionButton({ userId, onStatusChange }) {
     }
   }
 
-  if (loading) {
-    return (
-      <button
-        disabled
-        className="px-4 py-2 bg-gray-100 text-gray-400 rounded-lg cursor-not-allowed"
-      >
-        Loading...
-      </button>
-    )
-  }
-
-  if (!status) {
+  if (!status || status === 'none') {
     return (
       <button
         onClick={handleConnect}
-        className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+        disabled={loading}
+        className="px-4 py-2 bg-cyan-500 text-white rounded-lg hover:bg-cyan-600 transition disabled:opacity-50"
       >
-        Connect
+        {loading ? 'Connecting...' : 'Connect'}
       </button>
     )
   }

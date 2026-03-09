@@ -105,9 +105,9 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <a href="mailto:support@wishdrop.app" className="text-gray-300 hover:text-cyan-400 transition-colors text-sm">
+                <Link href="/contact" className="text-gray-300 hover:text-cyan-400 transition-colors text-sm">
                   Contact Us
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
