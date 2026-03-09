@@ -18,7 +18,9 @@ const sentryOptions = {
   silent: true,
   widenClientFileUpload: true,
   hideSourceMaps: true,
-  automaticVercelMonitors: true,
+  webpack: {
+    automaticVercelMonitors: true,
+  },
 }
 
 module.exports = withSentryConfig(nextConfig, sentryOptions)
