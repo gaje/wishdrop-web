@@ -13,10 +13,21 @@ export default function Home() {
     loadTrendingProducts()
   }, [])
 
+  const hasGoodImage = (url) => {
+    if (!url) return false
+    if (url.startsWith('data:')) return false
+    if (url.includes('via.placeholder.com')) return false
+    if (url.includes('fls-na.amazon.com/1/batch')) return false
+    if (url.includes('lookaside.fbsbx.com')) return false
+    return true
+  }
+
   const loadTrendingProducts = async () => {
     try {
-      const response = await discover.trendingItems(16)
-      const withImages = (response.items || []).filter(item => item.image)
+      const response = await discover.trendingItems(24)
+      const withImages = (response.items || []).filter(item =>
+        hasGoodImage(item.image) && !item.title?.startsWith('Amazon.com')
+      )
       setTrendingProducts(withImages.slice(0, 8))
     } catch (error) {
       console.error('Failed to load trending products:', error)
