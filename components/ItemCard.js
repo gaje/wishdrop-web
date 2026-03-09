@@ -2,6 +2,7 @@
 
 import { useMemo } from 'react'
 import ProductImage from './ui/ProductImage'
+import api from '@/lib/api'
 
 /**
  * Decode HTML entities in text for display
@@ -63,9 +64,26 @@ export default function ItemCard({
     affiliateCode,
   } = item
 
-  // Prefer affiliate redirect (routed through API server for click tracking), fall back to original URL
   const API_BASE = process.env.NEXT_PUBLIC_API_BASE || 'http://localhost:4000'
-  const url = affiliateCode ? `${API_BASE}/r/${affiliateCode}` : originalUrl
+
+  const handleBuy = async (e) => {
+    e.preventDefault()
+    if (affiliateCode) {
+      window.open(`${API_BASE}/r/${affiliateCode}`, '_blank', 'noopener,noreferrer')
+      return
+    }
+    if (!originalUrl) return
+    try {
+      const result = await api.affiliate.rewrite(originalUrl)
+      if (result.code) {
+        window.open(`${API_BASE}/r/${result.code}`, '_blank', 'noopener,noreferrer')
+      } else {
+        window.open(originalUrl, '_blank', 'noopener,noreferrer')
+      }
+    } catch {
+      window.open(originalUrl, '_blank', 'noopener,noreferrer')
+    }
+  }
 
   // Support both 'image' (API) and 'imageUrl' (legacy) field names
   const itemImage = image || imageUrl
@@ -171,18 +189,16 @@ export default function ItemCard({
         {showActions && (
           <div className="flex gap-2 mt-3 pt-3 border-t border-slate-100">
             {/* View/Buy Button */}
-            {url && (
-              <a
-                href={url}
-                target="_blank"
-                rel="noopener noreferrer"
+            {originalUrl && (
+              <button
+                onClick={handleBuy}
                 className="flex-1 inline-flex items-center justify-center gap-1.5 px-4 py-2.5 bg-gradient-to-r from-cyan-500 to-cyan-500 text-white rounded-xl font-semibold text-sm hover:shadow-lg hover:shadow-cyan-200 transition-all"
               >
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                 </svg>
                 View Item
-              </a>
+              </button>
             )}
 
             {/* Owner Actions */}

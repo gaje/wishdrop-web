@@ -99,10 +99,25 @@ export default function ProductDetailPage({ params }) {
     }
   }
 
-  const handleBuyNow = () => {
-    if (!product?.affiliateCode) return
-    const url = api.getRedirectUrl(product.affiliateCode)
-    window.open(url, '_blank')
+  const handleBuyNow = async () => {
+    const API_BASE = process.env.NEXT_PUBLIC_API_BASE || 'http://localhost:4000'
+    if (product?.affiliateCode) {
+      window.open(`${API_BASE}/r/${product.affiliateCode}`, '_blank', 'noopener,noreferrer')
+      return
+    }
+    // Rewrite at click time for products without a stored affiliate code
+    const targetUrl = product?.normalizedUrl || product?.url
+    if (!targetUrl) return
+    try {
+      const result = await api.affiliate.rewrite(targetUrl)
+      if (result.code) {
+        window.open(`${API_BASE}/r/${result.code}`, '_blank', 'noopener,noreferrer')
+      } else {
+        window.open(targetUrl, '_blank', 'noopener,noreferrer')
+      }
+    } catch {
+      window.open(targetUrl, '_blank', 'noopener,noreferrer')
+    }
   }
 
   const formatNumber = (num) => {
@@ -269,7 +284,7 @@ export default function ProductDetailPage({ params }) {
 
               {/* Action Buttons */}
               <div className="flex flex-col sm:flex-row gap-3">
-                {product.affiliateCode && (
+                {(product.affiliateCode || product.normalizedUrl || product.url) && (
                   <button
                     onClick={handleBuyNow}
                     className="group flex-1 flex items-center justify-center gap-2.5 px-6 py-3.5 bg-gradient-to-r from-violet-600 to-purple-600 text-white font-semibold rounded-xl hover:shadow-lg hover:shadow-violet-200 transition-all duration-300 hover:-translate-y-0.5"

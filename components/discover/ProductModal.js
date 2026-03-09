@@ -92,18 +92,32 @@ export default function ProductModal({ product, isOpen, onClose }) {
     router.push(`/product/${encodeURIComponent(product.normalizedUrl)}`)
   }
 
-  const handleBuy = (retailer = null) => {
+  const handleBuy = async (retailer = null) => {
+    const API_BASE = process.env.NEXT_PUBLIC_API_BASE || 'http://localhost:4000'
     const targetRetailer = retailer || getPrimaryRetailer()
+    const url = targetRetailer?.url || product.normalizedUrl
+    if (!url) return
+
+    // If we already have an affiliate code, use it directly
     if (targetRetailer?.affiliateCode) {
-      const API_BASE = process.env.NEXT_PUBLIC_API_BASE || 'http://localhost:4000'
       window.open(`${API_BASE}/r/${targetRetailer.affiliateCode}`, '_blank', 'noopener,noreferrer')
-    } else if (targetRetailer?.url) {
-      window.open(targetRetailer.url, '_blank', 'noopener,noreferrer')
-    } else if (product.affiliateCode) {
-      const API_BASE = process.env.NEXT_PUBLIC_API_BASE || 'http://localhost:4000'
+      return
+    }
+    if (product.affiliateCode) {
       window.open(`${API_BASE}/r/${product.affiliateCode}`, '_blank', 'noopener,noreferrer')
-    } else if (product.normalizedUrl) {
-      window.open(product.normalizedUrl, '_blank', 'noopener,noreferrer')
+      return
+    }
+
+    // Otherwise, rewrite at click time to get affiliate link + tracking
+    try {
+      const result = await api.affiliate.rewrite(url)
+      if (result.code) {
+        window.open(`${API_BASE}/r/${result.code}`, '_blank', 'noopener,noreferrer')
+      } else {
+        window.open(url, '_blank', 'noopener,noreferrer')
+      }
+    } catch {
+      window.open(url, '_blank', 'noopener,noreferrer')
     }
   }
 
@@ -285,12 +299,10 @@ export default function ProductModal({ product, isOpen, onClose }) {
                   <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-3">Also Available At</h3>
                   <div className="space-y-0 border border-gray-200 rounded-lg overflow-hidden">
                     {alternativeRetailers.map((retailer, index) => (
-                      <a
+                      <button
                         key={index}
-                        href={retailer.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center justify-between px-4 py-3 hover:bg-gray-50 transition-colors border-b border-gray-100 last:border-b-0"
+                        onClick={() => handleBuy(retailer)}
+                        className="w-full flex items-center justify-between px-4 py-3 hover:bg-gray-50 transition-colors border-b border-gray-100 last:border-b-0 text-left"
                       >
                         <span className="text-gray-700 font-medium">{retailer.merchant}</span>
                         {retailer.price && (
@@ -298,7 +310,7 @@ export default function ProductModal({ product, isOpen, onClose }) {
                             ${typeof retailer.price === 'object' ? retailer.price.amount?.toFixed(2) : Number(retailer.price).toFixed(2)}
                           </span>
                         )}
-                      </a>
+                      </button>
                     ))}
                   </div>
                 </div>
