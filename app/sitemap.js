@@ -92,5 +92,30 @@ export default async function sitemap() {
     console.warn('Could not fetch dynamic pages for sitemap:', error.message)
   }
 
+  // Dynamic product pages
+  try {
+    const productResponse = await fetch(`${API_BASE}/api/products/slugs`, {
+      headers: { 'Content-Type': 'application/json' },
+      signal: AbortSignal.timeout(5000),
+    })
+
+    if (productResponse.ok) {
+      const productData = await productResponse.json()
+
+      if (productData.products && Array.isArray(productData.products)) {
+        productData.products.forEach(product => {
+          entries.push({
+            url: `${SITE_URL}/product/${product.slug}`,
+            lastModified: product.updatedAt ? new Date(product.updatedAt) : new Date(),
+            changeFrequency: 'weekly',
+            priority: 0.7,
+          })
+        })
+      }
+    }
+  } catch (error) {
+    console.warn('Could not fetch products for sitemap:', error.message)
+  }
+
   return entries
 }
