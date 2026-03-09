@@ -18,6 +18,7 @@ export default async function sitemap() {
     { url: '/legal/privacy', changeFrequency: 'monthly', priority: 0.2 },
     { url: '/legal/terms', changeFrequency: 'monthly', priority: 0.2 },
     { url: '/legal/affiliate-disclosure', changeFrequency: 'monthly', priority: 0.2 },
+    { url: '/legal/community-guidelines', changeFrequency: 'monthly', priority: 0.2 },
   ]
 
   staticPages.forEach(page => {
