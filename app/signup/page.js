@@ -108,18 +108,12 @@ export default function SignupPage() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 flex items-center justify-center px-4 py-12">
-      <div className="max-w-md w-full animate-fade-in">
-        {/* Logo/Brand */}
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-cyan-500 to-cyan-500 bg-clip-text text-transparent mb-2">
-            Wishdrop
-          </h1>
-          <p className="text-slate-500">Start sharing your wishes</p>
-        </div>
-
+    <div className="min-h-screen bg-gradient-to-b from-white via-slate-50 to-slate-100 flex items-start justify-center px-4 pt-8 sm:pt-12 pb-12 relative overflow-hidden">
+      <div className="absolute inset-0 opacity-[0.4]" style={{ backgroundImage: 'radial-gradient(circle, #94a3b8 1px, transparent 1px)', backgroundSize: '24px 24px' }} />
+      <div className="absolute inset-0 bg-gradient-to-br from-brand-100/40 via-transparent to-brand-50/20 pointer-events-none" />
+      <div className="max-w-md w-full relative">
         {/* Signup Card */}
-        <div className="bg-white rounded-2xl border border-slate-200/80 shadow-sm p-8 animate-fade-in-up">
+        <div className="bg-white rounded-2xl border border-slate-200/60 shadow-elevation-2 p-6 sm:p-8">
           <h2 className="text-2xl font-bold text-slate-900 mb-6">Create your account</h2>
 
           {error && (
@@ -144,7 +138,7 @@ export default function SignupPage() {
                 required
                 value={formData.email}
                 onChange={handleChange}
-                className="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all text-slate-900 placeholder-slate-400"
+                className="w-full px-4 py-2.5 border border-slate-200 rounded-xl hover:border-slate-300 focus:ring-2 focus:ring-brand-500 focus:border-transparent transition-all text-slate-900 placeholder-slate-400"
                 placeholder="you@example.com"
                 disabled={loading}
               />
@@ -162,7 +156,7 @@ export default function SignupPage() {
                 required
                 value={formData.username}
                 onChange={handleChange}
-                className="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all text-slate-900 placeholder-slate-400"
+                className="w-full px-4 py-2.5 border border-slate-200 rounded-xl hover:border-slate-300 focus:ring-2 focus:ring-brand-500 focus:border-transparent transition-all text-slate-900 placeholder-slate-400"
                 placeholder="johndoe"
                 disabled={loading}
               />
@@ -180,7 +174,7 @@ export default function SignupPage() {
                 type="text"
                 value={formData.displayName}
                 onChange={handleChange}
-                className="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all text-slate-900 placeholder-slate-400"
+                className="w-full px-4 py-2.5 border border-slate-200 rounded-xl hover:border-slate-300 focus:ring-2 focus:ring-brand-500 focus:border-transparent transition-all text-slate-900 placeholder-slate-400"
                 placeholder="John Doe"
                 disabled={loading}
               />
@@ -199,7 +193,7 @@ export default function SignupPage() {
                 required
                 value={formData.password}
                 onChange={handleChange}
-                className="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all text-slate-900 placeholder-slate-400"
+                className="w-full px-4 py-2.5 border border-slate-200 rounded-xl hover:border-slate-300 focus:ring-2 focus:ring-brand-500 focus:border-transparent transition-all text-slate-900 placeholder-slate-400"
                 placeholder="••••••••"
                 disabled={loading}
               />
@@ -218,7 +212,7 @@ export default function SignupPage() {
                 required
                 value={formData.confirmPassword}
                 onChange={handleChange}
-                className="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all text-slate-900 placeholder-slate-400"
+                className="w-full px-4 py-2.5 border border-slate-200 rounded-xl hover:border-slate-300 focus:ring-2 focus:ring-brand-500 focus:border-transparent transition-all text-slate-900 placeholder-slate-400"
                 placeholder="••••••••"
                 disabled={loading}
               />
@@ -232,7 +226,7 @@ export default function SignupPage() {
                 type="checkbox"
                 checked={formData.acceptedTerms}
                 onChange={handleChange}
-                className="mt-1 h-4 w-4 rounded border-slate-300 text-cyan-500 focus:ring-cyan-500"
+                className="mt-1 h-4 w-4 rounded border-slate-300 text-brand-500 focus:ring-brand-500"
                 disabled={loading}
               />
               <label htmlFor="acceptedTerms" className="text-sm text-slate-600">
@@ -251,7 +245,7 @@ export default function SignupPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-gradient-to-r from-cyan-500 to-cyan-500 text-white font-semibold py-3 px-4 rounded-xl hover:shadow-lg hover:shadow-cyan-200 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full bg-brand-500 hover:bg-brand-600 text-white font-semibold py-3 px-4 rounded-xl hover:shadow-lg hover:shadow-cyan-200 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {loading ? (
                 <span className="flex items-center justify-center gap-2">
@@ -276,16 +270,6 @@ export default function SignupPage() {
               </Link>
             </p>
           </div>
-        </div>
-
-        {/* Back to home */}
-        <div className="mt-6 text-center">
-          <Link href="/" className="text-slate-500 hover:text-slate-700 text-sm flex items-center justify-center gap-1">
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-            </svg>
-            Back to home
-          </Link>
         </div>
       </div>
     </div>

@@ -43,3 +43,5 @@ if (dsn) {
     denyUrls: [/\/api\//],
   })
 }
+
+export const onRouterTransitionStart = Sentry.captureRouterTransitionStart
