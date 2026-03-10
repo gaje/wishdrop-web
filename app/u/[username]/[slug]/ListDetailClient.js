@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useAuth } from '@/lib/AuthContext'
 import api from '@/lib/api'
+import { analytics } from '@/lib/analytics'
 import { getOrCreateGuestToken, getGuestToken } from '@/lib/guestToken'
 import ItemCard from '@/components/ItemCard'
 import GuestClaimModal from '@/components/GuestClaimModal'
@@ -102,6 +103,7 @@ export default function ListDetailClient({ username, slug, list, initialItems })
   const handleClaimItem = async (itemId) => {
     try {
       await api.items.claim(itemId)
+      analytics.itemClaimed({ itemId })
       await reloadItems()
     } catch (err) {
       console.error('Failed to claim item:', err)
@@ -117,6 +119,7 @@ export default function ListDetailClient({ username, slug, list, initialItems })
     setConnectLoading(true)
     try {
       await api.connections.request(listOwnerId)
+      analytics.connectionRequested()
       setConnectionStatus('pending_sent')
     } catch (err) {
       console.error('Failed to send connection request:', err)
@@ -128,6 +131,7 @@ export default function ListDetailClient({ username, slug, list, initialItems })
   const handleUnclaimItem = async (itemId) => {
     try {
       await api.items.unclaim(itemId)
+      analytics.itemUnclaimed({ itemId })
       await reloadItems()
     } catch (err) {
       console.error('Failed to unclaim item:', err)

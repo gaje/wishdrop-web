@@ -6,6 +6,7 @@ import Link from 'next/link'
 
 import { useAuth } from '@/lib/AuthContext'
 import api, { APIError } from '@/lib/api'
+import { analytics } from '@/lib/analytics'
 
 const CURRENCIES = [
   { value: 'USD', label: 'USD', symbol: '$' },
@@ -304,6 +305,7 @@ export default function SettingsPage() {
     setError('')
 
     try {
+      analytics.accountDeleted()
       await api.users.deleteAccount()
       await logout()
       router.push('/')

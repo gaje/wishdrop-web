@@ -3,6 +3,7 @@
 import { useMemo } from 'react'
 import ProductImage from './ui/ProductImage'
 import api from '@/lib/api'
+import { analytics } from '@/lib/analytics'
 
 /**
  * Decode HTML entities in text for display
@@ -69,6 +70,7 @@ export default function ItemCard({
 
   const handleBuy = async (e) => {
     e.preventDefault()
+    analytics.buyClicked({ hasAffiliateCode: !!affiliateCode, merchant })
     if (affiliateCode) {
       window.open(`${API_BASE}/r/${affiliateCode}`, '_blank', 'noopener,noreferrer')
       return

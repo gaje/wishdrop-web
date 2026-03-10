@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import api from '@/lib/api'
+import { analytics } from '@/lib/analytics'
 
 
 export default function ConnectionsPage() {
@@ -74,6 +75,7 @@ export default function ConnectionsPage() {
   const handleAcceptRequest = async (connectionId) => {
     try {
       await api.connections.acceptRequest(connectionId)
+      analytics.connectionAccepted()
       fetchData()
     } catch (err) {
       alert(err.getUserMessage?.() || 'Failed to accept request')

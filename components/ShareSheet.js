@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import Modal from './ui/Modal'
 import Avatar from './ui/Avatar'
 import api from '../lib/api'
+import { analytics } from '../lib/analytics'
 
 /**
  * ShareSheet - Modal for sharing lists with users
@@ -96,6 +97,7 @@ export default function ShareSheet({ isOpen, onClose, list, onShareUpdate }) {
     setSharing(true)
     try {
       await api.lists.share(list._id, selectedUsers.map(u => u._id))
+      analytics.listShared({ userCount: selectedUsers.length })
       await loadData()
       setSelectedUsers([])
       setSearchQuery('')
@@ -153,6 +155,7 @@ export default function ShareSheet({ isOpen, onClose, list, onShareUpdate }) {
 
     try {
       await navigator.clipboard.writeText(shareUrl)
+      analytics.shareLinkCopied()
       setCopied(true)
       setTimeout(() => setCopied(false), 2000)
     } catch (error) {

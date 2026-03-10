@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { useAuth } from '@/lib/AuthContext'
 import api, { APIError } from '@/lib/api'
+import { analytics } from '@/lib/analytics'
 
 const OCCASIONS = [
   'Birthday',
@@ -198,6 +199,12 @@ export default function CreateListModal({ isOpen, onClose, familyMemberId: initi
         categories: selectedCategories,
         familyMemberId: selectedFamilyMemberId || undefined,
         surpriseSettings,
+      })
+      analytics.listCreated({
+        occasion: formData.occasion,
+        privacy: formData.privacy,
+        isSurprise: surpriseSettings?.enabled || false,
+        categoryCount: selectedCategories.length,
       })
       onClose()
       router.push(`/u/${user.username}/${response.list.slug}`)

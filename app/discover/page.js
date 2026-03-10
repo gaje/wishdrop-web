@@ -4,6 +4,7 @@ import { useState, useEffect, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { Link } from 'next-view-transitions'
 import api from '@/lib/api'
+import { analytics } from '@/lib/analytics'
 
 import HeroSpotlight from '@/components/discover/HeroSpotlight'
 import CollectionGrid from '@/components/discover/CollectionGrid'
@@ -135,6 +136,7 @@ function DiscoverPageContent() {
     const newCategory = selectedCategory === categoryName ? null : categoryName
     setSelectedCategory(newCategory)
     if (newCategory) {
+      analytics.discoverCategoryFiltered({ category: newCategory })
       router.push(`/discover?category=${encodeURIComponent(newCategory)}`, { scroll: false })
     } else {
       router.push('/discover', { scroll: false })

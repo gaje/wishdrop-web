@@ -5,6 +5,7 @@ import Modal, { ModalActions } from './ui/Modal'
 import Button from './ui/Button'
 import Input from './ui/Input'
 import api from '@/lib/api'
+import { analytics } from '@/lib/analytics'
 
 // Decode HTML entities in strings
 function decodeHtmlEntities(text) {
@@ -224,6 +225,11 @@ export default function AddItemModal({
       }
 
       await api.items.create(itemData)
+      analytics.itemAdded({
+        entryMode,
+        hasPrice: !!(formData.price || metadata?.price?.amount),
+        merchant: merchant,
+      })
       onItemAdded?.()
       onClose()
     } catch (err) {
