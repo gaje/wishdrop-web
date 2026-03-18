@@ -27,6 +27,9 @@ export const metadata = {
     apple: '/logo-circle.png',
   },
   manifest: '/manifest.json',
+  other: {
+    'impact-site-verification': 'bc106bfc-567e-4860-930b-2fd74b138a17',
+  },
 }
 
 export default function RootLayout({ children }) {
