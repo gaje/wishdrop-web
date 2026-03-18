@@ -70,6 +70,7 @@ export default function ItemCard({
 
   const handleBuy = async (e) => {
     e.preventDefault()
+    if (!window.confirm("Off you go! We're opening the store for you. Once you've bought it, come back and mark it purchased — that way nobody accidentally buys it twice!")) return
     analytics.buyClicked({ hasAffiliateCode: !!affiliateCode, merchant })
     if (affiliateCode) {
       window.open(`${API_BASE}/r/${affiliateCode}`, '_blank', 'noopener,noreferrer')

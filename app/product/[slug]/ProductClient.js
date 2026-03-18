@@ -67,8 +67,9 @@ export default function ProductClient({ initialData, slug }) {
   }
 
   const handleBuyNow = async (retailer) => {
+    if (!window.confirm("Off you go! We're opening the store for you. Once you've bought it, come back and mark it purchased — that way nobody accidentally buys it twice!")) return
     const API_BASE = process.env.NEXT_PUBLIC_API_BASE || 'http://localhost:4000'
-    
+
     // Use provided retailer or default to primary product
     const targetRetailer = retailer || {
       affiliateCode: product.affiliateCode,
