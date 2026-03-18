@@ -7,7 +7,7 @@ import api from '@/lib/api'
 
 
 const MAX_FILE_SIZE = 100 * 1024 * 1024 // 100MB
-const MAX_DURATION = 20 // seconds
+const MAX_DURATION = 90 // seconds
 const ACCEPTED_FORMATS = ['video/mp4', 'video/quicktime', 'video/webm']
 
 export default function VideoUploadPage() {
